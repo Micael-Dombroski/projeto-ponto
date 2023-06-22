@@ -6,21 +6,30 @@ namespace Ponto.ConsoleApp
 {
     class Program
     {
+        static int menuOption;
+
         static string ler;
         static int Opt;
         static int OptMenu;
         static Empresa empresa;
         //Inventando Dados para um Adm inicial...---------------------------------------------------------------
-        static Endereco enderecoRoot = new Endereco ("Adm", "Administralândia", "Sim", "Bairro", "Rua", 1);
+        static Endereco enderecoRoot = new Endereco("Adm", "Administralândia", "Sim", "Bairro", "Rua", 1);
         static Administrador administrador = new Administrador("12345678900", "Galo", "Cinza", enderecoRoot);
         //------------------------------------------------------------------------------------------------------
         static CrudFuncionario funcionarios = new CrudFuncionario("", "", "", enderecoRoot);//Tive que colocar esses dados só pra poder usar o Crud
         static void Main(string[] args)
         {
+            while (true)
+            {
+                Console.Clear();
+                ShowMainMenu();
+                ReadMenuOption();
+                HandleMenu();
+            }
             administrador.ChaveAdministrador = "root";
             //Funcionario Teste-----------------------------------------------------------------------------------
             Endereco endereco1 = new Endereco("SC", "Lages", "Casa", "Petropoles", "Rua 31 de Março", 55);
-            Funcionario funcionarioC = new Funcionario("12345678901","lucas","almeida", endereco1);
+            Funcionario funcionarioC = new Funcionario("12345678901", "lucas", "almeida", endereco1);
             funcionarios.Cadastrar(funcionarioC);
             //----------------------------------------------------------------------------------------------------
             Console.WriteLine("Informe o Nome da Empresa: ");
@@ -47,19 +56,12 @@ namespace Ponto.ConsoleApp
                 ler = Console.ReadLine();
             } while (ENumero(ler) == false);
             int numero = Convert.ToInt32(ler);
-            Endereco endereco = new Endereco(uf,cidade,complemento,bairro,rua,numero);
-            empresa = new Empresa(empresaNome,cnpj,endereco);
+            Endereco endereco = new Endereco(uf, cidade, complemento, bairro, rua, numero);
+            empresa = new Empresa(empresaNome, cnpj, endereco);
             do
             {
                 do
                 {
-                    Console.WriteLine("-----------Menu-----------");
-                    Console.WriteLine("[1] Exibir Informações da Empresa");
-                    Console.WriteLine("[2] Menu Funcionário");
-                    Console.WriteLine("[3] Menu Administrador");
-                    Console.WriteLine("[4] Sair");
-                    Console.WriteLine("--------------------------");
-                    Console.Write("Informe o Número da Opção desejada: ");
                     ler = Console.ReadLine();
                 } while (ENumero(ler) == false);
                 Opt = Convert.ToInt32(ler);
@@ -77,7 +79,7 @@ namespace Ponto.ConsoleApp
                         Console.WriteLine($"Complemento: {empresa.Endereco.Complemento}");
                         Console.WriteLine($"Número do Complemento: {empresa.Endereco.NumeroCasa}");
                         Console.WriteLine("---------------------------------------");
-                    break;
+                        break;
                     case 2:
                         do
                         {
@@ -120,13 +122,13 @@ namespace Ponto.ConsoleApp
                                         Console.WriteLine($"Nome de Usuário: {funcionario.Usuario}");
                                         Console.WriteLine($"Senha: {funcionario.Senha}");
                                         Console.WriteLine("------------------------------------------");
-                                    }  
-                                break;
+                                    }
+                                    break;
                                 case 2:
                                     bool registrarPonto = false;
                                     bool usuarioExistente = false;
                                     bool senhaCerta = false;
-                                    do 
+                                    do
                                     {
                                         registrarPonto = false;
                                         usuarioExistente = false;
@@ -152,22 +154,22 @@ namespace Ponto.ConsoleApp
                                         if (usuarioExistente == false)
                                         {
                                             Console.WriteLine("Usuário Não Encontrado");
-                                        } 
+                                        }
                                         else if (senhaCerta == false)
                                         {
                                             Console.WriteLine("Senha Incorreta");
                                         }
                                     } while (registrarPonto == false);
-                                break;
+                                    break;
                                 case 3:
                                     Console.WriteLine("Voltando...");
-                                break;
+                                    break;
                                 default:
                                     Console.WriteLine("Opção Inválida");
-                                break;
+                                    break;
                             }
-                        } while(OptMenu != 4);
-                    break;
+                        } while (OptMenu != 4);
+                        break;
                     case 3:
                         bool AdmCadastrado = false;
                         do
@@ -201,9 +203,9 @@ namespace Ponto.ConsoleApp
                                             {
                                                 Administrador funcionarioAdm = (Administrador)funcionario;
                                                 if (funcionarioAdm.ChaveAdministrador == ler)
-                                            {
-                                                AdmCadastrado = true;
-                                            }
+                                                {
+                                                    AdmCadastrado = true;
+                                                }
                                             }
                                         }
                                         if (ler == "root")
@@ -212,7 +214,7 @@ namespace Ponto.ConsoleApp
                                         }
                                     } while (AdmCadastrado == false);
                                     //Falta Escrever Aqui o Código pra Cadastrar
-                                break;
+                                    break;
                                 case 2:
                                     do
                                     {
@@ -229,7 +231,7 @@ namespace Ponto.ConsoleApp
                                                 {
                                                     AdmCadastrado = true;
                                                 }
-                                            }  
+                                            }
                                         }
                                         if (ler == "root")
                                         {
@@ -237,7 +239,7 @@ namespace Ponto.ConsoleApp
                                         }
                                     } while (AdmCadastrado == false);
                                     //Falta Escrever Aqui o Código para Editar
-                                break;
+                                    break;
                                 case 3:
                                     do
                                     {
@@ -263,7 +265,7 @@ namespace Ponto.ConsoleApp
                                     } while (AdmCadastrado == false);
                                     //Excluindo Funcionário...
                                     bool FuncionarioExistente = false;
-                                    string CpfFuncionario;
+                                    string CpfFuncionario = "";
                                     do
                                     {
                                         Console.Write("Informe o CPF do Funcionário que deseja excluir: ");
@@ -286,12 +288,12 @@ namespace Ponto.ConsoleApp
                                             funcionarios.Excluir(CpfFuncionario);
                                             Console.WriteLine("Funcionário Excluído");
                                         }
-                                    } 
+                                    }
                                     else
                                     {
                                         Console.WriteLine("Funcionário Não Encontrado");
                                     }
-                                break;
+                                    break;
                                 case 4:
                                     do
                                     {
@@ -333,26 +335,62 @@ namespace Ponto.ConsoleApp
                                         Console.WriteLine($"{funcionario.Endereco.NumeroCasa}");
                                     }
                                     Console.WriteLine("------------------------------------------------------------------------------------------------------");
-                                break;
+                                    break;
                                 case 5:
                                     Console.WriteLine("Voltando...");
-                                break;
+                                    break;
                                 default:
                                     Console.WriteLine("Opção Inválida");
-                                break;
+                                    break;
                             }
                         } while (OptMenu != 4);
-                    break;
+                        break;
                     case 4:
                         Console.WriteLine("Saindo...");
-                    break;
+                        break;
                     default:
                         Console.WriteLine("Opção Inválida");
-                    break;
+                        break;
                 }
             } while (Opt != 4);
         }
-        static bool ENumero (string palavra)
+
+        private static void HandleMenu()
+        {
+            switch (menuOption)
+            {
+                case 0:
+                    Exit();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private static void Exit()
+        {
+            Console.WriteLine("Saindo do sistema");
+            Environment.Exit(1);
+        }
+
+        static void ShowMainMenu()
+        {
+            Console.WriteLine("-----------Menu-----------");
+            Console.WriteLine("[1] Exibir Informações da Empresa");
+            Console.WriteLine("[2] Menu Funcionário");
+            Console.WriteLine("[3] Menu Administrador");
+            Console.WriteLine("[0] Sair");
+            Console.WriteLine("--------------------------");
+            Console.Write("Informe o Número da Opção desejada: ");
+        }
+
+        static void ReadMenuOption()
+        {
+            Console.Write("=> ");
+            menuOption = Convert.ToInt16(Console.ReadLine());
+        }
+
+        static bool ENumero(string palavra)
         {
             for (int i = 0; i < palavra.Length; i++)
             {
@@ -370,7 +408,7 @@ namespace Ponto.ConsoleApp
             {
                 if (Cnpj.Length < 14 || Cnpj.Length > 14)
                 {
-                    throw new ArgumentException("O número de caracteres inseridos não bate com a quantidade que essa informação exige");;
+                    throw new ArgumentException("O número de caracteres inseridos não bate com a quantidade que essa informação exige"); ;
                 }
                 for (int i = 0; i < Cnpj.Length; i++)
                 {
@@ -381,7 +419,8 @@ namespace Ponto.ConsoleApp
                 }
                 Console.WriteLine("CNPJ válido");
                 return true;
-            } catch (ArgumentException e)
+            }
+            catch (ArgumentException e)
             {
                 Console.WriteLine(e.Message);
                 return false;
@@ -393,7 +432,7 @@ namespace Ponto.ConsoleApp
             {
                 if (Cpf.Length < 11 || Cpf.Length > 11)
                 {
-                    throw new ArgumentException("O número de caracteres inseridos não bate com a quantidade que essa informação exige");;
+                    throw new ArgumentException("O número de caracteres inseridos não bate com a quantidade que essa informação exige"); ;
                 }
                 for (int i = 0; i < Cpf.Length; i++)
                 {
@@ -404,7 +443,8 @@ namespace Ponto.ConsoleApp
                 }
                 Console.WriteLine("CPF válido");
                 return true;
-            } catch (ArgumentException e)
+            }
+            catch (ArgumentException e)
             {
                 Console.WriteLine(e.Message);
                 return false;

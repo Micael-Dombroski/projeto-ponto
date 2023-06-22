@@ -211,7 +211,7 @@ namespace Ponto.ConsoleApp
                                             AdmCadastrado = true;
                                         }
                                     } while (AdmCadastrado == false);
-                                    
+                                    //Falta Escrever Aqui o Código pra Cadastrar
                                 break;
                                 case 2:
                                     do
@@ -228,33 +228,6 @@ namespace Ponto.ConsoleApp
                                                 if (funcionarioAdm.ChaveAdministrador == ler)
                                                 {
                                                     AdmCadastrado = true;
-                                                    bool FuncionarioExistente = false;
-                                                    do
-                                                    {
-                                                        Console.Write("Informe o CPF do Funcionário que deseja excluir: ");
-                                                        ler = Console.ReadLine();
-                                                    } while (ValCPF(ler) == false);
-                                                    foreach (KeyValuePair<string, Funcionario> par1 in funcionarios.ConsultarTodos())
-                                                    {
-                                                        if (par1.Key == ler)
-                                                        {
-                                                            FuncionarioExistente = true;
-                                                        }
-                                                    }
-                                                    if (FuncionarioExistente == true)
-                                                    {
-                                                        Console.WriteLine("Tem certeza que deseja Excluir esse Funcionário? S/N");
-                                                        ler = Console.ReadLine();
-                                                        if (ler.ToLower() == "s")
-                                                        {
-                                                            funcionarios.Excluir(ler);
-                                                            Console.WriteLine("Funcionário Excluído");
-                                                        }
-                                                    } 
-                                                    else
-                                                    {
-                                                        Console.WriteLine("Funcionário Não Encontrado");
-                                                    }
                                                 }
                                             }  
                                         }
@@ -263,6 +236,7 @@ namespace Ponto.ConsoleApp
                                             AdmCadastrado = true;
                                         }
                                     } while (AdmCadastrado == false);
+                                    //Falta Escrever Aqui o Código para Editar
                                 break;
                                 case 3:
                                     do
@@ -287,6 +261,36 @@ namespace Ponto.ConsoleApp
                                             AdmCadastrado = true;
                                         }
                                     } while (AdmCadastrado == false);
+                                    //Excluindo Funcionário...
+                                    bool FuncionarioExistente = false;
+                                    string CpfFuncionario;
+                                    do
+                                    {
+                                        Console.Write("Informe o CPF do Funcionário que deseja excluir: ");
+                                        ler = Console.ReadLine();
+                                    } while (ValCPF(ler) == false);
+                                    foreach (KeyValuePair<string, Funcionario> par1 in funcionarios.ConsultarTodos())
+                                    {
+                                        if (par1.Key == ler)
+                                        {
+                                            FuncionarioExistente = true;
+                                            CpfFuncionario = par1.Key;
+                                        }
+                                    }
+                                    if (FuncionarioExistente == true)
+                                    {
+                                        Console.WriteLine("Tem certeza que deseja Excluir esse Funcionário? S/N");
+                                        ler = Console.ReadLine();
+                                        if (ler.ToLower() == "s")
+                                        {
+                                            funcionarios.Excluir(CpfFuncionario);
+                                            Console.WriteLine("Funcionário Excluído");
+                                        }
+                                    } 
+                                    else
+                                    {
+                                        Console.WriteLine("Funcionário Não Encontrado");
+                                    }
                                 break;
                                 case 4:
                                     do
@@ -405,10 +409,6 @@ namespace Ponto.ConsoleApp
                 Console.WriteLine(e.Message);
                 return false;
             }
-        }
-        static void ConsultarTodos()
-        {
-
         }
     }
 }

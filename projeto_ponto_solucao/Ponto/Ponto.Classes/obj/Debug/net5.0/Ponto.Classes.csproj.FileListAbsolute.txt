@@ -1,0 +1,12 @@
+C:\Cursos\DevSistemas\projeto_ponto_solucao\Ponto\Ponto.Classes\obj\Debug\net5.0\Ponto.Classes.csproj.AssemblyReference.cache
+C:\Cursos\DevSistemas\projeto_ponto_solucao\Ponto\Ponto.Classes\obj\Debug\net5.0\Ponto.Classes.GeneratedMSBuildEditorConfig.editorconfig
+C:\Cursos\DevSistemas\projeto_ponto_solucao\Ponto\Ponto.Classes\obj\Debug\net5.0\Ponto.Classes.AssemblyInfoInputs.cache
+C:\Cursos\DevSistemas\projeto_ponto_solucao\Ponto\Ponto.Classes\obj\Debug\net5.0\Ponto.Classes.AssemblyInfo.cs
+C:\Cursos\DevSistemas\projeto_ponto_solucao\Ponto\Ponto.Classes\obj\Debug\net5.0\Ponto.Classes.csproj.CoreCompileInputs.cache
+C:\Cursos\DevSistemas\projeto_ponto_solucao\Ponto\Ponto.Classes\bin\Debug\net5.0\Ponto.Classes.deps.json
+C:\Cursos\DevSistemas\projeto_ponto_solucao\Ponto\Ponto.Classes\bin\Debug\net5.0\Ponto.Classes.dll
+C:\Cursos\DevSistemas\projeto_ponto_solucao\Ponto\Ponto.Classes\bin\Debug\net5.0\Ponto.Classes.pdb
+C:\Cursos\DevSistemas\projeto_ponto_solucao\Ponto\Ponto.Classes\obj\Debug\net5.0\Ponto.Classes.dll
+C:\Cursos\DevSistemas\projeto_ponto_solucao\Ponto\Ponto.Classes\obj\Debug\net5.0\refint\Ponto.Classes.dll
+C:\Cursos\DevSistemas\projeto_ponto_solucao\Ponto\Ponto.Classes\obj\Debug\net5.0\Ponto.Classes.pdb
+C:\Cursos\DevSistemas\projeto_ponto_solucao\Ponto\Ponto.Classes\obj\Debug\net5.0\ref\Ponto.Classes.dll

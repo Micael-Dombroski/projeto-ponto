@@ -1,0 +1,89 @@
+{
+  "version": 3,
+  "targets": {
+    "net5.0": {
+      "Ponto.Classes/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "compile": {
+          "bin/placeholder/Ponto.Classes.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Ponto.Classes.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Ponto.Classes/1.0.0": {
+      "type": "project",
+      "path": "../Ponto.Classes/Ponto.Classes.csproj",
+      "msbuildProject": "../Ponto.Classes/Ponto.Classes.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net5.0": [
+      "Ponto.Classes >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\jackp\\.nuget\\packages\\": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "C:\\Cursos\\DevSistemas\\projeto_ponto_solucao\\Ponto\\Ponto.ConsoleApp\\Ponto.ConsoleApp.csproj",
+      "projectName": "Ponto.ConsoleApp",
+      "projectPath": "C:\\Cursos\\DevSistemas\\projeto_ponto_solucao\\Ponto\\Ponto.ConsoleApp\\Ponto.ConsoleApp.csproj",
+      "packagesPath": "C:\\Users\\jackp\\.nuget\\packages\\",
+      "outputPath": "C:\\Cursos\\DevSistemas\\projeto_ponto_solucao\\Ponto\\Ponto.ConsoleApp\\obj\\",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "C:\\Users\\jackp\\AppData\\Roaming\\NuGet\\NuGet.Config"
+      ],
+      "originalTargetFrameworks": [
+        "net5.0"
+      ],
+      "sources": {
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "projectReferences": {
+            "C:\\Cursos\\DevSistemas\\projeto_ponto_solucao\\Ponto\\Ponto.Classes\\Ponto.Classes.csproj": {
+              "projectPath": "C:\\Cursos\\DevSistemas\\projeto_ponto_solucao\\Ponto\\Ponto.Classes\\Ponto.Classes.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "net5.0": {
+        "targetAlias": "net5.0",
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}

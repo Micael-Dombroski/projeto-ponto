@@ -1,0 +1,36 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v5.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v5.0": {
+      "Ponto.ConsoleApp/1.0.0": {
+        "dependencies": {
+          "Ponto.Classes": "1.0.0"
+        },
+        "runtime": {
+          "Ponto.ConsoleApp.dll": {}
+        }
+      },
+      "Ponto.Classes/1.0.0": {
+        "runtime": {
+          "Ponto.Classes.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Ponto.ConsoleApp/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Ponto.Classes/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

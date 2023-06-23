@@ -1,22 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
 namespace Ponto.Classes
 {
-    public class Pessoa
+    public abstract class User
     {
-        public string Cpf {get;set;}
-        public string Nome {get;set;}
-        public string Sobrenome {get;set;}
-        public Endereco Endereco {get;set;}
-        public Pessoa(string cpf, string nome, string sobrenome, Endereco endereco)
+        public string Cpf { get; set; }
+        public string Name { get; set; }
+
+        public User(string cpf, string name)
         {
             Cpf = cpf;
-            Nome = nome;
-            Sobrenome = sobrenome;
-            Endereco = endereco;
+            Name = name;
         }
     }
 }

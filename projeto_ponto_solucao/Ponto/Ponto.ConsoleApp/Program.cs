@@ -108,13 +108,13 @@ namespace Ponto.ConsoleApp
                                         string cpf = funcionario.Cpf;
                                         Console.WriteLine("-----------Dados do Funcionário-----------");
                                         Console.WriteLine($"CPF: {cpf[0]}{cpf[1]}{cpf[2]}.{cpf[3]}{cpf[4]}{cpf[5]}.{cpf[6]}{cpf[7]}{cpf[8]}-{cpf[9]}{cpf[10]}");
-                                        Console.WriteLine($"Nome: {funcionario.Nome} {funcionario.Sobrenome}");
-                                        Console.WriteLine($"UF: {funcionario.Endereco.Uf}");
-                                        Console.WriteLine($"Cidade: {funcionario.Endereco.Cidade}");
-                                        Console.WriteLine($"Bairro: {funcionario.Endereco.Bairro}");
-                                        Console.WriteLine($"Rua: {funcionario.Endereco.Rua}");
-                                        Console.WriteLine($"Complemento: {funcionario.Endereco.Complemento}");
-                                        Console.WriteLine($"Número do Complemento: {funcionario.Endereco.NumeroCasa}");
+                                        Console.WriteLine($"Nome: {funcionario.Name} {funcionario}");
+                                        Console.WriteLine($"UF: {funcionario}");
+                                        Console.WriteLine($"Cidade: {funcionario}");
+                                        Console.WriteLine($"Bairro: {funcionario}");
+                                        Console.WriteLine($"Rua: {funcionario}");
+                                        Console.WriteLine($"Complemento: {funcionario}");
+                                        Console.WriteLine($"Número do Complemento: {funcionario}");
                                         Console.WriteLine($"Nome de Usuário: {funcionario.Usuario}");
                                         Console.WriteLine($"Senha: {funcionario.Senha}");
                                         Console.WriteLine("------------------------------------------");
@@ -322,13 +322,13 @@ namespace Ponto.ConsoleApp
                                         Funcionario funcionario = par.Value;
                                         string cpf = funcionario.Cpf;
                                         Console.Write($"{cpf[0]}{cpf[1]}{cpf[2]}.{cpf[3]}{cpf[4]}{cpf[5]}.{cpf[6]}{cpf[7]}{cpf[8]}-{cpf[9]}{cpf[10]} | ");
-                                        Console.Write($"{funcionario.Nome} {funcionario.Sobrenome}  | ");
-                                        Console.Write($"{funcionario.Endereco.Uf} - ");
-                                        Console.Write($"{funcionario.Endereco.Cidade} - ");
-                                        Console.Write($"{funcionario.Endereco.Bairro} - ");
-                                        Console.Write($"{funcionario.Endereco.Rua} - ");
-                                        Console.Write($"{funcionario.Endereco.Complemento} - ");
-                                        Console.WriteLine($"{funcionario.Endereco.NumeroCasa}");
+                                        Console.Write($"{funcionario.Name} {funcionario}  | ");
+                                        Console.Write($"{funcionario} - ");
+                                        Console.Write($"{funcionario} - ");
+                                        Console.Write($"{funcionario} - ");
+                                        Console.Write($"{funcionario} - ");
+                                        Console.Write($"{funcionario} - ");
+                                        Console.WriteLine($"{funcionario}");
                                     }
                                     Console.WriteLine("------------------------------------------------------------------------------------------------------");
                                     break;
@@ -358,7 +358,7 @@ namespace Ponto.ConsoleApp
                 case "0":
                     Exit();
                     break;
-                case "1":
+                case "2":
                     userConsole.Execute();
                     break;
                 default:

@@ -1,21 +1,17 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Ponto.Classes
 {
-    public class CrudFuncionario: Administrador
+    public class CrudFuncionario : Administrador
     {
         private Dictionary<String, Funcionario> funcionarios;
         private static int Index = 0;
-        public CrudFuncionario(string cpf, string nome, string sobrenome, Endereco endereco):base(cpf,nome,sobrenome,endereco)
+        public CrudFuncionario(string cpf, string nome, string sobrenome, Endereco endereco) : base(cpf, nome, sobrenome, endereco)
         {
             funcionarios = new Dictionary<String, Funcionario>();
             Cpf = cpf;
-            Nome = nome;
-            Sobrenome = sobrenome;
-            Endereco = endereco;
+            Name = nome;
         }
 
         public void Cadastrar(Funcionario funcionario)

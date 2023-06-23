@@ -15,23 +15,22 @@ namespace Ponto.ConsoleApp
         static int OptMenu;
         static Empresa empresa;
         //Inventando Dados para um Adm inicial...---------------------------------------------------------------
-        static Endereco enderecoRoot = new Endereco("Adm", "Administralândia", "Sim", "Bairro", "Rua", 1);
-        static Administrador administrador = new Administrador("12345678900", "Galo", "Cinza", enderecoRoot);
+        static Administrador administrador = new Administrador("12345678900", "Galo", "Cinza");
         //------------------------------------------------------------------------------------------------------
-        static CrudFuncionario funcionarios = new CrudFuncionario("", "", "", enderecoRoot);//Tive que colocar esses dados só pra poder usar o Crud
+        static CrudFuncionario funcionarios = new CrudFuncionario();//Tive que colocar esses dados só pra poder usar o Crud
         static void Main(string[] args)
         {
             while (true)
             {
                 Console.Clear();
+                _utils.ShowHeader("Menu");
                 ShowMainMenu();
                 ReadMenuOption();
                 HandleMenu();
             }
             administrador.ChaveAdministrador = "root";
             //Funcionario Teste-----------------------------------------------------------------------------------
-            Endereco endereco1 = new Endereco("SC", "Lages", "Casa", "Petropoles", "Rua 31 de Março", 55);
-            Funcionario funcionarioC = new Funcionario("12345678901", "lucas", "almeida", endereco1);
+            Funcionario funcionarioC = new Funcionario("12345678901", "lucas", "almeida");
             funcionarios.Cadastrar(funcionarioC);
             //----------------------------------------------------------------------------------------------------
             Console.WriteLine("Informe o Nome da Empresa: ");
@@ -58,8 +57,7 @@ namespace Ponto.ConsoleApp
                 ler = Console.ReadLine();
             } while (ENumero(ler) == false);
             int numero = Convert.ToInt32(ler);
-            Endereco endereco = new Endereco(uf, cidade, complemento, bairro, rua, numero);
-            empresa = new Empresa(empresaNome, cnpj, endereco);
+            empresa = new Empresa(empresaNome, cnpj);
             do
             {
                 do
@@ -74,12 +72,6 @@ namespace Ponto.ConsoleApp
                         Console.WriteLine("-----------Dados da Empresa-----------");
                         Console.WriteLine($"CNPJ: {cnpj[0]}{cnpj[1]}.{cnpj[2]}{cnpj[3]}{cnpj[4]}.{cnpj[5]}{cnpj[6]}{cnpj[7]}/{cnpj[8]}{cnpj[9]}{cnpj[10]}{cnpj[11]}-{cnpj[12]}{cnpj[13]}");
                         Console.WriteLine($"Nome: {empresa.Nome}");
-                        Console.WriteLine($"UF: {empresa.Endereco.Uf}");
-                        Console.WriteLine($"Cidade: {empresa.Endereco.Cidade}");
-                        Console.WriteLine($"Bairro: {empresa.Endereco.Bairro}");
-                        Console.WriteLine($"Rua: {empresa.Endereco.Rua}");
-                        Console.WriteLine($"Complemento: {empresa.Endereco.Complemento}");
-                        Console.WriteLine($"Número do Complemento: {empresa.Endereco.NumeroCasa}");
                         Console.WriteLine("---------------------------------------");
                         break;
                     case 2:
@@ -374,8 +366,6 @@ namespace Ponto.ConsoleApp
 
         static void ShowMainMenu()
         {
-            _utils.ShowHeader("Menu");
-
             Console.WriteLine("[1] Exibir Informações da Empresa");
             Console.WriteLine("[2] Menu Funcionário");
             Console.WriteLine("[3] Menu Administrador");

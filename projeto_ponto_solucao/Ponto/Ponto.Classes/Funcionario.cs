@@ -12,7 +12,7 @@ namespace Ponto.Classes
         private int IndexRegistro = 0;
         public string Tipo;
         //public TimeOnly CargaHoraria = new TimeOnly(8h); rascunhos
-        public Funcionario(string cpf, string nome, string sobrenome, Endereco endereco) : base(cpf, nome)
+        public Funcionario(string cpf, string nome, string sobrenome) : base(cpf, nome)
         {
             Cpf = cpf;
             Name = nome;

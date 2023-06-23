@@ -7,7 +7,7 @@ namespace Ponto.ConsoleApp
     class Program
     {
         static string menuOption;
-        static UserConsole userConsole = new();
+        static EmployeeConsole userConsole = new();
         static ConsoleUtils _utils = new();
 
         static string ler;
@@ -164,14 +164,6 @@ namespace Ponto.ConsoleApp
                         {
                             do
                             {
-                                Console.WriteLine("-----------Menu Administrador-----------");
-                                Console.WriteLine("[1] Cadastrar");
-                                Console.WriteLine("[2] Editar");
-                                Console.WriteLine("[3] Excluir");
-                                Console.WriteLine("[4] Exibir todos os Funcionários");
-                                Console.WriteLine("[5] Voltar");
-                                Console.WriteLine("----------------------------------------");
-                                Console.Write("Informe o Número da Opção desejada: ");
                                 ler = Console.ReadLine();
                             } while (ENumero(ler) == false);
                             OptMenu = Convert.ToInt32(ler);

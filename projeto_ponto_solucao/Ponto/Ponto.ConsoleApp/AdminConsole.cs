@@ -2,19 +2,19 @@ using System;
 
 namespace Ponto.ConsoleApp
 {
-    public class EmployeeConsole
+    public class AdminConsole
     {
         private string menuOption;
-        private ConsoleUtils _utils = new();
+        private ConsoleUtils utils;
 
         public void Execute()
         {
-            string optionToBack = "3";
+            string optionToBack = "5";
 
             do
             {
                 Console.Clear();
-                _utils.ShowHeader("Menu Funcionário");
+                utils.ShowHeader("Menu Administrador");
                 ShowMenu();
                 ReadMenuOption();
                 HandleMenu();
@@ -23,9 +23,17 @@ namespace Ponto.ConsoleApp
 
         private void ShowMenu()
         {
-            Console.WriteLine("[1] Exibir Informações do Funcionário");
-            Console.WriteLine("[2] Marcar Ponto");
-            Console.WriteLine("[3] Voltar");
+            Console.WriteLine("[1] Cadastrar");
+            Console.WriteLine("[2] Editar");
+            Console.WriteLine("[3] Excluir");
+            Console.WriteLine("[4] Exibir todos os Funcionários");
+            Console.WriteLine("[5] Voltar");
+        }
+
+        private void ReadMenuOption()
+        {
+            Console.Write("=> ");
+            menuOption = Console.ReadLine();
         }
 
         private void HandleMenu()
@@ -38,15 +46,13 @@ namespace Ponto.ConsoleApp
                     break;
                 case "3":
                     break;
+                case "4":
+                    break;
+                case "5":
+                    break;
                 default:
                     break;
             }
-        }
-
-        private void ReadMenuOption()
-        {
-            Console.Write("=> ");
-            menuOption = Console.ReadLine();
         }
     }
 }

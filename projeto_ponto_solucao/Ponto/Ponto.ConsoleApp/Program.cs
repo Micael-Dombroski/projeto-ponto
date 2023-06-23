@@ -31,7 +31,7 @@ namespace Ponto.ConsoleApp
         static void ShowMainMenu()
         {
             Console.WriteLine("[1] Fazer Login");
-            Console.WriteLine("[2] Criar Conta");
+            Console.WriteLine("[2] Registrar-se");
             Console.WriteLine("[3] Sobre");
             Console.WriteLine("[0] Sair");
         }
@@ -42,10 +42,10 @@ namespace Ponto.ConsoleApp
             switch (menuOption)
             {
                 case "1":
-                    LoginMenu();
+                    DoLogin();
                     break;
                 case "2":
-                    SignUpMenu();
+                    DoSignUp();
                     break;
                 case "3":
                     AboutUs();
@@ -56,10 +56,10 @@ namespace Ponto.ConsoleApp
                 default:
                     break;
             }
-            BackToMenu();
+            BackToMainMenu();
         }
 
-        private static void LoginMenu()
+        private static void DoLogin()
         {
             utils.ShowHeader("login");
 
@@ -82,7 +82,55 @@ namespace Ponto.ConsoleApp
                 utils.HandleError("Senha incorreta");
         }
 
-        private static void SignUpMenu()
+        private static void DoSignUp()
+        {
+            do
+            {
+                Console.Clear();
+                utils.ShowHeader("Registrar-se");
+                ShowSignUpMenu();
+                ReadMenuOption();
+                HandleSignUp();
+            } while (menuOption != "4");
+        }
+
+        private static void ShowSignUpMenu()
+        {
+            Console.WriteLine("[1] Novo funcionário");
+            Console.WriteLine("[2] Novo administrador");
+            Console.WriteLine("[3] Nova empresa");
+            Console.WriteLine("[4] Voltar");
+        }
+
+        private static void HandleSignUp()
+        {
+            switch (menuOption)
+            {
+                case "1":
+                    NewEmployee();
+                    break;
+                case "2":
+                    NewAdmin();
+                    break;
+                case "3":
+                    NewCompany();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private static void NewEmployee()
+        {
+            throw new NotImplementedException();
+        }
+
+        private static void NewAdmin()
+        {
+            throw new NotImplementedException();
+        }
+
+        private static void NewCompany()
         {
             throw new NotImplementedException();
         }
@@ -104,7 +152,7 @@ namespace Ponto.ConsoleApp
             menuOption = Console.ReadLine();
         }
 
-        static void BackToMenu()
+        static void BackToMainMenu()
         {
             Console.WriteLine("\nPressione qualquer tecla para prosseguir...");
             Console.ReadKey();

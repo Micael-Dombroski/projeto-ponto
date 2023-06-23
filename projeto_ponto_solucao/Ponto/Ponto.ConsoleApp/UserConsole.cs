@@ -1,0 +1,52 @@
+using System;
+
+namespace Ponto.ConsoleApp
+{
+    public class UserConsole
+    {
+        private string menuOption;
+        private ConsoleUtils _utils = new();
+
+        public void Execute()
+        {
+            string optionToBack = "3";
+
+            while (menuOption != optionToBack)
+            {
+                Console.Clear();
+                _utils.ShowHeader("Menu Funcionário");
+                ShowMenu();
+                ReadMenuOption();
+                HandleMenu();
+            }
+        }
+
+        private void ShowMenu()
+        {
+            Console.WriteLine("[1] Exibir Informações do Funcionário");
+            Console.WriteLine("[2] Marcar Ponto");
+            Console.WriteLine("[3] Voltar");
+        }
+
+        private void HandleMenu()
+        {
+            switch (menuOption)
+            {
+                case "1":
+                    break;
+                case "2":
+                    break;
+                case "3":
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void ReadMenuOption()
+        {
+            Console.Write("=> ");
+            menuOption = Console.ReadLine();
+        }
+    }
+}

@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "cfgkcyqxqq/m/zQ0KIOgXZlgwZjJ3UfQ/Cb1cHTEsFQWTVyFOmgoIWXgezDN542fPSbTwBlEbW6fjS/pNUfX0w==",
+  "dgSpecHash": "DwdANAsW8MrkwKCmRoK6v5buE4OUi1qmguUL9zmLA4oscQer2x7dPE9KY3ne6bzLpGF80ti6wRiCyePMDb+oRQ==",
   "success": true,
-  "projectFilePath": "C:\\Cursos\\DevSistemas\\projeto_ponto_solucao\\Ponto\\Ponto.ConsoleApp\\Ponto.ConsoleApp.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "/home/natan/www/jp/projeto-ponto/projeto_ponto_solucao/Ponto/Ponto.ConsoleApp/Ponto.ConsoleApp.csproj",
+  "expectedPackageFiles": [
+    "/home/natan/.nuget/packages/microsoft.aspnetcore.app.ref/5.0.0/microsoft.aspnetcore.app.ref.5.0.0.nupkg.sha512"
+  ],
   "logs": []
 }

@@ -6,7 +6,9 @@ namespace Ponto.ConsoleApp
 {
     class Program
     {
-        static int menuOption;
+        static string menuOption;
+        static UserConsole userConsole = new();
+        static ConsoleUtils _utils = new();
 
         static string ler;
         static int Opt;
@@ -85,12 +87,6 @@ namespace Ponto.ConsoleApp
                         {
                             do
                             {
-                                Console.WriteLine("-----------Menu Funcionário-----------");
-                                Console.WriteLine("[1] Exibir Informações do Funcionário");
-                                Console.WriteLine("[2] Marcar Ponto");
-                                Console.WriteLine("[3] Voltar");
-                                Console.WriteLine("--------------------------");
-                                Console.Write("Informe o Número da Opção desejada: ");
                                 ler = Console.ReadLine();
                             } while (ENumero(ler) == false);
                             OptMenu = Convert.ToInt32(ler);
@@ -359,8 +355,11 @@ namespace Ponto.ConsoleApp
         {
             switch (menuOption)
             {
-                case 0:
+                case "0":
                     Exit();
+                    break;
+                case "1":
+                    userConsole.Execute();
                     break;
                 default:
                     break;
@@ -369,25 +368,24 @@ namespace Ponto.ConsoleApp
 
         private static void Exit()
         {
-            Console.WriteLine("Saindo do sistema");
+            Console.WriteLine("Saindo do sistema...");
             Environment.Exit(1);
         }
 
         static void ShowMainMenu()
         {
-            Console.WriteLine("-----------Menu-----------");
+            _utils.ShowHeader("Menu");
+
             Console.WriteLine("[1] Exibir Informações da Empresa");
             Console.WriteLine("[2] Menu Funcionário");
             Console.WriteLine("[3] Menu Administrador");
             Console.WriteLine("[0] Sair");
-            Console.WriteLine("--------------------------");
-            Console.Write("Informe o Número da Opção desejada: ");
         }
 
         static void ReadMenuOption()
         {
             Console.Write("=> ");
-            menuOption = Convert.ToInt16(Console.ReadLine());
+            menuOption = Console.ReadLine();
         }
 
         static bool ENumero(string palavra)

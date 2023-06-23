@@ -1,6 +1,6 @@
 namespace Ponto.ConsoleApp
 {
-    public class EmployeeConsole
+    public class CompanyConsole
     {
 
     }

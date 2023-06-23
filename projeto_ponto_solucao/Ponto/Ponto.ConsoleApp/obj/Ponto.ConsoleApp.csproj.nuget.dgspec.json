@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Cursos\\DevSistemas\\projeto_ponto_solucao\\Ponto\\Ponto.ConsoleApp\\Ponto.ConsoleApp.csproj": {}
+    "/home/natan/www/jp/projeto-ponto/projeto_ponto_solucao/Ponto/Ponto.ConsoleApp/Ponto.ConsoleApp.csproj": {}
   },
   "projects": {
-    "C:\\Cursos\\DevSistemas\\projeto_ponto_solucao\\Ponto\\Ponto.Classes\\Ponto.Classes.csproj": {
+    "/home/natan/www/jp/projeto-ponto/projeto_ponto_solucao/Ponto/Ponto.Classes/Ponto.Classes.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Cursos\\DevSistemas\\projeto_ponto_solucao\\Ponto\\Ponto.Classes\\Ponto.Classes.csproj",
+        "projectUniqueName": "/home/natan/www/jp/projeto-ponto/projeto_ponto_solucao/Ponto/Ponto.Classes/Ponto.Classes.csproj",
         "projectName": "Ponto.Classes",
-        "projectPath": "C:\\Cursos\\DevSistemas\\projeto_ponto_solucao\\Ponto\\Ponto.Classes\\Ponto.Classes.csproj",
-        "packagesPath": "C:\\Users\\jackp\\.nuget\\packages\\",
-        "outputPath": "C:\\Cursos\\DevSistemas\\projeto_ponto_solucao\\Ponto\\Ponto.Classes\\obj\\",
+        "projectPath": "/home/natan/www/jp/projeto-ponto/projeto_ponto_solucao/Ponto/Ponto.Classes/Ponto.Classes.csproj",
+        "packagesPath": "/home/natan/.nuget/packages/",
+        "outputPath": "/home/natan/www/jp/projeto-ponto/projeto_ponto_solucao/Ponto/Ponto.Classes/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\jackp\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/home/natan/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
@@ -48,26 +48,32 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[5.0.0, 5.0.0]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/7.0.105/RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Cursos\\DevSistemas\\projeto_ponto_solucao\\Ponto\\Ponto.ConsoleApp\\Ponto.ConsoleApp.csproj": {
+    "/home/natan/www/jp/projeto-ponto/projeto_ponto_solucao/Ponto/Ponto.ConsoleApp/Ponto.ConsoleApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Cursos\\DevSistemas\\projeto_ponto_solucao\\Ponto\\Ponto.ConsoleApp\\Ponto.ConsoleApp.csproj",
+        "projectUniqueName": "/home/natan/www/jp/projeto-ponto/projeto_ponto_solucao/Ponto/Ponto.ConsoleApp/Ponto.ConsoleApp.csproj",
         "projectName": "Ponto.ConsoleApp",
-        "projectPath": "C:\\Cursos\\DevSistemas\\projeto_ponto_solucao\\Ponto\\Ponto.ConsoleApp\\Ponto.ConsoleApp.csproj",
-        "packagesPath": "C:\\Users\\jackp\\.nuget\\packages\\",
-        "outputPath": "C:\\Cursos\\DevSistemas\\projeto_ponto_solucao\\Ponto\\Ponto.ConsoleApp\\obj\\",
+        "projectPath": "/home/natan/www/jp/projeto-ponto/projeto_ponto_solucao/Ponto/Ponto.ConsoleApp/Ponto.ConsoleApp.csproj",
+        "packagesPath": "/home/natan/.nuget/packages/",
+        "outputPath": "/home/natan/www/jp/projeto-ponto/projeto_ponto_solucao/Ponto/Ponto.ConsoleApp/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\jackp\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/home/natan/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
@@ -79,8 +85,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Cursos\\DevSistemas\\projeto_ponto_solucao\\Ponto\\Ponto.Classes\\Ponto.Classes.csproj": {
-                "projectPath": "C:\\Cursos\\DevSistemas\\projeto_ponto_solucao\\Ponto\\Ponto.Classes\\Ponto.Classes.csproj"
+              "/home/natan/www/jp/projeto-ponto/projeto_ponto_solucao/Ponto/Ponto.Classes/Ponto.Classes.csproj": {
+                "projectPath": "/home/natan/www/jp/projeto-ponto/projeto_ponto_solucao/Ponto/Ponto.Classes/Ponto.Classes.csproj"
               }
             }
           }
@@ -105,12 +111,18 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[5.0.0, 5.0.0]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/7.0.105/RuntimeIdentifierGraph.json"
         }
       }
     }

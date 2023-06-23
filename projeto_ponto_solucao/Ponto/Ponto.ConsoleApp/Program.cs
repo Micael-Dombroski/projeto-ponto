@@ -7,8 +7,12 @@ namespace Ponto.ConsoleApp
     class Program
     {
         static string menuOption;
-        static EmployeeConsole userConsole = new();
-        static ConsoleUtils _utils = new();
+
+        static EmployeeConsole employeeConsole = new();
+        static CompanyConsole companyConsole = new();
+        static AdminConsole adminConsole = new();
+
+        static ConsoleUtils utils = new();
 
         static string ler;
         static int Opt;
@@ -23,7 +27,7 @@ namespace Ponto.ConsoleApp
             while (true)
             {
                 Console.Clear();
-                _utils.ShowHeader("Menu");
+                utils.ShowHeader("Menu");
                 ShowMainMenu();
                 ReadMenuOption();
                 HandleMenu();
@@ -335,33 +339,54 @@ namespace Ponto.ConsoleApp
             } while (Opt != 4);
         }
 
+        static void ShowMainMenu()
+        {
+            Console.WriteLine("[1] Fazer Login");
+            Console.WriteLine("[2] Criar Conta");
+            Console.WriteLine("[3] Sobre");
+            Console.WriteLine("[0] Sair");
+        }
+
         private static void HandleMenu()
         {
             switch (menuOption)
             {
-                case "0":
-                    Exit();
+                case "1":
+                    LoginMenu();
                     break;
                 case "2":
-                    userConsole.Execute();
+                    SignUpMenu();
+                    break;
+                case "3":
+                    AboutUs();
+                    break;
+                case "0":
+                    Exit();
                     break;
                 default:
                     break;
             }
         }
 
+        private static void LoginMenu()
+        {
+            throw new NotImplementedException();
+        }
+
+        private static void SignUpMenu()
+        {
+            throw new NotImplementedException();
+        }
+
+        private static void AboutUs()
+        {
+            throw new NotImplementedException();
+        }
+
         private static void Exit()
         {
             Console.WriteLine("Saindo do sistema...");
             Environment.Exit(1);
-        }
-
-        static void ShowMainMenu()
-        {
-            Console.WriteLine("[1] Exibir Informações da Empresa");
-            Console.WriteLine("[2] Menu Funcionário");
-            Console.WriteLine("[3] Menu Administrador");
-            Console.WriteLine("[0] Sair");
         }
 
         static void ReadMenuOption()

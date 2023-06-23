@@ -6,12 +6,9 @@ namespace Ponto.Classes
         public Administrador(
             string cpf,
             string nome,
-            string sobrenome) : base(cpf, nome, sobrenome)
+            string registration,
+            string password) : base(cpf, nome, registration, password)
         {
-            Cpf = cpf;
-            Name = nome;
-            Usuario = $"{Name.ToLower()}";
-            Senha = cpf;
         }
     }
 }

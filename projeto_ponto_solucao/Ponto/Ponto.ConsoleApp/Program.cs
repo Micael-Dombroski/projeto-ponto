@@ -14,14 +14,15 @@ namespace Ponto.ConsoleApp
 
         static ConsoleUtils utils = new();
 
+        static CrudFuncionario employees = new CrudFuncionario();
+
         static string ler;
         static int Opt;
         static int OptMenu;
         static Empresa empresa;
         //Inventando Dados para um Adm inicial...---------------------------------------------------------------
-        static Administrador administrador = new Administrador("12345678900", "Galo", "Cinza");
+        static Administrador administrador = new Administrador("12345678900", "Galo", "matricula", "senha");
         //------------------------------------------------------------------------------------------------------
-        static CrudFuncionario funcionarios = new CrudFuncionario();//Tive que colocar esses dados só pra poder usar o Crud
         static void Main(string[] args)
         {
             while (true)
@@ -34,8 +35,8 @@ namespace Ponto.ConsoleApp
             }
             administrador.ChaveAdministrador = "root";
             //Funcionario Teste-----------------------------------------------------------------------------------
-            Funcionario funcionarioC = new Funcionario("12345678901", "lucas", "almeida");
-            funcionarios.Cadastrar(funcionarioC);
+            Funcionario funcionarioC = new Funcionario("12345678901", "lucas", "matricula", "password");
+            employees.Cadastrar(funcionarioC);
             //----------------------------------------------------------------------------------------------------
             Console.WriteLine("Informe o Nome da Empresa: ");
             string empresaNome = Console.ReadLine();
@@ -94,14 +95,14 @@ namespace Ponto.ConsoleApp
                                         Console.Write("Informe o CPF do Funcionário que deseja Consultar: ");
                                         ler = Console.ReadLine();
                                     } while (ValCPF(ler) == false);
-                                    if (funcionarios.ConsultarCPF(ler) == null)
+                                    if (employees.ConsultarCPF(ler) == null)
                                     {
                                         Console.WriteLine("Funcionário Não Encontrado");
                                     }
                                     else
                                     {
-                                        Funcionario funcionario = funcionarios.ConsultarCPF(ler);
-                                        string cpf = funcionario.Cpf;
+                                        Funcionario funcionario = employees.ConsultarCPF(ler);
+                                        string cpf = funcionario.CPF;
                                         Console.WriteLine("-----------Dados do Funcionário-----------");
                                         Console.WriteLine($"CPF: {cpf[0]}{cpf[1]}{cpf[2]}.{cpf[3]}{cpf[4]}{cpf[5]}.{cpf[6]}{cpf[7]}{cpf[8]}-{cpf[9]}{cpf[10]}");
                                         Console.WriteLine($"Nome: {funcionario.Name} {funcionario}");
@@ -111,8 +112,8 @@ namespace Ponto.ConsoleApp
                                         Console.WriteLine($"Rua: {funcionario}");
                                         Console.WriteLine($"Complemento: {funcionario}");
                                         Console.WriteLine($"Número do Complemento: {funcionario}");
-                                        Console.WriteLine($"Nome de Usuário: {funcionario.Usuario}");
-                                        Console.WriteLine($"Senha: {funcionario.Senha}");
+                                        Console.WriteLine($"Nome de Usuário: {funcionario.Name}");
+                                        Console.WriteLine($"Senha: {funcionario.Password}");
                                         Console.WriteLine("------------------------------------------");
                                     }
                                     break;
@@ -127,15 +128,15 @@ namespace Ponto.ConsoleApp
                                         senhaCerta = false;
                                         Console.Write("Informe o Nome do Usuário: ");
                                         ler = Console.ReadLine();
-                                        foreach (KeyValuePair<string, Funcionario> par in funcionarios.ConsultarTodos())
+                                        foreach (KeyValuePair<string, Funcionario> par in employees.ConsultarTodos())
                                         {
                                             Funcionario funcionario = par.Value;
-                                            if (funcionario.Usuario == ler)
+                                            if (funcionario.Registration == ler)
                                             {
                                                 usuarioExistente = true;
                                                 Console.Write("Informe a Senha do Usuário: ");
                                                 ler = Console.ReadLine();
-                                                if (funcionario.Senha == ler)
+                                                if (funcionario.Password == ler)
                                                 {
                                                     senhaCerta = true;
                                                     registrarPonto = true;
@@ -180,7 +181,7 @@ namespace Ponto.ConsoleApp
                                         AdmCadastrado = false;
                                         Console.Write("Informe uma Chave de Admnistrador: ");
                                         ler = Console.ReadLine();
-                                        foreach (KeyValuePair<string, Funcionario> par in funcionarios.ConsultarTodos())
+                                        foreach (KeyValuePair<string, Funcionario> par in employees.ConsultarTodos())
                                         {
                                             Funcionario funcionario = par.Value;
                                             if (funcionario.Tipo == "Adm")
@@ -205,7 +206,7 @@ namespace Ponto.ConsoleApp
                                         AdmCadastrado = false;
                                         Console.Write("Informe uma Chave de Admnistrador: ");
                                         ler = Console.ReadLine();
-                                        foreach (KeyValuePair<string, Funcionario> par in funcionarios.ConsultarTodos())
+                                        foreach (KeyValuePair<string, Funcionario> par in employees.ConsultarTodos())
                                         {
                                             Funcionario funcionario = par.Value;
                                             if (funcionario.Tipo == "Adm")
@@ -230,7 +231,7 @@ namespace Ponto.ConsoleApp
                                         AdmCadastrado = false;
                                         Console.Write("Informe uma Chave de Admnistrador: ");
                                         ler = Console.ReadLine();
-                                        foreach (KeyValuePair<string, Funcionario> par in funcionarios.ConsultarTodos())
+                                        foreach (KeyValuePair<string, Funcionario> par in employees.ConsultarTodos())
                                         {
                                             Funcionario funcionario = par.Value;
                                             if (funcionario.Tipo == "Adm")
@@ -255,7 +256,7 @@ namespace Ponto.ConsoleApp
                                         Console.Write("Informe o CPF do Funcionário que deseja excluir: ");
                                         ler = Console.ReadLine();
                                     } while (ValCPF(ler) == false);
-                                    foreach (KeyValuePair<string, Funcionario> par1 in funcionarios.ConsultarTodos())
+                                    foreach (KeyValuePair<string, Funcionario> par1 in employees.ConsultarTodos())
                                     {
                                         if (par1.Key == ler)
                                         {
@@ -269,7 +270,7 @@ namespace Ponto.ConsoleApp
                                         ler = Console.ReadLine();
                                         if (ler.ToLower() == "s")
                                         {
-                                            funcionarios.Excluir(CpfFuncionario);
+                                            employees.Excluir(CpfFuncionario);
                                             Console.WriteLine("Funcionário Excluído");
                                         }
                                     }
@@ -284,7 +285,7 @@ namespace Ponto.ConsoleApp
                                         AdmCadastrado = false;
                                         Console.Write("Informe uma Chave de Admnistrador: ");
                                         ler = Console.ReadLine();
-                                        foreach (KeyValuePair<string, Funcionario> par in funcionarios.ConsultarTodos())
+                                        foreach (KeyValuePair<string, Funcionario> par in employees.ConsultarTodos())
                                         {
                                             Funcionario funcionario = par.Value;
                                             if (funcionario.Tipo == "Adm")
@@ -305,10 +306,10 @@ namespace Ponto.ConsoleApp
                                     Console.WriteLine("Exibindo Todos os Funcionários...");
                                     Console.WriteLine("------------------------------------------------------------------------------------------------------");
                                     Console.WriteLine("CPF             | Nome Completo             | Endereço");
-                                    foreach (KeyValuePair<string, Funcionario> par in funcionarios.ConsultarTodos())
+                                    foreach (KeyValuePair<string, Funcionario> par in employees.ConsultarTodos())
                                     {
                                         Funcionario funcionario = par.Value;
-                                        string cpf = funcionario.Cpf;
+                                        string cpf = funcionario.CPF;
                                         Console.Write($"{cpf[0]}{cpf[1]}{cpf[2]}.{cpf[3]}{cpf[4]}{cpf[5]}.{cpf[6]}{cpf[7]}{cpf[8]}-{cpf[9]}{cpf[10]} | ");
                                         Console.Write($"{funcionario.Name} {funcionario}  | ");
                                         Console.Write($"{funcionario} - ");
@@ -349,6 +350,7 @@ namespace Ponto.ConsoleApp
 
         private static void HandleMenu()
         {
+            Console.Clear();
             switch (menuOption)
             {
                 case "1":
@@ -366,11 +368,30 @@ namespace Ponto.ConsoleApp
                 default:
                     break;
             }
+            BackToMenu();
         }
 
         private static void LoginMenu()
         {
-            throw new NotImplementedException();
+            utils.ShowHeader("login");
+
+            Console.Write("Digite sua matrícula: ");
+            string registration = Console.ReadLine();
+
+            Funcionario employee = employees.ConsultarCPF(registration);
+            if (employee == null)
+            {
+                utils.HandleError("Usuário não encontrado");
+                return;
+            }
+
+            Console.Write("Digite sua senha: ");
+            string password = Console.ReadLine();
+
+            if (employee.PasswordIsCorrect(password))
+                utils.HandleSuccess("Acesso concedido");
+            else
+                utils.HandleError("Senha incorreta");
         }
 
         private static void SignUpMenu()
@@ -393,6 +414,12 @@ namespace Ponto.ConsoleApp
         {
             Console.Write("=> ");
             menuOption = Console.ReadLine();
+        }
+
+        static void BackToMenu()
+        {
+            Console.WriteLine("\nPressione qualquer tecla para prosseguir...");
+            Console.ReadKey();
         }
 
         static bool ENumero(string palavra)

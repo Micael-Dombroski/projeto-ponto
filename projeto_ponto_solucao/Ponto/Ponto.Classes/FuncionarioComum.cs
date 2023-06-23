@@ -5,10 +5,14 @@ namespace Ponto.Classes
         public FuncionarioComum(
             string cpf,
             string nome,
-            string sobrenome) : base(cpf, nome, sobrenome)
+            string registration,
+            string password)
+            : base(
+                cpf: cpf,
+                name: nome,
+                registration: registration,
+                password: password)
         {
-            Usuario = $"{nome.ToLower()}";
-            Senha = cpf;
         }
     }
 }

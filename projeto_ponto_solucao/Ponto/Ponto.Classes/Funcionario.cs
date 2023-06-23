@@ -6,18 +6,16 @@ namespace Ponto.Classes
     {
         protected static int Index = 0;
         public int ID;
-        public string Usuario { get; set; }
-        public string Senha { get; set; }
         public DateTime[] Registro = new DateTime[2];//Tamanho 2 pq tem horirio de entrada e saida
         private int IndexRegistro = 0;
         public string Tipo;
         //public TimeOnly CargaHoraria = new TimeOnly(8h); rascunhos
-        public Funcionario(string cpf, string nome, string sobrenome) : base(cpf, nome)
+        public Funcionario(
+            string cpf,
+            string name,
+            string registration,
+            string password) : base(cpf, name, registration, password)
         {
-            Cpf = cpf;
-            Name = nome;
-            Usuario = $"{Name.ToLower()}";
-            Senha = cpf;
         }
         public bool MarcarPonto()
         {
@@ -38,5 +36,6 @@ namespace Ponto.Classes
             }
             return true;
         }
+
     }
 }

@@ -1,59 +1,37 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Ponto.Classes
 {
     public class CrudFuncionario
     {
-        private Dictionary<String, Funcionario> funcionarios = new();
-        private static int Index = 0;
+        private Dictionary<String, Funcionario> employees = new();
 
-        public void Cadastrar(Funcionario funcionario)
+        public void Add(Funcionario funcionario)
         {
-            Index++;
-            funcionario.ID = Index;
-            funcionario.Tipo = "Comum";
-            funcionarios.Add(funcionario.Registration, funcionario);
-        }
-        public void CadastrarAdm(Administrador administrador)
-        {
-            Index++;
-            administrador.ID = Index;
-            administrador.Tipo = "Adm";
-            funcionarios.Add(administrador.Registration, administrador);
+            employees.Add(funcionario.Registration, funcionario);
         }
 
-        public Dictionary<String, Funcionario> ConsultarTodos()
+        public List<Funcionario> ConsultarTodos()
         {
-            return funcionarios;
+            return employees.Values.ToList();
         }
 
         public Funcionario ConsultarCPF(string registration)
         {
-            return funcionarios.GetValueOrDefault(registration);
+            return employees.GetValueOrDefault(registration);
         }
 
         public void Editar(Funcionario funcionario)
         {
-            foreach (KeyValuePair<string, Funcionario> par in funcionarios)
-            {
-                if (par.Key == funcionario.Registration)
-                {
-                    funcionarios.Remove(par.Key);
-                    funcionarios.Add(funcionario.Registration, funcionario);
-                }
-            }
+            Delete(funcionario.Registration);
+            Add(funcionario);
         }
 
-        public void Excluir(string registration)
+        public void Delete(string registration)
         {
-            foreach (KeyValuePair<string, Funcionario> par in funcionarios)
-            {
-                if (par.Key == registration)
-                {
-                    funcionarios.Remove(par.Key);
-                }
-            }
+            employees.Remove(registration);
         }
     }
 }

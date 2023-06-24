@@ -65,7 +65,7 @@ namespace Ponto.ConsoleApp
             Console.Write("Digite sua matrícula: ");
             string registration = Console.ReadLine();
 
-            Funcionario employee = employees.ConsultarCPF(registration);
+            Employee employee = employees.GetByCPF(registration);
             if (employee == null)
             {
                 utils.HandleError("Usuário não encontrado");

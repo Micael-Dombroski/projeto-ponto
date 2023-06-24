@@ -1,9 +1,9 @@
 namespace Ponto.Classes
 {
-    public class FuncionarioComum : Funcionario
+    public class FuncionarioComum : Employee
     {
         public FuncionarioComum(
-            string cpf,
+            CPF cpf,
             string nome,
             string registration,
             string password)

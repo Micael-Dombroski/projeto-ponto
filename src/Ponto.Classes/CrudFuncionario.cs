@@ -6,24 +6,24 @@ namespace Ponto.Classes
 {
     public class CrudFuncionario
     {
-        private Dictionary<String, Funcionario> employees = new();
+        private Dictionary<String, Employee> employees = new();
 
-        public void Add(Funcionario funcionario)
+        public void Add(Employee employee)
         {
-            employees.Add(funcionario.Registration, funcionario);
+            employees.Add(employee.Registration, employee);
         }
 
-        public List<Funcionario> ConsultarTodos()
+        public List<Employee> GetAll()
         {
             return employees.Values.ToList();
         }
 
-        public Funcionario ConsultarCPF(string registration)
+        public Employee GetByCPF(string registration)
         {
             return employees.GetValueOrDefault(registration);
         }
 
-        public void Editar(Funcionario funcionario)
+        public void Update(Employee funcionario)
         {
             Delete(funcionario.Registration);
             Add(funcionario);

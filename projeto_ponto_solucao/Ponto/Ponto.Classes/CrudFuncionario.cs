@@ -6,7 +6,6 @@ namespace Ponto.Classes
     public class CrudFuncionario
     {
         private Dictionary<String, Funcionario> funcionarios = new();
-        private static int Index = 0;
 
         public void Cadastrar(Funcionario funcionario)
         {

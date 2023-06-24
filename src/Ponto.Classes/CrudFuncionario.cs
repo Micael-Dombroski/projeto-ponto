@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Ponto.Classes
 {
-    public class CrudFuncionario
+    public class EmployeeCRUD
     {
         private Dictionary<String, Employee> employees = new();
 

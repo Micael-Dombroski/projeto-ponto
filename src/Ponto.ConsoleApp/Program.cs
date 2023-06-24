@@ -13,7 +13,7 @@ namespace Ponto.ConsoleApp
 
         static ConsoleUtils utils = new();
 
-        static CrudFuncionario employees = new CrudFuncionario();
+        static EmployeeCRUD employees = new EmployeeCRUD();
 
         static void Main(string[] args)
         {

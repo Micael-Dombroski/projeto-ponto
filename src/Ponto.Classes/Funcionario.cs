@@ -11,7 +11,7 @@ namespace Ponto.Classes
         public string Tipo;
         //public TimeOnly CargaHoraria = new TimeOnly(8h); rascunhos
         public Funcionario(
-            string cpf,
+            CPF cpf,
             string name,
             string registration,
             string password) : base(cpf, name, registration, password)

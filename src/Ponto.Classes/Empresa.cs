@@ -1,11 +1,11 @@
 namespace Ponto.Classes
 {
-    public class Empresa
+    public class Company
     {
         public string Nome;
-        public string CNPJ;
+        public CNPJ CNPJ;
 
-        public Empresa(string nome, string cnpj)
+        public Company(string nome, CNPJ cnpj)
         {
             Nome = nome;
             CNPJ = cnpj;

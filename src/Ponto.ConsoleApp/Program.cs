@@ -41,19 +41,14 @@ namespace Ponto.ConsoleApp
             switch (menuOption)
             {
                 case "1":
-                    DoLogin();
-                    break;
+                    DoLogin(); break;
                 case "2":
-                    DoSignUp();
-                    break;
+                    DoSignUp(); break;
                 case "3":
-                    AboutUs();
-                    break;
-                case "0":
-                    Exit();
-                    break;
-                default:
-                    break;
+                    AboutUs(); break;
+                case "0": 
+                    Exit(); break;
+                default: break;
             }
             BackToMainMenu();
         }
@@ -65,8 +60,8 @@ namespace Ponto.ConsoleApp
             Console.Write("Digite sua matrícula: ");
             string registration = Console.ReadLine();
 
-            Employee employee = employees.GetByCPF(registration);
-            if (employee == null)
+            Employee employee = employees.Get(registration);
+            if (employee is null)
             {
                 utils.HandleError("Usuário não encontrado");
                 return;
@@ -79,6 +74,8 @@ namespace Ponto.ConsoleApp
                 utils.HandleSuccess("Acesso concedido");
             else
                 utils.HandleError("Senha incorreta");
+            
+            employeeConsole.SetLogedEmployee(employee);
         }
 
         private static void DoSignUp()
@@ -121,17 +118,17 @@ namespace Ponto.ConsoleApp
 
         private static void NewEmployee()
         {
-            throw new NotImplementedException();
+            employeeConsole.NewEmployee();
         }
 
         private static void NewAdmin()
         {
-            throw new NotImplementedException();
+            adminConsole.NewAdmin();
         }
 
         private static void NewCompany()
         {
-            throw new NotImplementedException();
+            companyConsole.NewCompany();
         }
 
         private static void AboutUs()
@@ -156,66 +153,4 @@ namespace Ponto.ConsoleApp
             Console.WriteLine("\nPressione qualquer tecla para prosseguir...");
             Console.ReadKey();
         }
-
-        static bool ENumero(string palavra)
-        {
-            for (int i = 0; i < palavra.Length; i++)
-            {
-                if (palavra[i] > 57 || palavra[i] < 48)
-                {
-                    Console.WriteLine("Use apenas números nesse campo");
-                    return false;
-                }
-            }
-            return true;
-        }
-        static bool ValCNPJ(string Cnpj)
-        {
-            try
-            {
-                if (Cnpj.Length < 14 || Cnpj.Length > 14)
-                {
-                    throw new ArgumentException("O número de caracteres inseridos não bate com a quantidade que essa informação exige"); ;
-                }
-                for (int i = 0; i < Cnpj.Length; i++)
-                {
-                    if (Cnpj[i] < 48 || Cnpj[i] > 57)
-                    {
-                        throw new ArgumentException("Use apenas números nessa informação");
-                    }
-                }
-                Console.WriteLine("CNPJ válido");
-                return true;
-            }
-            catch (ArgumentException e)
-            {
-                Console.WriteLine(e.Message);
-                return false;
-            }
-        }
-        static bool ValCPF(string Cpf)
-        {
-            try
-            {
-                if (Cpf.Length < 11 || Cpf.Length > 11)
-                {
-                    throw new ArgumentException("O número de caracteres inseridos não bate com a quantidade que essa informação exige"); ;
-                }
-                for (int i = 0; i < Cpf.Length; i++)
-                {
-                    if (Cpf[i] < 48 || Cpf[i] > 57)
-                    {
-                        throw new ArgumentException("Use apenas números nessa informação");
-                    }
-                }
-                Console.WriteLine("CPF válido");
-                return true;
-            }
-            catch (ArgumentException e)
-            {
-                Console.WriteLine(e.Message);
-                return false;
-            }
-        }
     }
-}

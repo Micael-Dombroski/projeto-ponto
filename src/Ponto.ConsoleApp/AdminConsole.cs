@@ -21,6 +21,26 @@ namespace Ponto.ConsoleApp
             } while (menuOption != optionToBack);
         }
 
+        public void NewEmployee()
+        {
+            utils.ShowHeader(message: "Novo Administrador");
+            string registration = utils.ReadRegistration();
+            if (utils.EmployeeExists(registration))
+                utils.HandleError("Administrador já cadastrado");
+            CPF cpf = utils.ReadCPF();
+            string name = utils.ReadName();
+            string password = utils.ReadPassword();
+            Employee employee = new Employee()
+            {
+                CPF = cpf,
+                name = name,
+                password = password,
+                registration = registration
+            };
+
+            utils.HandleSuccess("Funcionário criado com sucesso");
+        }
+
         private void ShowMenu()
         {
             Console.WriteLine("[1] Cadastrar");

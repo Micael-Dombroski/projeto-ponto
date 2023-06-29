@@ -1,28 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
 namespace Ponto.Classes
 {
     public class AdminCRUD
     {
         private Dictionary<String, Administrator> administrators = new();
 
-        public void Add(Administrator administrator)
-        {
-            administrators.Add(administrator.Registration, administrator);
-        }
+        public void Add(Administrator administrator) => administrators.Add(administrator.Registration, administrator);
 
-        public Administrator Get(string registration)
-        {
-            return administrators.GetValueOrDefault(registration);
-        }
+        public Administrator Get(string registration) => administrators.GetValueOrDefault(registration);
 
-        public List<Administrator> GetAll()
-        {
-            return administrators.Values.ToList();
-        }
+        public List<Administrator> GetAll() => administrators.Values.ToList();
 
         public void Update(Administrator administrator)
         {
@@ -30,9 +16,6 @@ namespace Ponto.Classes
             Add(administrator);
         }
 
-        public void Delete(string registration)
-        {
-            administrators.Remove(registration);
-        }
+        public void Delete(string registration) => administrators.Remove(registration);
     }
 }

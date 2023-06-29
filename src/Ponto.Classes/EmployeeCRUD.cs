@@ -8,20 +8,11 @@ namespace Ponto.Classes
     {
         private Dictionary<String, Employee> employees = new();
 
-        public void Add(Employee employee)
-        {
-            employees.Add(employee.Registration, employee);
-        }
+        public void Add(Employee employee) => employees.Add(employee.Registration, employee);
 
-        public List<Employee> GetAll()
-        {
-            return employees.Values.ToList();
-        }
+        public List<Employee> GetAll() => employees.Values.ToList();
 
-        public Employee GetByCPF(string registration)
-        {
-            return employees.GetValueOrDefault(registration);
-        }
+        public Employee Get(string registration) => employees.GetValueOrDefault(registration);
 
         public void Update(Employee employee)
         {
@@ -29,9 +20,6 @@ namespace Ponto.Classes
             Add(employee);
         }
 
-        public void Delete(string registration)
-        {
-            employees.Remove(registration);
-        }
+        public void Delete(string registration) => employees.Remove(registration);
     }
 }

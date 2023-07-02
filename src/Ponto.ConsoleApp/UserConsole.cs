@@ -2,7 +2,7 @@ using System;
 
 namespace Ponto.ConsoleApp
 {
-    public class EmployeeConsole
+    public class UserConsole
     {
         private string menuOption;
         private ConsoleUtils _utils = new();

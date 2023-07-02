@@ -11,23 +11,18 @@ namespace Ponto.ConsoleApp
         {
             logedEmployee = employee;
         }
-        
+
         public void NewEmployee()
         {
-            utils.ShowHeader(message: "Novo Funcionário");
-            string registration = ReadRegistration();
+            utils.ShowHeader("Novo Funcionário");
+            string registration = utils.ReadRegistration();
             if (utils.EmployeeExists(registration))
                 utils.HandleError("Funcionário já cadastrado");
-            CPF cpf = ReadCPF();
-            string name = ReadName();
-            string password = ReadPassword();
-            Employee employee = new Employee()
-            {
-                CPF = cpf,
-                name = name,
-                password = password,
-                registration = registration
-            };
+            CPF cpf = utils.ReadCPF();
+            string name = utils.ReadName();
+            string password = utils.ReadPassword();
+            WorkLoad workLoad = utils.ReadWorkLoad();
+            Employee employee = new Employee(cpf, name, password: password, registration: registration, workLoad: workLoad);
 
             utils.HandleSuccess("Funcionário criado com sucesso");
         }

@@ -1,3 +1,5 @@
+using System;
+
 namespace Ponto.Classes
 {
     public class Employee : User
@@ -18,37 +20,33 @@ namespace Ponto.Classes
             this.WorkLoad = workLoad;
         }
 
-        public Employee()
-        {
-        }
-
         public void PunchClock()
         {
             if (timesPunchClock == 2)
                 timesPunchClock = 0;
 
             PunchClock();
-            
+
             if (timesPunchClock == 0)
             {
-                if (DateTime.Now == workLoad.StartHour || DateTime.Now < workLoad.StartHour.AddMinutes(5))
+                if (DateTime.Now == WorkLoad.StartHour || DateTime.Now < WorkLoad.StartHour.AddMinutes(5))
                 {
                     hourWhoStartToday = DateTime.Now;
                     timesPunchClock++;
                 }
-                else 
+                else
                 {
                     throw new Exception("fora do horario");
                 }
             }
             else if (timesPunchClock == 1)
             {
-                if (DateTime.Now == workLoad.EndHour || DateTime.Now < workLoad.StartHour.RemoveMinutes(5))
+                if (DateTime.Now == WorkLoad.EndHour || DateTime.Now < (WorkLoad.StartHour.AddMinutes(-5)))
                 {
                     hourWhoEndsToday = DateTime.Now;
                     timesPunchClock++;
                 }
-                else 
+                else
                 {
                     throw new Exception("fora do horario");
                 }

@@ -4,7 +4,13 @@ namespace Ponto.Classes
 {
     public struct CPF
     {
+
         public string Value { get; set; }
+
+        public CPF(string value)
+        {
+            Value = value;
+        }
 
         public void DoValidations()
         {

@@ -1,13 +1,14 @@
 using System;
+using Ponto.Classes;
 
 namespace Ponto.ConsoleApp
 {
     public class ConsoleUtils
     {
-        private void EmployeeCRUD employees = new ();
+        private EmployeeCRUD employees = new();
 
         public void ShowHeader(string header) => Console.WriteLine($"==== {header.ToUpper()} ====");
-        
+
         public void HandleError(string message)
         {
             Console.ForegroundColor = ConsoleColor.Red;
@@ -21,31 +22,44 @@ namespace Ponto.ConsoleApp
             Console.WriteLine(message);
             Console.ResetColor();
         }
-    
+
         public bool EmployeeExists(string registration) => employees.Get(registration) is not null;
 
-        private string ReadRegistration()
+        public string ReadRegistration()
         {
             Console.Write("Digite a matrícula: ");
             return Console.ReadLine();
         }
 
-        private void ReadCPF()
+        public CPF ReadCPF()
         {
             Console.Write("Digite o CPF: ");
-            return Console.ReadLine();
+            return new CPF() { Value = Console.ReadLine() };
         }
 
-        private string ReadName()
+        public string ReadName()
         {
             Console.Write("Digite o nome: ");
             return Console.ReadLine();
         }
 
-        private string ReadPassword()
+        public string ReadPassword()
         {
             Console.Write("Digite a senha: ");
             return Console.ReadLine();
+        }
+
+        public WorkLoad ReadWorkLoad()
+        {
+            WorkLoad workLoad = new WorkLoad();
+
+            Console.Write("Digite a hora em que se deve bater o ponto para Iniciar a jornada de trabalho: ");
+            workLoad.StartHour = Convert.ToDateTime(Console.ReadLine());
+
+            Console.Write("A hora em que se deve bater o ponto para Encerrar a jornada de trabalho: ");
+            workLoad.EndHour = Convert.ToDateTime(Console.ReadLine());
+
+            return workLoad;
         }
     }
 }

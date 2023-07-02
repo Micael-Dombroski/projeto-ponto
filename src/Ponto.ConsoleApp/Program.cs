@@ -46,7 +46,7 @@ namespace Ponto.ConsoleApp
                     DoSignUp(); break;
                 case "3":
                     AboutUs(); break;
-                case "0": 
+                case "0":
                     Exit(); break;
                 default: break;
             }
@@ -74,7 +74,7 @@ namespace Ponto.ConsoleApp
                 utils.HandleSuccess("Acesso concedido");
             else
                 utils.HandleError("Senha incorreta");
-            
+
             employeeConsole.SetLogedEmployee(employee);
         }
 
@@ -154,3 +154,4 @@ namespace Ponto.ConsoleApp
             Console.ReadKey();
         }
     }
+}

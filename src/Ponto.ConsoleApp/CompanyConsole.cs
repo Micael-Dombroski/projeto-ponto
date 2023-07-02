@@ -34,5 +34,10 @@ namespace Ponto.ConsoleApp
             Console.Write("=> ");
             menuOption = Console.ReadLine();
         }
+
+        internal void NewCompany()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

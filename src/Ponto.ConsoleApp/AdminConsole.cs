@@ -1,4 +1,5 @@
 using System;
+using Ponto.Classes;
 
 namespace Ponto.ConsoleApp
 {
@@ -23,20 +24,15 @@ namespace Ponto.ConsoleApp
 
         public void NewEmployee()
         {
-            utils.ShowHeader(message: "Novo Administrador");
+            utils.ShowHeader("Novo Administrador");
             string registration = utils.ReadRegistration();
             if (utils.EmployeeExists(registration))
                 utils.HandleError("Administrador já cadastrado");
             CPF cpf = utils.ReadCPF();
             string name = utils.ReadName();
             string password = utils.ReadPassword();
-            Employee employee = new Employee()
-            {
-                CPF = cpf,
-                name = name,
-                password = password,
-                registration = registration
-            };
+            WorkLoad workLoad = utils.ReadWorkLoad();
+            Employee employee = new Employee(cpf, name, registration, password, workLoad);
 
             utils.HandleSuccess("Funcionário criado com sucesso");
         }
@@ -73,6 +69,11 @@ namespace Ponto.ConsoleApp
                 default:
                     break;
             }
+        }
+
+        internal void NewAdmin()
+        {
+            throw new NotImplementedException();
         }
     }
 }

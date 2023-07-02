@@ -1,6 +1,6 @@
 namespace Ponto.Classes
 {
-    public class Administrator : Employee
+    public class Administrator : User
     {
         public Administrator(
             CPF cpf,

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/natan/www/jp/projeto-ponto/projeto_ponto_solucao/Ponto/Ponto.ConsoleApp/Ponto.ConsoleApp.csproj": {}
+    "/home/natan/www/jp/projeto-ponto/src/Ponto.ConsoleApp/Ponto.ConsoleApp.csproj": {}
   },
   "projects": {
-    "/home/natan/www/jp/projeto-ponto/projeto_ponto_solucao/Ponto/Ponto.Classes/Ponto.Classes.csproj": {
+    "/home/natan/www/jp/projeto-ponto/src/Ponto.Classes/Ponto.Classes.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/natan/www/jp/projeto-ponto/projeto_ponto_solucao/Ponto/Ponto.Classes/Ponto.Classes.csproj",
+        "projectUniqueName": "/home/natan/www/jp/projeto-ponto/src/Ponto.Classes/Ponto.Classes.csproj",
         "projectName": "Ponto.Classes",
-        "projectPath": "/home/natan/www/jp/projeto-ponto/projeto_ponto_solucao/Ponto/Ponto.Classes/Ponto.Classes.csproj",
+        "projectPath": "/home/natan/www/jp/projeto-ponto/src/Ponto.Classes/Ponto.Classes.csproj",
         "packagesPath": "/home/natan/.nuget/packages/",
-        "outputPath": "/home/natan/www/jp/projeto-ponto/projeto_ponto_solucao/Ponto/Ponto.Classes/obj/",
+        "outputPath": "/home/natan/www/jp/projeto-ponto/src/Ponto.Classes/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/natan/.nuget/NuGet/NuGet.Config"
@@ -63,14 +63,14 @@
         }
       }
     },
-    "/home/natan/www/jp/projeto-ponto/projeto_ponto_solucao/Ponto/Ponto.ConsoleApp/Ponto.ConsoleApp.csproj": {
+    "/home/natan/www/jp/projeto-ponto/src/Ponto.ConsoleApp/Ponto.ConsoleApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/natan/www/jp/projeto-ponto/projeto_ponto_solucao/Ponto/Ponto.ConsoleApp/Ponto.ConsoleApp.csproj",
+        "projectUniqueName": "/home/natan/www/jp/projeto-ponto/src/Ponto.ConsoleApp/Ponto.ConsoleApp.csproj",
         "projectName": "Ponto.ConsoleApp",
-        "projectPath": "/home/natan/www/jp/projeto-ponto/projeto_ponto_solucao/Ponto/Ponto.ConsoleApp/Ponto.ConsoleApp.csproj",
+        "projectPath": "/home/natan/www/jp/projeto-ponto/src/Ponto.ConsoleApp/Ponto.ConsoleApp.csproj",
         "packagesPath": "/home/natan/.nuget/packages/",
-        "outputPath": "/home/natan/www/jp/projeto-ponto/projeto_ponto_solucao/Ponto/Ponto.ConsoleApp/obj/",
+        "outputPath": "/home/natan/www/jp/projeto-ponto/src/Ponto.ConsoleApp/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/natan/.nuget/NuGet/NuGet.Config"
@@ -85,8 +85,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "/home/natan/www/jp/projeto-ponto/projeto_ponto_solucao/Ponto/Ponto.Classes/Ponto.Classes.csproj": {
-                "projectPath": "/home/natan/www/jp/projeto-ponto/projeto_ponto_solucao/Ponto/Ponto.Classes/Ponto.Classes.csproj"
+              "/home/natan/www/jp/projeto-ponto/src/Ponto.Classes/Ponto.Classes.csproj": {
+                "projectPath": "/home/natan/www/jp/projeto-ponto/src/Ponto.Classes/Ponto.Classes.csproj"
               }
             }
           }

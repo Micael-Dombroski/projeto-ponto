@@ -1,8 +1,11 @@
+using System.Collections.Generic;
+using System.Linq;
+
 namespace Ponto.Classes
 {
     public class AdminCRUD
     {
-        private Dictionary<String, Administrator> administrators = new();
+        private Dictionary<string, Administrator> administrators = new();
 
         public void Add(Administrator administrator) => administrators.Add(administrator.Registration, administrator);
 

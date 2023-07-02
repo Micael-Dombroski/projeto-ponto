@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "yJZbw5P3/TMysTBMboj3IMWQ3WstzkakLJ4hkGgdcuu4Pm6zMUF9lAtuqv3xZPAMhGYhj8dmZQWhNDecL40n+w==",
+  "dgSpecHash": "FmJkMpe7utmRbsDFI40Iwe838OBTRdvmiAFHzS7PW/sDvdjYY8HqUHTLr5F5rqqhs8oQwBpJg8m/NXWOlRRagQ==",
   "success": true,
-  "projectFilePath": "/home/natan/www/jp/projeto-ponto/projeto_ponto_solucao/Ponto/Ponto.Classes/Ponto.Classes.csproj",
+  "projectFilePath": "/home/natan/www/jp/projeto-ponto/src/Ponto.Classes/Ponto.Classes.csproj",
   "expectedPackageFiles": [
     "/home/natan/.nuget/packages/microsoft.aspnetcore.app.ref/5.0.0/microsoft.aspnetcore.app.ref.5.0.0.nupkg.sha512"
   ],

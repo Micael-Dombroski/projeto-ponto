@@ -22,3 +22,15 @@ C:/Cursos/DevSistemas/projeto_ponto_solucao/Ponto/Ponto.Classes/obj/Debug/net5.0
 /home/natan/www/jp/projeto-ponto/projeto_ponto_solucao/Ponto/Ponto.Classes/obj/Debug/net5.0/refint/Ponto.Classes.dll
 /home/natan/www/jp/projeto-ponto/projeto_ponto_solucao/Ponto/Ponto.Classes/obj/Debug/net5.0/Ponto.Classes.pdb
 /home/natan/www/jp/projeto-ponto/projeto_ponto_solucao/Ponto/Ponto.Classes/obj/Debug/net5.0/ref/Ponto.Classes.dll
+/home/natan/www/jp/projeto-ponto/src/Ponto.Classes/obj/Debug/net5.0/Ponto.Classes.csproj.AssemblyReference.cache
+/home/natan/www/jp/projeto-ponto/src/Ponto.Classes/obj/Debug/net5.0/Ponto.Classes.GeneratedMSBuildEditorConfig.editorconfig
+/home/natan/www/jp/projeto-ponto/src/Ponto.Classes/obj/Debug/net5.0/Ponto.Classes.AssemblyInfoInputs.cache
+/home/natan/www/jp/projeto-ponto/src/Ponto.Classes/obj/Debug/net5.0/Ponto.Classes.AssemblyInfo.cs
+/home/natan/www/jp/projeto-ponto/src/Ponto.Classes/obj/Debug/net5.0/Ponto.Classes.csproj.CoreCompileInputs.cache
+/home/natan/www/jp/projeto-ponto/src/Ponto.Classes/obj/Debug/net5.0/Ponto.Classes.dll
+/home/natan/www/jp/projeto-ponto/src/Ponto.Classes/obj/Debug/net5.0/refint/Ponto.Classes.dll
+/home/natan/www/jp/projeto-ponto/src/Ponto.Classes/obj/Debug/net5.0/Ponto.Classes.pdb
+/home/natan/www/jp/projeto-ponto/src/Ponto.Classes/bin/Debug/net5.0/Ponto.Classes.deps.json
+/home/natan/www/jp/projeto-ponto/src/Ponto.Classes/bin/Debug/net5.0/Ponto.Classes.dll
+/home/natan/www/jp/projeto-ponto/src/Ponto.Classes/bin/Debug/net5.0/Ponto.Classes.pdb
+/home/natan/www/jp/projeto-ponto/src/Ponto.Classes/obj/Debug/net5.0/ref/Ponto.Classes.dll

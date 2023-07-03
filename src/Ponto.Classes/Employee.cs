@@ -25,11 +25,10 @@ namespace Ponto.Classes
             if (timesPunchClock == 2)
                 timesPunchClock = 0;
 
-            PunchClock();
 
             if (timesPunchClock == 0)
             {
-                if (DateTime.Now == WorkLoad.StartHour || DateTime.Now < WorkLoad.StartHour.AddMinutes(5))
+                if (DateTime.Now >= WorkLoad.StartHour.AddMinutes(-5) && DateTime.Now <= WorkLoad.StartHour.AddMinutes(5))
                 {
                     hourWhoStartToday = DateTime.Now;
                     timesPunchClock++;
@@ -41,7 +40,7 @@ namespace Ponto.Classes
             }
             else if (timesPunchClock == 1)
             {
-                if (DateTime.Now == WorkLoad.EndHour || DateTime.Now < (WorkLoad.StartHour.AddMinutes(-5)))
+                if (DateTime.Now <= WorkLoad.EndtHour.AddMinutes(-5) && DateTime.Now >= WorkLoad.EndtHour.AddMinutes(5))
                 {
                     hourWhoEndsToday = DateTime.Now;
                     timesPunchClock++;

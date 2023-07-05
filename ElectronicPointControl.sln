@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElectronicPointControl.Libr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElectronicPointControl.ConsoleApp", "src\ElectronicPointControl.ConsoleApp\ElectronicPointControl.ConsoleApp.csproj", "{728CFBCE-6E23-4CC0-A178-03BA0909DC82}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElectronicPointControl.Tests", "ElectronicPointControl.Tests\ElectronicPointControl.Tests.csproj", "{ED97DA43-E53A-4F85-8602-258099384624}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,6 +28,10 @@ Global
 		{728CFBCE-6E23-4CC0-A178-03BA0909DC82}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{728CFBCE-6E23-4CC0-A178-03BA0909DC82}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{728CFBCE-6E23-4CC0-A178-03BA0909DC82}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED97DA43-E53A-4F85-8602-258099384624}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED97DA43-E53A-4F85-8602-258099384624}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED97DA43-E53A-4F85-8602-258099384624}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED97DA43-E53A-4F85-8602-258099384624}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{E20BE5E3-5955-4A50-8596-10AC222ECAD0} = {1A784E0B-CEDD-43C9-884B-942BBCECE4CD}

@@ -1369,6 +1369,29 @@
         "runtime": {
           "lib/netstandard1.3/System.Xml.XPath.XmlDocument.dll": {}
         }
+      },
+      "ElectronicPointControl.ConsoleApp/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "ElectronicPointControl.Library": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/ElectronicPointControl.ConsoleApp.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ElectronicPointControl.ConsoleApp.dll": {}
+        }
+      },
+      "ElectronicPointControl.Library/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "compile": {
+          "bin/placeholder/ElectronicPointControl.Library.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ElectronicPointControl.Library.dll": {}
+        }
       }
     }
   },
@@ -5058,10 +5081,22 @@
         "system.xml.xpath.xmldocument.4.3.0.nupkg.sha512",
         "system.xml.xpath.xmldocument.nuspec"
       ]
+    },
+    "ElectronicPointControl.ConsoleApp/1.0.0": {
+      "type": "project",
+      "path": "../src/ElectronicPointControl.ConsoleApp/ElectronicPointControl.ConsoleApp.csproj",
+      "msbuildProject": "../src/ElectronicPointControl.ConsoleApp/ElectronicPointControl.ConsoleApp.csproj"
+    },
+    "ElectronicPointControl.Library/1.0.0": {
+      "type": "project",
+      "path": "../src/ElectronicPointControl.Library/ElectronicPointControl.Library.csproj",
+      "msbuildProject": "../src/ElectronicPointControl.Library/ElectronicPointControl.Library.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net5.0": [
+      "ElectronicPointControl.ConsoleApp >= 1.0.0",
+      "ElectronicPointControl.Library >= 1.0.0",
       "Microsoft.NET.Test.Sdk >= 16.9.4",
       "NUnit >= 3.13.1",
       "NUnit3TestAdapter >= 3.17.0",
@@ -5092,7 +5127,14 @@
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "/home/natan/www/jp/projeto-ponto/src/ElectronicPointControl.ConsoleApp/ElectronicPointControl.ConsoleApp.csproj": {
+              "projectPath": "/home/natan/www/jp/projeto-ponto/src/ElectronicPointControl.ConsoleApp/ElectronicPointControl.ConsoleApp.csproj"
+            },
+            "/home/natan/www/jp/projeto-ponto/src/ElectronicPointControl.Library/ElectronicPointControl.Library.csproj": {
+              "projectPath": "/home/natan/www/jp/projeto-ponto/src/ElectronicPointControl.Library/ElectronicPointControl.Library.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

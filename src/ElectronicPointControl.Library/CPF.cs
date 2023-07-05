@@ -12,6 +12,7 @@ namespace ElectronicPointControl.Library
         {
             cpf = value;
             RemoveDotsAndHyphens();
+            DoValidations();
         }
 
         private void RemoveDotsAndHyphens()
@@ -29,7 +30,7 @@ namespace ElectronicPointControl.Library
         private void LengthIsCorrect()
         {
             if (cpf.Length != cpfLengthWithOnlyNumbers)
-                throw new Exception("CPF precisa ter 11 dígitos");
+                throw new InvalidCPFException("Número de caracteres é insuficiente.");
         }
 
         private void AllDigitsAreEqual()

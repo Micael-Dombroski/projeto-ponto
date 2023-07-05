@@ -1,8 +1,2 @@
-ElectronicPointControl.Tests/bin/
-ElectronicPointControl.Tests/obj/
-
-src/ElectronicPointControl.Library/bin/
-src/ElectronicPointControl.Library/obj/
-
-src/ElectronicPointControl.ConsoleApp/obj/
-src/ElectronicPointControl.ConsoleApp/bin/
+**/bin/*
+**/obj/*

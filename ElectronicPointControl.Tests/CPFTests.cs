@@ -22,5 +22,12 @@ namespace ElectronicPointControl.Tests
                 delegate { new CPF(cpfValue); },
                 "CPF não pode ter todos os dígitos iguais");
         }
+
+        public void ThrowInvalidCPFException_WhenCPFIsInvalid()
+        {
+            Assert.Throws<InvalidCPFException>(
+                delegate { new CPF("129.998.001-05"); },
+                "CPF inválido");
+        }
     }
 }

@@ -35,10 +35,17 @@ namespace ElectronicPointControl.Library
 
         private void AllDigitsAreEqual()
         {
-            char firstDigit = cpf[0];
+            bool allAreEqual = true;
+
             foreach (char digit in cpf)
-                if (firstDigit != digit)
-                    throw new Exception("CPF inválido");
+                if (digit != cpf[0])
+                {
+                    allAreEqual = false;
+                    break;
+                }
+
+            if (allAreEqual)
+                throw new InvalidCPFException("CPF não pode ter todos os dígitos iguais");
         }
 
         private void ValidateCheckDigits()

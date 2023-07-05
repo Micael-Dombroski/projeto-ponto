@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Ponto.Classes
+namespace ElectronicPointControl.Library
 {
     public class EmployeeCRUD
     {

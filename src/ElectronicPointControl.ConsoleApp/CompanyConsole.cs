@@ -1,6 +1,6 @@
 using System;
 
-namespace Ponto.ConsoleApp
+namespace ElectronicPointControl.ConsoleApp
 {
     public class CompanyConsole
     {

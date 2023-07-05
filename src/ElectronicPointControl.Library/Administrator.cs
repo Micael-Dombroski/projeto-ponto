@@ -1,4 +1,4 @@
-namespace Ponto.Classes
+namespace ElectronicPointControl.Library
 {
     public class Administrator : User
     {

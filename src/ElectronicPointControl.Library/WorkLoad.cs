@@ -1,6 +1,6 @@
 using System;
 
-namespace Ponto.Classes
+namespace ElectronicPointControl.Library
 {
     public class WorkLoad
     {

@@ -1,7 +1,7 @@
 using System;
-using Ponto.Classes;
+using ElectronicPointControl.Library;
 
-namespace Ponto.ConsoleApp
+namespace ElectronicPointControl.ConsoleApp
 {
     public class ConsoleUtils
     {
@@ -34,7 +34,7 @@ namespace Ponto.ConsoleApp
         public CPF ReadCPF()
         {
             Console.Write("Digite o CPF: ");
-            return new CPF() { Value = Console.ReadLine() };
+            return new CPF(Console.ReadLine());
         }
 
         public string ReadName()

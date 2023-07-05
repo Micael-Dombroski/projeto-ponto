@@ -1,11 +1,30 @@
 {
   "version": 3,
   "targets": {
-    "net5.0": {}
+    "net5.0": {
+      "ElectronicPointControl.Library/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "compile": {
+          "bin/placeholder/ElectronicPointControl.Library.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ElectronicPointControl.Library.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "ElectronicPointControl.Library/1.0.0": {
+      "type": "project",
+      "path": "../ElectronicPointControl.Library/ElectronicPointControl.Library.csproj",
+      "msbuildProject": "../ElectronicPointControl.Library/ElectronicPointControl.Library.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net5.0": []
+    "net5.0": [
+      "ElectronicPointControl.Library >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "/home/natan/.nuget/packages/": {}
@@ -31,7 +50,11 @@
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "/home/natan/www/jp/projeto-ponto/src/ElectronicPointControl.Library/ElectronicPointControl.Library.csproj": {
+              "projectPath": "/home/natan/www/jp/projeto-ponto/src/ElectronicPointControl.Library/ElectronicPointControl.Library.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

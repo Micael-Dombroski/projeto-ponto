@@ -1,7 +1,7 @@
 ﻿using System;
-using Ponto.Classes;
+using ElectronicPointControl.Library;
 
-namespace Ponto.ConsoleApp
+namespace ElectronicPointControl.ConsoleApp
 {
     class Program
     {

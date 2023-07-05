@@ -1,6 +1,6 @@
-using Ponto.Classes;
+using ElectronicPointControl.Library;
 
-namespace Ponto.ConsoleApp
+namespace ElectronicPointControl.ConsoleApp
 {
     public class EmployeeConsole
     {

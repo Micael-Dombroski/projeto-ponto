@@ -1,5 +1,3 @@
-using System;
-
 namespace ElectronicPointControl.Library
 {
     public class CPF
@@ -71,7 +69,7 @@ namespace ElectronicPointControl.Library
             bool itIsNotValid = !secondVerifyingDigit.Equals(trueCheckDigit);
 
             if (itIsNotValid)
-                throw new Exception("CPF inválido");
+                throw new InvalidCPFException("CPF inválido");
         }
 
         private void CheckSecondVerifyingDigit()
@@ -91,7 +89,7 @@ namespace ElectronicPointControl.Library
             bool itIsNotValid = !firstVerifyingDigit.Equals(trueCheckDigit);
 
             if (itIsNotValid)
-                throw new Exception("CPF inválido");
+                throw new InvalidCPFException("CPF inválido");
         }
 
         public override string ToString()

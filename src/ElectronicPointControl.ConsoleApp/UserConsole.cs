@@ -4,7 +4,7 @@ namespace ElectronicPointControl.ConsoleApp
 {
     public class UserConsole
     {
-        private string menuOption;
+        protected string menuOption;
         private ConsoleUtils _utils = new();
 
         public void Execute()
@@ -28,7 +28,7 @@ namespace ElectronicPointControl.ConsoleApp
             Console.WriteLine("[3] Voltar");
         }
 
-        private void HandleMenu()
+        protected virtual void HandleMenu()
         {
             switch (menuOption)
             {

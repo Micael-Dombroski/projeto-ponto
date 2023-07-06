@@ -23,6 +23,7 @@ namespace ElectronicPointControl.Tests
                 "CPF não pode ter todos os dígitos iguais");
         }
 
+        [Test]
         public void ThrowInvalidCPFException_WhenCPFIsInvalid()
         {
             Assert.Throws<InvalidCPFException>(

@@ -22,6 +22,13 @@ namespace ElectronicPointControl.Library
         public void DoValidations()
         {
             AllDigitsAreEquals();
+            CheckLength();
+        }
+
+        private void CheckLength()
+        {
+            if (cnpj.Length != 14)
+                throw new InvalidCNPJException("CNPJ inválido: quantidade de caracteres incorreta");
         }
 
         private void AllDigitsAreEquals()

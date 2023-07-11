@@ -9,9 +9,9 @@ namespace ElectronicPointControl.Tests
         [Test]
         public void OnCreate_RemoveHyphensDotsAndSlash()
         {
-            CNPJ sut = new CNPJ("12.345.678/0009-01");
+            CNPJ sut = new CNPJ("11.222.333/0001-81");
 
-            Assert.That(sut.cnpj, Is.EqualTo("12345678000901"));
+            Assert.That(sut.cnpj, Is.EqualTo("11222333000181"));
         }
 
         [Test]
@@ -34,6 +34,13 @@ namespace ElectronicPointControl.Tests
         {
             Assert.Throws<InvalidCNPJException>(
                         delegate { new CNPJ(cnpjValue); });
+        }
+
+        [Test]
+        public void Throw_IfVerifyingDigitsAreWrong()
+        {
+            Assert.Throws<InvalidCNPJException>(
+                    delegate { new CNPJ("11.222.333/0001-42"); });
         }
     }
 }

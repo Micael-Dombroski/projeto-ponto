@@ -42,5 +42,15 @@ namespace ElectronicPointControl.Tests
             Assert.Throws<InvalidCNPJException>(
                     delegate { new CNPJ("11.222.333/0001-42"); });
         }
+
+        [Test]
+        [TestCase("65.264.395/0001-85")]
+        [TestCase("91.025.722/0001-56")]
+        public void Success_IfCNPJIsValid(string cnpjValue)
+        {
+            CNPJ sut = new CNPJ(cnpjValue);
+
+            Assert.That(sut.ToString(), Is.EqualTo(cnpjValue));
+        }
     }
 }

@@ -13,5 +13,18 @@ namespace ElectronicPointControl.Tests
 
             Assert.That(sut.cnpj, Is.EqualTo("12345678000901"));
         }
+
+        [Test]
+        [TestCase("111.111.111/1111-11")]
+        [TestCase("777.777.777/7777-77")]
+        public void Throw_IfAllNumbersAreEqual(string cnpjValue)
+        {
+            Assert.Throws<InvalidCNPJException>(
+                delegate
+                {
+                    new CNPJ(cnpjValue);
+                }
+            );
+        }
     }
 }

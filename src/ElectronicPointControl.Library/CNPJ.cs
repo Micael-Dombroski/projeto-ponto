@@ -36,12 +36,9 @@ namespace ElectronicPointControl.Library
         {
             int[] multipliers = { 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2 };
 
-            int sum = 0;
-            for (int i = 0; i < multipliers.Length; i++)
-                sum += (int)char.GetNumericValue(cnpj[i]) * multipliers[i];
+            int sum = CalcSum(multipliers);
 
-            int rest = sum % 11;
-            int expectedDigit = rest < 2 ? 0 : 11 - rest;
+            int expectedDigit = CalcExpectedVerifyingDigit(sum);
 
             if (expectedDigit != char.GetNumericValue(cnpj[12]))
                 throw new InvalidCNPJException("CNPJ inválido: primeiro dígito verificador incorreto");
@@ -51,15 +48,26 @@ namespace ElectronicPointControl.Library
         {
             int[] multipliers = { 6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2 };
 
-            int sum = 0;
-            for (int i = 0; i < multipliers.Length; i++)
-                sum += (int)char.GetNumericValue(cnpj[i]) * multipliers[i];
+            int sum = CalcSum(multipliers);
 
-            int rest = sum % 11;
-            int expectedDigit = rest < 2 ? 0 : 11 - rest;
+            int expectedDigit = CalcExpectedVerifyingDigit(sum);
 
             if (expectedDigit != char.GetNumericValue(cnpj[13]))
                 throw new InvalidCNPJException("CNPJ inválido: primeiro dígito verificador incorreto");
+        }
+
+        private int CalcSum(int[] multipliers)
+        {
+            int sum = 0;
+            for (int i = 0; i < multipliers.Length; i++)
+                sum += (int)char.GetNumericValue(cnpj[i]) * multipliers[i];
+            return sum;
+        }
+
+        private int CalcExpectedVerifyingDigit(int sum)
+        {
+            int rest = sum % 11;
+            return rest < 2 ? 0 : 11 - rest;
         }
 
         private void CheckLength()

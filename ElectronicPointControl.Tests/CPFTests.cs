@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using ElectronicPointControl.Library;
+using ElectronicPointControl.Library.Exceptions;
 
 namespace ElectronicPointControl.Tests
 {

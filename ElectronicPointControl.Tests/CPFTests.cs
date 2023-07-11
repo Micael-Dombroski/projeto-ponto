@@ -30,5 +30,12 @@ namespace ElectronicPointControl.Tests
                 delegate { new CPF("129.998.001-05"); },
                 "CPF inválido");
         }
+
+        [Test]
+        public void Pass_CPFIsValid()
+        {
+            CPF sut = new CPF("111.444.777-35");
+            Assert.That(sut, Is.InstanceOf<CPF>());
+        }
     }
 }

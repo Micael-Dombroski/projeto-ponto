@@ -26,5 +26,14 @@ namespace ElectronicPointControl.Tests
                 }
             );
         }
+
+        [Test]
+        [TestCase("1")]
+        [TestCase("173648723649827364827461283746")]
+        public void Throw_IfLengthIsIncorrect(string cnpjValue)
+        {
+            Assert.Throws<InvalidCNPJException>(
+                        delegate { new CNPJ(cnpjValue); });
+        }
     }
 }

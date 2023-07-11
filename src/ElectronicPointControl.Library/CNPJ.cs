@@ -23,6 +23,43 @@ namespace ElectronicPointControl.Library
         {
             AllDigitsAreEquals();
             CheckLength();
+            CheckVerifyingDigits();
+        }
+
+        private void CheckVerifyingDigits()
+        {
+            CheckFirstDigit();
+            CheckSecondDigit();
+        }
+
+        private void CheckFirstDigit()
+        {
+            int[] multipliers = { 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2 };
+
+            int sum = 0;
+            for (int i = 0; i < multipliers.Length; i++)
+                sum += (int)char.GetNumericValue(cnpj[i]) * multipliers[i];
+
+            int rest = sum % 11;
+            int expectedDigit = rest < 2 ? 0 : 11 - rest;
+
+            if (expectedDigit != char.GetNumericValue(cnpj[12]))
+                throw new InvalidCNPJException("CNPJ inválido: primeiro dígito verificador incorreto");
+        }
+
+        private void CheckSecondDigit()
+        {
+            int[] multipliers = { 6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2 };
+
+            int sum = 0;
+            for (int i = 0; i < multipliers.Length; i++)
+                sum += (int)char.GetNumericValue(cnpj[i]) * multipliers[i];
+
+            int rest = sum % 11;
+            int expectedDigit = rest < 2 ? 0 : 11 - rest;
+
+            if (expectedDigit != char.GetNumericValue(cnpj[13]))
+                throw new InvalidCNPJException("CNPJ inválido: primeiro dígito verificador incorreto");
         }
 
         private void CheckLength()

@@ -1,3 +1,5 @@
+using System;
+
 namespace ElectronicPointControl.Library
 {
     public class CPF
@@ -54,41 +56,34 @@ namespace ElectronicPointControl.Library
 
         private void CheckFirstVerifyingDigit()
         {
-            string tempCpf = cpf.Substring(0, 9);
-            int[] multipliers = { 10, 9, 8, 7, 6, 5, 4, 3, 2, 1 };
+            int[] multipliers = { 10, 9, 8, 7, 6, 5, 4, 3, 2 };
 
             int sum = 0;
             for (int i = 0; i < 9; i++)
-                sum += (int)tempCpf[i] * multipliers[i];
+                sum += (int)char.GetNumericValue(cpf[i]) * multipliers[i];
 
-            string secondVerifyingDigit = cpf.Substring(9, 1);
+            var rest = sum % 11;
+            var expectedDigit =
+                (rest < 2 ? 0 : 11 - rest).ToString();
 
-            int modulus = sum % 11;
-            string trueCheckDigit = (modulus < 2 ? 0 : 11 - modulus).ToString();
-
-            bool itIsNotValid = !secondVerifyingDigit.Equals(trueCheckDigit);
-
-            if (itIsNotValid)
-                throw new InvalidCPFException("CPF inválido");
+            if (expectedDigit != cpf[9].ToString())
+                throw new
+                    InvalidCPFException($"CPF inválido");
         }
 
         private void CheckSecondVerifyingDigit()
         {
-            string tempCpf = cpf.Substring(0, 10);
-            int[] multipliers = { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1 };
+            int[] multipliers = { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2 };
 
             int sum = 0;
             for (int i = 0; i < 10; i++)
-                sum += (int)tempCpf[i] * multipliers[i];
+                sum += (int)char.GetNumericValue(cpf[i]) * multipliers[i];
 
-            string firstVerifyingDigit = cpf.Substring(10, 1);
+            int rest = sum % 11;
+            string expectedDigit =
+                (rest < 2 ? 0 : 11 - rest).ToString();
 
-            int modulus = sum % 11;
-            string trueCheckDigit = (modulus < 2 ? 0 : 11 - modulus).ToString();
-
-            bool itIsNotValid = !firstVerifyingDigit.Equals(trueCheckDigit);
-
-            if (itIsNotValid)
+            if (expectedDigit != cpf[10].ToString())
                 throw new InvalidCPFException("CPF inválido");
         }
 

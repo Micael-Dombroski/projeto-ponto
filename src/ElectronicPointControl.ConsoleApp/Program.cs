@@ -118,7 +118,7 @@ namespace ElectronicPointControl.ConsoleApp
 
         private static void NewEmployee()
         {
-            employeeConsole.NewEmployee();
+            adminConsole.NewEmployee();
         }
 
         private static void NewAdmin()

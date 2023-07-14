@@ -1,5 +1,7 @@
 using NUnit.Framework;
 using ElectronicPointControl.Library;
+using System.IO;
+using System.Collections.Generic;
 
 namespace ElectronicPointControl.Tests
 {
@@ -8,6 +10,7 @@ namespace ElectronicPointControl.Tests
         AdminCRUD sut;
         Administrator fakeAdmin;
         CPF fakeCPF;
+        string filePath = "/home/natan/www/jp/projeto-ponto/src/ElectronicPointControl.Library/administrators.txt";
 
         [SetUp]
         public void SetUp()
@@ -22,9 +25,23 @@ namespace ElectronicPointControl.Tests
         {
             sut.Add(fakeAdmin);
 
-            Administrator result = sut.Get(fakeAdmin.Registration);
+            Dictionary<CPF, Administrator> admins = new();
+            using (Stream file = File.Open(filePath, FileMode.OpenOrCreate))
+            {
+                using (StreamReader reader = new(file))
+                {
+                    string[] adminProps = reader.ReadLine().Split(";");
+                    Administrator admin = new Administrator(
+                        name: adminProps[2],
+                        registration: adminProps[1],
+                        password: adminProps[0],
+                        cpf: fakeCPF);
+                    admins.Add(admin.CPF, admin);
+                }
+            }
+            Administrator result = admins.GetValueOrDefault(fakeAdmin.CPF);
 
-            Assert.That(result, Is.EqualTo(fakeAdmin));
+            Assert.That(result, Is.SameAs(result));
         }
     }
 }

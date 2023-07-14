@@ -10,14 +10,14 @@ namespace ElectronicPointControl.Tests
         AdminCRUD sut;
         Administrator fakeAdmin;
         CPF fakeCPF;
-        string filePath = "/home/natan/www/jp/projeto-ponto/src/ElectronicPointControl.Library/administrators.txt";
+        string filePath = "/home/natan/www/jp/projeto-ponto/src/ElectronicPointControl.Library/fakeAdministrators.txt";
 
         [SetUp]
         public void SetUp()
         {
             fakeCPF = new("111.444.777-35");
             fakeAdmin = new(name: "name", registration: "registration", password: "password", cpf: fakeCPF);
-            sut = new();
+            sut = new(filePath: filePath);
         }
 
         [TearDown]

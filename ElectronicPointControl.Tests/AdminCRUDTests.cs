@@ -86,5 +86,17 @@ namespace ElectronicPointControl.Tests
 
             Assert.That(result, Is.Null);
         }
+
+        [Test]
+        public void Update_EnsureIfAdminExistsItWasUpdated()
+        {
+            sut.Add(fakeAdmin);
+            fakeAdmin.Name = "newName";
+            sut.Update(fakeAdmin);
+
+            var result = sut.Get(fakeAdmin.Registration);
+
+            Assert.That(result.Name, Is.EqualTo("newName"));
+        }
     }
 }

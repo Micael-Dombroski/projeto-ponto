@@ -2,12 +2,12 @@ namespace ElectronicPointControl.Library
 {
     public class Company
     {
-        public string Nome;
+        public string Name;
         public CNPJ CNPJ;
 
-        public Company(string nome, CNPJ cnpj)
+        public Company(string name, CNPJ cnpj)
         {
-            Nome = nome;
+            Name = name;
             CNPJ = cnpj;
         }
     }

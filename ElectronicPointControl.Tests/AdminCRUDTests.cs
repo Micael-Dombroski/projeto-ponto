@@ -20,6 +20,12 @@ namespace ElectronicPointControl.Tests
             sut = new();
         }
 
+        [TearDown]
+        public void TearDown()
+        {
+            File.WriteAllText(filePath, string.Empty);
+        }
+
         [Test]
         public void Add_EnsureIsPercisting()
         {
@@ -55,6 +61,8 @@ namespace ElectronicPointControl.Tests
         [Test]
         public void Get_ReturnAdminIfItsFound()
         {
+            sut.Add(fakeAdmin);
+
             var actual = sut.Get(fakeAdmin.Registration);
             var expected = fakeAdmin;
 

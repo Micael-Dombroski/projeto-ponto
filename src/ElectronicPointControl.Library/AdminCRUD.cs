@@ -33,7 +33,7 @@ namespace ElectronicPointControl.Library
             {
                 using (StreamReader reader = new(file))
                 {
-                    var line = reader.ReadLine().Trim();
+                    var line = reader.ReadLine();
                     while (line != null)
                     {
                         var props = line.Split(";");
@@ -62,7 +62,7 @@ namespace ElectronicPointControl.Library
             {
                 using (StreamReader reader = new(file))
                 {
-                    var line = reader.ReadLine().Trim();
+                    var line = reader.ReadLine();
                     while (line != null)
                     {
                         var props = line.Split(";");

@@ -1,15 +1,21 @@
 using System.IO;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace ElectronicPointControl.Library
 {
     public class AdminCRUD
     {
-        private const string filePath
-            = "/home/natan/www/jp/projeto-ponto/src/ElectronicPointControl.Library/administrators.txt";
+        private string filePath;
 
         private Dictionary<string, Administrator> administrators = new();
+
+        public AdminCRUD(string filePath
+                = "/home/natan/www/jp/projeto-ponto/src/ElectronicPointControl.Library/administrators.txt")
+        {
+            this.filePath = filePath;
+        }
+
+        public string FilePath { get; }
 
         public void Add(Administrator administrator)
         {

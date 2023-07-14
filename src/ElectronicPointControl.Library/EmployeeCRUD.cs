@@ -63,7 +63,11 @@ namespace ElectronicPointControl.Library
             return employees;
         }
 
-        public Employee Get(string registration) => employees.GetValueOrDefault(registration);
+        public Employee Get(string registration)
+        {
+            var employees = GetAll();
+            return employees.Find(employee => employee.Registration == registration);
+        }
 
         public void Update(Employee employee)
         {

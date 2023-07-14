@@ -94,5 +94,16 @@ namespace ElectronicPointControl.Tests
             Assert.That(result[0], Is.EqualTo(fakeEmployee));
             Assert.That(result[1], Is.EqualTo(fakeEmployee));
         }
+
+        [Test]
+        public void Get_ReturnAdminIfItsFound()
+        {
+            sut.Add(fakeEmployee);
+
+            var actual = sut.Get(fakeEmployee.Registration);
+            var expected = fakeEmployee;
+
+            Assert.That(actual, Is.EqualTo(expected));
+        }
     }
 }

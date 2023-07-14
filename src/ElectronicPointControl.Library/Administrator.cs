@@ -9,5 +9,10 @@ namespace ElectronicPointControl.Library
             string password) : base(cpf, name, registration, password)
         {
         }
+
+        public override string ToString()
+        {
+            return $"{CPF};{Name};{Registration};{Password}";
+        }
     }
 }

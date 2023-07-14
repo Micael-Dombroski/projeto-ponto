@@ -76,5 +76,15 @@ namespace ElectronicPointControl.Tests
 
             Assert.That(actual, Is.TypeOf<List<Administrator>>());
         }
+
+        [Test]
+        public void Delete_EnsureDeleteTheAdmin()
+        {
+            sut.Add(fakeAdmin);
+            sut.Delete(fakeAdmin.Registration);
+            var result = sut.Get(fakeAdmin.Registration);
+
+            Assert.That(result, Is.Null);
+        }
     }
 }

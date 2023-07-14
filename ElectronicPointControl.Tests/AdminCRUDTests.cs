@@ -25,23 +25,23 @@ namespace ElectronicPointControl.Tests
         {
             sut.Add(fakeAdmin);
 
-            Dictionary<CPF, Administrator> admins = new();
+            List<Administrator> admins = new();
             using (Stream file = File.Open(filePath, FileMode.OpenOrCreate))
             {
                 using (StreamReader reader = new(file))
                 {
                     string[] adminProps = reader.ReadLine().Split(";");
                     Administrator admin = new Administrator(
-                        name: adminProps[2],
-                        registration: adminProps[1],
-                        password: adminProps[0],
-                        cpf: fakeCPF);
-                    admins.Add(admin.CPF, admin);
+                        new CPF(adminProps[0]),
+                        adminProps[1],
+                        adminProps[2],
+                        adminProps[3]);
+                    admins.Add(admin);
                 }
             }
-            Administrator result = admins.GetValueOrDefault(fakeAdmin.CPF);
+            Administrator result = admins.Find(admin => admin.Registration == fakeAdmin.Registration);
 
-            Assert.That(result, Is.SameAs(result));
+            Assert.That(result, Is.EqualTo(fakeAdmin));
         }
 
         [Test]

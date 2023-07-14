@@ -75,6 +75,21 @@ namespace ElectronicPointControl.Library
             Add(employee);
         }
 
-        public void Delete(string registration) => employees.Remove(registration);
+        public void Delete(string registration)
+        {
+            var employees = GetAll();
+            employees.Remove(Get(registration));
+            using (Stream file = File.Open(filePath, FileMode.Create))
+            {
+                using (StreamWriter writer = new(file))
+                {
+                    foreach (var employee in employees)
+                    {
+                        writer.WriteLine(employee);
+                    }
+                }
+            }
+
+        }
     }
 }

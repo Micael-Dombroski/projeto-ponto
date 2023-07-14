@@ -34,7 +34,34 @@ namespace ElectronicPointControl.Library
 
         }
 
-        public List<Employee> GetAll() => employees.Values.ToList();
+        public List<Employee> GetAll()
+        {
+            List<Employee> employees = new();
+            using (Stream file = File.Open(filePath, FileMode.Open))
+            {
+                using (StreamReader reader = new(file))
+                {
+                    var line = reader.ReadLine();
+                    while (line != null)
+                    {
+                        var props = line.Split(";");
+                        var employee = new Employee(
+                                cpf: new CPF(props[0]),
+                                name: props[1],
+                                registration: props[2],
+                                password: props[3],
+                                workLoad: new WorkLoad
+                                {
+                                    StartHour = Convert.ToDateTime(props[4]),
+                                    EndHour = Convert.ToDateTime(props[5])
+                                });
+                        employees.Add(employee);
+                        line = reader.ReadLine();
+                    }
+                }
+            }
+            return employees;
+        }
 
         public Employee Get(string registration) => employees.GetValueOrDefault(registration);
 

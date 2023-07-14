@@ -57,5 +57,21 @@ namespace ElectronicPointControl.Library
         {
             return hourWhoEndsToday.Hour - hourWhoStartToday.Hour;
         }
+
+        public override string ToString()
+        {
+            return $"{CPF};{Name};{Registration};{Password};{WorkLoad.StartHour};{WorkLoad.EndHour}";
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Employee employee &&
+                    employee.Registration == Registration;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Registration);
+        }
     }
 }

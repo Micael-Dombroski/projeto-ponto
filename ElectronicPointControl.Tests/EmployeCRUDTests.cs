@@ -66,5 +66,13 @@ namespace ElectronicPointControl.Tests
 
             Assert.That(result, Is.EqualTo(fakeEmployee));
         }
+
+        [Test]
+        public void Get_EnsureReturnsNullIfAdminNotFound()
+        {
+            var result = sut.Get(registration: "invalidRegistration");
+
+            Assert.That(result, Is.Null);
+        }
     }
 }

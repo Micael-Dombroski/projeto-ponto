@@ -1,3 +1,5 @@
+using System;
+
 namespace ElectronicPointControl.Library
 {
     public class Administrator : User
@@ -10,9 +12,21 @@ namespace ElectronicPointControl.Library
         {
         }
 
+        public override bool Equals(object obj)
+        {
+            return obj is Administrator administrator &&
+                   Registration == administrator.Registration;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Registration);
+        }
+
         public override string ToString()
         {
             return $"{CPF};{Name};{Registration};{Password}";
         }
+
     }
 }

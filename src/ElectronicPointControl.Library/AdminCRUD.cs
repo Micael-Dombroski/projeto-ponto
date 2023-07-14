@@ -26,7 +26,33 @@ namespace ElectronicPointControl.Library
                 }
             }
         }
-        public Administrator Get(string registration) => administrators.GetValueOrDefault(registration);
+        public Administrator Get(string registration)
+        {
+            List<Administrator> admins = new();
+            using (Stream file = File.Open(filePath, FileMode.Open))
+            {
+                using (StreamReader reader = new(file))
+                {
+                    var line = reader.ReadLine().Trim();
+                    while (line != null)
+                    {
+                        var props = line.Split(";");
+                        Administrator admin = new(
+                                cpf: new CPF(props[0]),
+                                name: props[1],
+                                registration: props[2],
+                                password: props[3]);
+                        admins.Add(admin);
+                        line = reader.ReadLine();
+                    }
+                }
+            }
+            foreach (var admin in admins)
+                if (admin.Registration == registration)
+                    return admin;
+
+            return null;
+        }
 
         public List<Administrator> GetAll() => administrators.Values.ToList();
 

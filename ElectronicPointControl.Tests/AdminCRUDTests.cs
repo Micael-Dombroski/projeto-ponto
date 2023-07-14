@@ -51,5 +51,14 @@ namespace ElectronicPointControl.Tests
 
             Assert.That(result, Is.Null);
         }
+
+        [Test]
+        public void Get_ReturnAdminIfItsFound()
+        {
+            var actual = sut.Get(fakeAdmin.Registration);
+            var expected = fakeAdmin;
+
+            Assert.That(actual, Is.EqualTo(expected));
+        }
     }
 }

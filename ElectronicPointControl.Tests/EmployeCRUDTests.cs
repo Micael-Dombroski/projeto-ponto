@@ -76,11 +76,23 @@ namespace ElectronicPointControl.Tests
         }
 
         [Test]
-        public void GetAll_ReturnAllObjetcsInAnList()
+        public void GetAll_ReturnAnObjetcOfTypeList()
         {
             var actual = sut.GetAll();
 
             Assert.That(actual, Is.TypeOf<List<Employee>>());
+        }
+
+        [Test]
+        public void GetAll_ReturnsCorrectsObjects()
+        {
+            sut.Add(fakeEmployee);
+            sut.Add(fakeEmployee);
+
+            var result = sut.GetAll();
+
+            Assert.That(result[0], Is.EqualTo(fakeEmployee));
+            Assert.That(result[1], Is.EqualTo(fakeEmployee));
         }
     }
 }

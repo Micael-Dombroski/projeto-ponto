@@ -60,5 +60,13 @@ namespace ElectronicPointControl.Tests
 
             Assert.That(actual, Is.EqualTo(expected));
         }
+
+        [Test]
+        public void GetAll_ReturnAllObjetcsInAnList()
+        {
+            var actual = sut.GetAll();
+
+            Assert.That(actual, Is.TypeOf<List<Administrator>>());
+        }
     }
 }

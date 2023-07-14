@@ -54,8 +54,30 @@ namespace ElectronicPointControl.Library
             return null;
         }
 
-        public List<Administrator> GetAll() => administrators.Values.ToList();
+        public List<Administrator> GetAll()
+        {
+            List<Administrator> admins = new();
 
+            using (Stream file = File.Open(filePath, FileMode.Open))
+            {
+                using (StreamReader reader = new(file))
+                {
+                    var line = reader.ReadLine().Trim();
+                    while (line != null)
+                    {
+                        var props = line.Split(";");
+                        Administrator admin = new(
+                                cpf: new CPF(props[0]),
+                                name: props[1],
+                                registration: props[2],
+                                password: props[3]);
+                        admins.Add(admin);
+                        line = reader.ReadLine();
+                    }
+                }
+            }
+            return admins;
+        }
         public void Update(Administrator administrator)
         {
             Delete(administrator.Registration);

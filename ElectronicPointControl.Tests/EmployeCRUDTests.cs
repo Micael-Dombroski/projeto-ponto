@@ -105,5 +105,15 @@ namespace ElectronicPointControl.Tests
 
             Assert.That(actual, Is.EqualTo(expected));
         }
+
+        [Test]
+        public void Delete_EnsureDeleteTheAdmin()
+        {
+            sut.Add(fakeEmployee);
+            sut.Delete(fakeEmployee.Registration);
+            var result = sut.Get(fakeEmployee.Registration);
+
+            Assert.That(result, Is.Null);
+        }
     }
 }

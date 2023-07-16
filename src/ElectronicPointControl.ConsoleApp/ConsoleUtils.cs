@@ -6,6 +6,7 @@ namespace ElectronicPointControl.ConsoleApp
     public class ConsoleUtils
     {
         private EmployeeCRUD employees = new();
+        private AdminCRUD adminstrators = new();
 
         public void ShowHeader(string header) => Console.WriteLine($"==== {header.ToUpper()} ====");
 
@@ -24,6 +25,8 @@ namespace ElectronicPointControl.ConsoleApp
         }
 
         public bool EmployeeExists(string registration) => employees.Get(registration) is not null;
+
+         public bool AdministratorExists(string registration) => adminstrators.Get(registration) is not null;
 
         public string ReadRegistration()
         {

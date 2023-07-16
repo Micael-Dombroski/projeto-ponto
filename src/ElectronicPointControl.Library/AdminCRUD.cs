@@ -10,12 +10,11 @@ namespace ElectronicPointControl.Library
         private Dictionary<string, Administrator> administrators = new();
 
         public AdminCRUD(string filePath
-                = "/home/natan/www/jp/projeto-ponto/src/ElectronicPointControl.Library/administrators.txt")
+                = "C:/Cursos/DevSistemas/Repositorio/src/ElectronicPointControl.Library/administrators.txt")
         {
             this.filePath = filePath;
+            Root();
         }
-
-        public string FilePath { get; }
 
         public void Add(Administrator administrator)
         {
@@ -34,28 +33,41 @@ namespace ElectronicPointControl.Library
         }
         public Administrator Get(string registration)
         {
-            List<Administrator> admins = new();
-            using (Stream file = File.Open(filePath, FileMode.Open))
+            if (registration == "root")
             {
-                using (StreamReader reader = new(file))
+                foreach (KeyValuePair<string, Administrator> par in administrators)
                 {
-                    var line = reader.ReadLine();
-                    while (line != null)
+                    if (par.Key == registration)
                     {
-                        var props = line.Split(";");
-                        Administrator admin = new(
-                                cpf: new CPF(props[0]),
-                                name: props[1],
-                                registration: props[2],
-                                password: props[3]);
-                        admins.Add(admin);
-                        line = reader.ReadLine();
+                        return par.Value;
                     }
                 }
             }
-            foreach (var admin in admins)
-                if (admin.Registration == registration)
-                    return admin;
+            else
+            {
+                List<Administrator> admins = new();
+                using (Stream file = File.Open(filePath, FileMode.Open))
+                {
+                    using (StreamReader reader = new(file))
+                    {
+                        var line = reader.ReadLine();
+                        while (line != null)
+                        {
+                            var props = line.Split(";");
+                            Administrator admin = new(
+                                    cpf: new CPF(props[0]),
+                                    name: props[1],
+                                    registration: props[2],
+                                    password: props[3]);
+                            admins.Add(admin);
+                            line = reader.ReadLine();
+                        }
+                    }
+                }
+                foreach (var admin in admins)
+                    if (admin.Registration == registration)
+                        return admin;
+            }
 
             return null;
         }
@@ -104,6 +116,13 @@ namespace ElectronicPointControl.Library
                     }
                 }
             }
+        }
+
+        private void Root()
+        {
+            CPF cpf = new CPF("123.456.789-09");
+            Administrator root = new Administrator(cpf, "", "root", "root");
+            administrators.Add(root.Registration, root);
         }
     }
 }

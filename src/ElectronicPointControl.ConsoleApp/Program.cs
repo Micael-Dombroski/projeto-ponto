@@ -6,19 +6,21 @@ namespace ElectronicPointControl.ConsoleApp
     class Program
     {
         static string menuOption;
-
         static EmployeeConsole employeeConsole = new();
         static CompanyConsole companyConsole = new();
         static AdminConsole adminConsole = new();
 
         static ConsoleUtils utils = new();
 
-        static EmployeeCRUD employees = new EmployeeCRUD();
+        static EmployeeCRUD employees = new();
+        static AdminCRUD administrators = new();
 
         static void Main(string[] args)
         {
             while (true)
             {
+                //UpdateEmployeesList();
+                //UpdateAdminsList();
                 Console.Clear();
                 utils.ShowHeader("Menu");
                 ShowMainMenu();
@@ -30,8 +32,7 @@ namespace ElectronicPointControl.ConsoleApp
         static void ShowMainMenu()
         {
             Console.WriteLine("[1] Fazer Login");
-            Console.WriteLine("[2] Registrar-se");
-            Console.WriteLine("[3] Sobre");
+            Console.WriteLine("[2] Sobre");
             Console.WriteLine("[0] Sair");
         }
 
@@ -43,8 +44,6 @@ namespace ElectronicPointControl.ConsoleApp
                 case "1":
                     DoLogin(); break;
                 case "2":
-                    DoSignUp(); break;
-                case "3":
                     AboutUs(); break;
                 case "0":
                     Exit(); break;
@@ -61,71 +60,56 @@ namespace ElectronicPointControl.ConsoleApp
             string registration = Console.ReadLine();
 
             Employee employee = employees.Get(registration);
+            Administrator administrator = administrators.Get(registration);
+            int typeUser = 0;
             if (employee is null)
             {
-                utils.HandleError("Usuário não encontrado");
-                return;
+                if (administrator is null)
+                {
+                    utils.HandleError("Usuário não encontrado");
+                    return;
+                }
+                else
+                {
+                    typeUser = 2;
+                }
+            }
+            else
+            {
+                typeUser = 1;
             }
 
             Console.Write("Digite sua senha: ");
             string password = Console.ReadLine();
-
-            if (employee.PasswordIsCorrect(password))
-                utils.HandleSuccess("Acesso concedido");
-            else
-                utils.HandleError("Senha incorreta");
-
-            employeeConsole.SetLogedEmployee(employee);
-        }
-
-        private static void DoSignUp()
-        {
-            do
+            if (typeUser == 1)
             {
-                Console.Clear();
-                utils.ShowHeader("Registrar-se");
-                ShowSignUpMenu();
-                ReadMenuOption();
-                HandleSignUp();
-            } while (menuOption != "4");
-        }
+                if (employee.PasswordIsCorrect(password))
+                {
+                    typeUser = 1;
+                    utils.HandleSuccess("Acesso concedido");
 
-        private static void ShowSignUpMenu()
-        {
-            Console.WriteLine("[1] Novo funcionário");
-            Console.WriteLine("[2] Novo administrador");
-            Console.WriteLine("[3] Nova empresa");
-            Console.WriteLine("[4] Voltar");
-        }
-
-        private static void HandleSignUp()
-        {
-            switch (menuOption)
-            {
-                case "1":
-                    NewEmployee();
-                    break;
-                case "2":
-                    NewAdmin();
-                    break;
-                case "3":
-                    NewCompany();
-                    break;
-                default:
-                    break;
+                    employeeConsole.SetLogedEmployee(employee);
+                }
+                else
+                {
+                    utils.HandleError("Senha incorreta");
+                }
             }
-        }
+            else if (typeUser == 2)
+            {
+                if (administrator.PasswordIsCorrect(password))
+                {
+                    typeUser = 2;
+                    utils.HandleSuccess("Acesso concedido");
 
-        private static void NewEmployee()
-        {
-            adminConsole.NewEmployee();
+                    adminConsole.SetLogedAdministrator(administrator);
+                }                              
+                else
+                {
+                    utils.HandleError("Senha incorreta");
+                }
+            }  
         }
-
-        private static void NewAdmin()
-        {
-            adminConsole.NewAdmin();
-        }
-
         private static void NewCompany()
         {
             companyConsole.NewCompany();
@@ -153,5 +137,26 @@ namespace ElectronicPointControl.ConsoleApp
             Console.WriteLine("\nPressione qualquer tecla para prosseguir...");
             Console.ReadKey();
         }
+        /*
+        static void UpdateEmployeesList()
+        {
+            foreach (var item in adminConsole.SendEmployees())
+            {
+                if (employees.Get(item.Registration) is null)
+                {
+                    employees.Add(item);
+                }
+            }
+        }
+        static void UpdateAdminsList()
+        {
+            foreach (var item in adminConsole.SendAdmins())
+            {
+                if (administrators.Get(item.Registration) is null)
+                {
+                    administrators.Add(item);
+                }
+            }
+        }*/
     }
 }

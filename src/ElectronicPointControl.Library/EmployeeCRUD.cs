@@ -12,7 +12,7 @@ namespace ElectronicPointControl.Library
         private Dictionary<String, Employee> employees = new();
 
         public EmployeeCRUD(string filePath
-                = "/home/natan/www/jp/projeto-ponto/src/ElectronicPointControl.Library/employees.txt")
+                = "C:/Cursos/DevSistemas/Repositorio/src/ElectronicPointControl.Library/employees.txt")
         {
             this.filePath = filePath;
         }

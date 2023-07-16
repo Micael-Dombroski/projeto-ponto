@@ -5,13 +5,41 @@ namespace ElectronicPointControl.ConsoleApp
 {
     public class EmployeeConsole: UserConsole
     {
-        private ConsoleUtils utils = new ConsoleUtils();
+        private string menuOption;
+        private ConsoleUtils utils = new();
         private Employee logedEmployee;
 
         public void SetLogedEmployee(Employee employee)
         {
             logedEmployee = employee;
             Execute();
+        }
+
+        public void Execute()
+        {
+            string optionToBack = "3";
+
+            do
+            {
+                Console.Clear();
+                utils.ShowHeader("Menu Funcionário");
+                ShowMenu();
+                ReadMenuOption();
+                HandleMenu();
+            } while (menuOption != optionToBack);
+        }
+
+        private void ShowMenu()
+        {
+            Console.WriteLine("[1] Exibir Informações");
+            Console.WriteLine("[2] Bater Ponto");
+            Console.WriteLine("[3] Voltar");
+        }
+
+        private void ReadMenuOption()
+        {
+            Console.Write("=> ");
+            menuOption = Console.ReadLine();
         }
 
         protected override void HandleMenu()
@@ -24,10 +52,14 @@ namespace ElectronicPointControl.ConsoleApp
                     Console.WriteLine($"Nome: {logedEmployee.Name}");
                     Console.WriteLine($"Usuário: {logedEmployee.Registration}");
                     Console.WriteLine($"Senha: {logedEmployee.Password}");
-                    Console.WriteLine($"Carga Horária: {logedEmployee.WorkLoad.StartHour} - {logedEmployee.WorkLoad.EndHour}\n");
+                    Console.WriteLine($"Carga Horária: {logedEmployee.WorkLoad.StartHour.ToString("hh:mm:ss")} - {logedEmployee.WorkLoad.EndHour.ToString("hh:mm:ss")}\n");
+                    Console.WriteLine("\nPressione qualquer para voltar para o Menu");
+                    Console.ReadLine();
                     break;
                 case "2":
                     PunchClock();
+                    Console.WriteLine("\nPressione qualquer para voltar para o Menu");
+                    Console.ReadLine();
                     break;
                 case "3":
                     Console.WriteLine("Voltando...");

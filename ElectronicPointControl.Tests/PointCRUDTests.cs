@@ -73,5 +73,15 @@ namespace ElectronicPointControl.Tests
             Assert.That(result[0], Is.EqualTo(point));
             Assert.That(result[1], Is.EqualTo(secondPoint));
         }
+
+        [Test]
+        public void Get_EnsurePointWasNotFoundReturnNull()
+        {
+            sut.Add(point);
+
+            var result = sut.FindByID(point.ID);
+
+            Assert.That(result, Is.Null);
+        }
     }
 }

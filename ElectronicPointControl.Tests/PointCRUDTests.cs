@@ -59,5 +59,19 @@ namespace ElectronicPointControl.Tests
 
             Assert.That(result, Is.InstanceOf<System.Collections.Generic.List<Point>>());
         }
+
+        [Test]
+        public void GetAll_EnsureReturnAListWithCorrectPoints()
+        {
+            sut.Add(point);
+            var secondPoint = new Point(employeeRegistration: "fakeReg", startWorkLoad: new DateTime());
+            sut.Add(secondPoint);
+
+            var result = sut.GetAll();
+
+            Assert.That(result.Count, Is.EqualTo(2));
+            Assert.That(result[0], Is.EqualTo(point));
+            Assert.That(result[1], Is.EqualTo(secondPoint));
+        }
     }
 }

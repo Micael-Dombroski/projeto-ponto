@@ -77,11 +77,19 @@ namespace ElectronicPointControl.Tests
         [Test]
         public void Get_EnsurePointWasNotFoundReturnNull()
         {
+            var result = sut.FindByID(point.ID);
+
+            Assert.That(result, Is.Null);
+        }
+
+        [Test]
+        public void FindByID_ReturnCorrectPointIfItWasFound()
+        {
             sut.Add(point);
 
             var result = sut.FindByID(point.ID);
 
-            Assert.That(result, Is.Null);
+            Assert.That(result, Is.EqualTo(point));
         }
     }
 }

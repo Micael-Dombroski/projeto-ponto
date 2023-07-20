@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System;
 using System.IO;
 
@@ -32,7 +33,8 @@ namespace ElectronicPointControl.Library
 
         public Point FindByID(Guid id)
         {
-            return null;
+            var points = GetAll();
+            return points.Find(point => point.ID == id);
         }
 
         public List<Point> GetAll()

@@ -8,12 +8,11 @@ namespace ElectronicPointControl.Tests
     public class PointCRUDTests
     {
         static string filePath = "../../../../ElectronicPointControl.Tests/points.txt";
-        static Point point = new Point()
+        static Point point = new Point(employeeRegistration: "1234", startWorkLoad: new System.DateTime())
         {
-            StartTime = new System.DateTime(),
             StartPause = null,
-            EndPause = null,
-            EndTime = null
+            FinishPause = null,
+            FinishWorkLoad = null
         };
         static PointCRUD sut = new(filePath);
 
@@ -39,12 +38,12 @@ namespace ElectronicPointControl.Tests
                 using (StreamReader reader = new(file))
                 {
                     string[] props = reader.ReadLine().Split(";");
-                    var result = new Point()
+                    var result = new Point(employeeRegistration: props[1], startWorkLoad: Convert.ToDateTime(props[2]))
                     {
-                        StartTime = Convert.ToDateTime(props[0]),
-                        StartPause = props[1] != "null" ? Convert.ToDateTime(props[1]) : null,
-                        EndPause = props[2] != "null" ? Convert.ToDateTime(props[2]) : null,
-                        EndTime = props[3] != "null" ? Convert.ToDateTime(props[3]) : null
+                        ID = Guid.Parse(props[0]),
+                        StartPause = props[3] != "null" ? Convert.ToDateTime(props[1]) : null,
+                        FinishPause = props[4] != "null" ? Convert.ToDateTime(props[2]) : null,
+                        FinishWorkLoad = props[5] != "null" ? Convert.ToDateTime(props[3]) : null
                     };
                     Assert.That(result, Is.EqualTo(point));
                 }

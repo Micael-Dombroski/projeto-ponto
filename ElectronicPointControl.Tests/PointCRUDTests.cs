@@ -49,5 +49,15 @@ namespace ElectronicPointControl.Tests
                 }
             }
         }
+
+        [Test]
+        public void GetAll_EnsureReturnsAList()
+        {
+            sut.Add(point);
+
+            var result = sut.GetAll();
+
+            Assert.That(result, Is.InstanceOf<System.Collections.Generic.List<Point>>());
+        }
     }
 }

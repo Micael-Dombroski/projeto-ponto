@@ -7,7 +7,6 @@ namespace ElectronicPointControl.ConsoleApp
     {
         static string menuOption;
         static EmployeeConsole employeeConsole = new();
-        static CompanyConsole companyConsole = new();
         static AdminConsole adminConsole = new();
 
         static ConsoleUtils utils = new();
@@ -19,8 +18,6 @@ namespace ElectronicPointControl.ConsoleApp
         {
             while (true)
             {
-                //UpdateEmployeesList();
-                //UpdateAdminsList();
                 Console.Clear();
                 utils.ShowHeader("Menu");
                 ShowMainMenu();
@@ -42,9 +39,11 @@ namespace ElectronicPointControl.ConsoleApp
             switch (menuOption)
             {
                 case "1":
-                    DoLogin(); break;
+                    DoLogin();
+                    break;
                 case "2":
-                    AboutUs(); break;
+                    AboutUs();
+                    break;
                 case "0":
                     Exit(); break;
                 default: break;
@@ -110,14 +109,13 @@ namespace ElectronicPointControl.ConsoleApp
                 }
             }  
         }
-        private static void NewCompany()
-        {
-            companyConsole.NewCompany();
-        }
 
         private static void AboutUs()
         {
-            throw new NotImplementedException();
+            utils.ShowHeader("Projeto Integrador SENAC");
+            Console.WriteLine("Alunos: Micael & Natan");
+            Console.WriteLine("Nome do Projeto: Projeto Ponto");
+            Console.WriteLine("Versão: 1.0.0");
         }
 
         private static void Exit()
@@ -137,26 +135,5 @@ namespace ElectronicPointControl.ConsoleApp
             Console.WriteLine("\nPressione qualquer tecla para prosseguir...");
             Console.ReadKey();
         }
-        /*
-        static void UpdateEmployeesList()
-        {
-            foreach (var item in adminConsole.SendEmployees())
-            {
-                if (employees.Get(item.Registration) is null)
-                {
-                    employees.Add(item);
-                }
-            }
-        }
-        static void UpdateAdminsList()
-        {
-            foreach (var item in adminConsole.SendAdmins())
-            {
-                if (administrators.Get(item.Registration) is null)
-                {
-                    administrators.Add(item);
-                }
-            }
-        }*/
     }
 }

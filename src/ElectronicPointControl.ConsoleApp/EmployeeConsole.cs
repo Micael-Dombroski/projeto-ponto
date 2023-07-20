@@ -44,30 +44,31 @@ namespace ElectronicPointControl.ConsoleApp
 
         protected override void HandleMenu()
         {
+            Console.Clear();
             switch (menuOption)
             {
                 case "1":
-                    Console.WriteLine("Informações do Funcionário");
+                    utils.ShowHeader("Informações do Funcionário");
                     Console.WriteLine($"CPF: {logedEmployee.CPF}");
                     Console.WriteLine($"Nome: {logedEmployee.Name}");
                     Console.WriteLine($"Usuário: {logedEmployee.Registration}");
                     Console.WriteLine($"Senha: {logedEmployee.Password}");
                     Console.WriteLine($"Carga Horária: {logedEmployee.WorkLoad.StartHour.ToString("hh:mm:ss")} - {logedEmployee.WorkLoad.EndHour.ToString("hh:mm:ss")}\n");
-                    Console.WriteLine("\nPressione qualquer para voltar para o Menu");
-                    Console.ReadLine();
+                    PressKeyToBackToMenu();
                     break;
                 case "2":
                     PunchClock();
-                    Console.WriteLine("\nPressione qualquer para voltar para o Menu");
-                    Console.ReadLine();
+                    PressKeyToBackToMenu();
                     break;
                 case "3":
                     Console.WriteLine("Voltando...");
                     break;
                 default:
                     Console.WriteLine("Opção Inválida");
+                    PressKeyToBackToMenu();
                     break;
             }
+
         }
 
         public void PunchClock()
@@ -75,11 +76,17 @@ namespace ElectronicPointControl.ConsoleApp
             try
             {
                 logedEmployee.PunchClock();
+                utils.HandleSuccess($"Ponto Batido com sucesso às {DateTime.Now.ToString("H:mm:ss")}");
             }
             catch (System.Exception e)
             {
                 utils.HandleError(e.Message);
             }
+        }
+        private void PressKeyToBackToMenu()
+        {
+            Console.WriteLine("\nPressione qualquer tecla para voltar ao Menu");
+            Console.ReadLine();
         }
     }
 }

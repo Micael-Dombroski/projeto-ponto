@@ -14,15 +14,15 @@ namespace ElectronicPointControl.Library
                 = "../ElectronicPointControl.Library/Database/employee.txt")
         {
             this.filePath = filePath;
-        }
-
-        public void Add(Employee employee)
-        {
             if (!File.Exists(filePath))
             {
                 Stream file = File.Open(filePath, FileMode.Create);
                 file.Close();
             }
+        }
+
+        public void Add(Employee employee)
+        {
             using (Stream file = File.Open(filePath, FileMode.Append))
             {
                 using (StreamWriter writer = new(file))

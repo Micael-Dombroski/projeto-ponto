@@ -28,6 +28,8 @@ namespace ElectronicPointControl.Library
 
             if (timesPunchClock == 0)
             {
+                Console.WriteLine($"Horário Mínimo permitido para bater ponto ao entrar: {WorkLoad.StartHour.AddMinutes(-5).ToString("H:mm:ss")}");
+                Console.WriteLine($"Horário Limite permitido para bater ponto ao entrar: {WorkLoad.StartHour.AddMinutes(5).ToString("H:mm:ss")}");
                 if (DateTime.Now >= WorkLoad.StartHour.AddMinutes(-5) && DateTime.Now <= WorkLoad.StartHour.AddMinutes(5))
                 {
                     hourWhoStartToday = DateTime.Now;
@@ -35,27 +37,33 @@ namespace ElectronicPointControl.Library
                 }
                 else
                 {
-                    throw new Exception("fora do horario");
+                    throw new Exception("Fora do horario");
                 }
             }
             else if (timesPunchClock == 1)
             {
-                if (DateTime.Now <= WorkLoad.EndHour.AddMinutes(-5)
-                    && DateTime.Now >= WorkLoad.EndHour.AddMinutes(5))
+                Console.WriteLine($"Horário Mínimo permitido para bater ponto ao sair: {WorkLoad.EndHour.AddMinutes(-5).ToString("H:mm:ss")}");
+                Console.WriteLine($"Horário Limite permitido para bater ponto ao sair: {WorkLoad.EndHour.AddMinutes(5).ToString("H:mm:ss")}");
+                if (DateTime.Now >= WorkLoad.EndHour.AddMinutes(-5)
+                    && DateTime.Now <= WorkLoad.EndHour.AddMinutes(5))
                 {
                     hourWhoEndsToday = DateTime.Now;
                     timesPunchClock++;
                 }
                 else
                 {
-                    throw new Exception("fora do horario");
+                    throw new Exception("Fora do horario");
                 }
+                CalcWorkedHours();
             }
         }
 
-        public int CalcWorkedHours()
+        public void CalcWorkedHours()
         {
-            return hourWhoEndsToday.Hour - hourWhoStartToday.Hour;
+            TimeSpan WorkedHours = hourWhoEndsToday.Subtract(hourWhoStartToday);
+            DateTime IgnoreIt = new DateTime(1996, 6, 3, 0, 0, 0);
+            DateTime workedHours = IgnoreIt + WorkedHours;
+            Console.WriteLine($"Hoje seu tempo trabalhado foi: {workedHours.ToString("H:mm:ss")}, parabéns!");
         }
 
         public override string ToString()

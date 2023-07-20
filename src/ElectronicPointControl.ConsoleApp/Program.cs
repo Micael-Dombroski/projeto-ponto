@@ -59,7 +59,7 @@ namespace ElectronicPointControl.ConsoleApp
             string registration = Console.ReadLine();
 
             Employee employee = employees.Get(registration);
-            Administrator administrator = administrators.Get(registration);
+            Administrator administrator = administrators.Get();
             int typeUser = 0;
             if (employee is null)
             {
@@ -102,12 +102,12 @@ namespace ElectronicPointControl.ConsoleApp
                     utils.HandleSuccess("Acesso concedido");
 
                     adminConsole.SetLogedAdministrator(administrator);
-                }                              
+                }
                 else
                 {
                     utils.HandleError("Senha incorreta");
                 }
-            }  
+            }
         }
 
         private static void AboutUs()

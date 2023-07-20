@@ -1,7 +1,6 @@
 using NUnit.Framework;
 using ElectronicPointControl.Library;
 using System.IO;
-using System.Collections.Generic;
 
 namespace ElectronicPointControl.Tests
 {
@@ -16,7 +15,7 @@ namespace ElectronicPointControl.Tests
         public void SetUp()
         {
             fakeCPF = new("111.444.777-35");
-            fakeAdmin = new(name: "name", registration: "registration", password: "password", cpf: fakeCPF);
+            fakeAdmin = new(login: "root", password: "root");
             sut = new(filePath: filePath);
         }
 
@@ -31,29 +30,21 @@ namespace ElectronicPointControl.Tests
         {
             sut.Add(fakeAdmin);
 
-            List<Administrator> admins = new();
             using (Stream file = File.Open(filePath, FileMode.OpenOrCreate))
             {
                 using (StreamReader reader = new(file))
                 {
                     string[] adminProps = reader.ReadLine().Split(";");
-                    Administrator admin = new Administrator(
-                        new CPF(adminProps[0]),
-                        adminProps[1],
-                        adminProps[2],
-                        adminProps[3]);
-                    admins.Add(admin);
+                    Administrator admin = new Administrator(adminProps[0], adminProps[1]);
+                    Assert.That(admin, Is.EqualTo(fakeAdmin));
                 }
             }
-            Administrator result = admins.Find(admin => admin.Registration == fakeAdmin.Registration);
-
-            Assert.That(result, Is.EqualTo(fakeAdmin));
         }
 
         [Test]
         public void Get_EnsureReturnsNullIfAdminNotFound()
         {
-            Administrator result = sut.Get(registration: "invalidRegistration");
+            Administrator result = sut.Get();
 
             Assert.That(result, Is.Null);
         }
@@ -63,26 +54,18 @@ namespace ElectronicPointControl.Tests
         {
             sut.Add(fakeAdmin);
 
-            var actual = sut.Get(fakeAdmin.Registration);
+            var actual = sut.Get();
             var expected = fakeAdmin;
 
             Assert.That(actual, Is.EqualTo(expected));
         }
 
         [Test]
-        public void GetAll_ReturnAllObjetcsInAnList()
-        {
-            var actual = sut.GetAll();
-
-            Assert.That(actual, Is.TypeOf<List<Administrator>>());
-        }
-
-        [Test]
         public void Delete_EnsureDeleteTheAdmin()
         {
             sut.Add(fakeAdmin);
-            sut.Delete(fakeAdmin.Registration);
-            var result = sut.Get(fakeAdmin.Registration);
+            sut.Delete();
+            var result = sut.Get();
 
             Assert.That(result, Is.Null);
         }
@@ -91,12 +74,12 @@ namespace ElectronicPointControl.Tests
         public void Update_EnsureIfAdminExistsItWasUpdated()
         {
             sut.Add(fakeAdmin);
-            fakeAdmin.Name = "newName";
+            fakeAdmin.Login = "newLogin";
             sut.Update(fakeAdmin);
 
-            var result = sut.Get(fakeAdmin.Registration);
+            var result = sut.Get();
 
-            Assert.That(result.Name, Is.EqualTo("newName"));
+            Assert.That(result.Login, Is.EqualTo("newLogin"));
         }
     }
 }

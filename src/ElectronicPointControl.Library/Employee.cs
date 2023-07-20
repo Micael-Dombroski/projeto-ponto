@@ -2,9 +2,14 @@ using System;
 
 namespace ElectronicPointControl.Library
 {
-    public class Employee : User
+    public class Employee
     {
+        public CPF CPF { get; set; }
+        public string Name { get; set; }
+        public string Registration { get; protected set; }
+        public string Password { get; protected set; }
         public WorkLoad WorkLoad;
+
         private DateTime hourWhoStartToday;
         private DateTime hourWhoEndsToday;
 
@@ -15,9 +20,18 @@ namespace ElectronicPointControl.Library
             string name,
             string registration,
             string password,
-            WorkLoad workLoad) : base(cpf, name, registration, password)
+            WorkLoad workLoad)
         {
+            this.CPF =cpf;
+            this.Name=name;
+            this.Registration=registration;
+            this.Password=password;
             this.WorkLoad = workLoad;
+        }
+
+        public bool PasswordIsCorrect(string password)
+        {
+            return Password == password;
         }
 
         public void PunchClock()

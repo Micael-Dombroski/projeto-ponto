@@ -2,31 +2,38 @@ using System;
 
 namespace ElectronicPointControl.Library
 {
-    public class Administrator : User
+    public class Administrator
     {
+        public string Login { get; set; }
+        public string Password { get; set; }
+
         public Administrator(
-            CPF cpf,
-            string name,
-            string registration,
-            string password) : base(cpf, name, registration, password)
+            string login,
+            string password)
         {
+            this.Login = login;
+            this.Password = password;
+        }
+
+        public bool PasswordIsCorrect(string password)
+        {
+            return Password == password;
         }
 
         public override bool Equals(object obj)
         {
             return obj is Administrator administrator &&
-                   Registration == administrator.Registration;
+                   Login == administrator.Login;
         }
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(Registration);
+            return HashCode.Combine(Login);
         }
 
         public override string ToString()
         {
-            return $"{CPF};{Name};{Registration};{Password}";
+            return $"{Login};{Password}";
         }
-
     }
 }

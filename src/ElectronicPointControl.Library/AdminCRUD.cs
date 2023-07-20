@@ -1,5 +1,4 @@
 using System.IO;
-using System.Collections.Generic;
 
 namespace ElectronicPointControl.Library
 {
@@ -7,13 +6,10 @@ namespace ElectronicPointControl.Library
     {
         private string filePath;
 
-        private Dictionary<string, Administrator> administrators = new();
-
         public AdminCRUD(string filePath
-                = "../ElectronicPointControl.Library/Database/administrators.txt")
+                = "../ElectronicPointControl.Library/Database/administrator.txt")
         {
             this.filePath = filePath;
-            Root();
         }
 
         public void Add(Administrator administrator)
@@ -31,98 +27,34 @@ namespace ElectronicPointControl.Library
                 }
             }
         }
-        public Administrator Get(string registration)
+
+        public Administrator Get()
         {
-            if (registration == "root")
-            {
-                foreach (KeyValuePair<string, Administrator> par in administrators)
-                {
-                    if (par.Key == registration)
-                    {
-                        return par.Value;
-                    }
-                }
-            }
-            else
-            {
-                List<Administrator> admins = new();
-                using (Stream file = File.Open(filePath, FileMode.Open))
-                {
-                    using (StreamReader reader = new(file))
-                    {
-                        var line = reader.ReadLine();
-                        while (line != null)
-                        {
-                            var props = line.Split(";");
-                            Administrator admin = new(
-                                    cpf: new CPF(props[0]),
-                                    name: props[1],
-                                    registration: props[2],
-                                    password: props[3]);
-                            admins.Add(admin);
-                            line = reader.ReadLine();
-                        }
-                    }
-                }
-                foreach (var admin in admins)
-                    if (admin.Registration == registration)
-                        return admin;
-            }
-
-            return null;
-        }
-
-        public List<Administrator> GetAll()
-        {
-            List<Administrator> admins = new();
-
             using (Stream file = File.Open(filePath, FileMode.Open))
             {
                 using (StreamReader reader = new(file))
                 {
                     var line = reader.ReadLine();
-                    while (line != null)
-                    {
-                        var props = line.Split(";");
-                        Administrator admin = new(
-                                cpf: new CPF(props[0]),
-                                name: props[1],
-                                registration: props[2],
-                                password: props[3]);
-                        admins.Add(admin);
-                        line = reader.ReadLine();
-                    }
+                    if (line is null)
+                        return null;
+
+                    var props = line.Split(";");
+                    return new Administrator(login: props[0], password: props[1]);
                 }
             }
-            return admins;
         }
+
         public void Update(Administrator administrator)
         {
-            Delete(administrator.Registration);
+            Delete();
             Add(administrator);
         }
 
-        public void Delete(string registration)
+        public void Delete()
         {
-            var admins = GetAll();
-            admins.Remove(Get(registration));
             using (Stream file = File.Open(filePath, FileMode.Create))
             {
-                using (StreamWriter writer = new(file))
-                {
-                    foreach (var admin in admins)
-                    {
-                        writer.WriteLine(admin);
-                    }
-                }
             }
-        }
-
-        private void Root()
-        {
-            CPF cpf = new CPF("123.456.789-09");
-            Administrator root = new Administrator(cpf, "", "root", "root");
-            administrators.Add(root.Registration, root);
         }
     }
 }

@@ -11,7 +11,7 @@ namespace ElectronicPointControl.Library
         private Dictionary<String, Employee> employees = new();
 
         public EmployeeCRUD(string filePath
-                = "C:/Cursos/DevSistemas/Repositorio/src/ElectronicPointControl.Library/employees.txt")
+                = "../ElectronicPointControl.Library/Database/employee.txt")
         {
             this.filePath = filePath;
         }

@@ -10,7 +10,7 @@ namespace ElectronicPointControl.Library
         private Dictionary<string, Administrator> administrators = new();
 
         public AdminCRUD(string filePath
-                = "C:/Cursos/DevSistemas/Repositorio/src/ElectronicPointControl.Library/administrators.txt")
+                = "../ElectronicPointControl.Library/Database/administrators.txt")
         {
             this.filePath = filePath;
             Root();

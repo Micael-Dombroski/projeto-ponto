@@ -4,7 +4,7 @@ namespace ElectronicPointControl.Library
 {
     public interface IPointRepository
     {
-        void Add();
+        void Add(Point point);
         Point Get();
         List<Point> GetAll();
     }

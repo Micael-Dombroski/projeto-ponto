@@ -12,7 +12,7 @@ namespace ElectronicPointControl.Library
 
         public override string ToString()
         {
-            return $"{StartTime};{StartPause};{EndPause};{EndTime}";
+            return $"{StartTime};{(StartPause is DateTime ? StartPause : "null")};{(EndPause is DateTime ? EndPause : "null")};{(EndTime is DateTime ? EndTime : "null")}";
         }
     }
 }

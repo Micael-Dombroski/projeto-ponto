@@ -1,12 +1,32 @@
 using System.Collections.Generic;
+using System.IO;
 
 namespace ElectronicPointControl.Library
 {
     public class PointCRUD : IPointRepository
     {
-        public void Add()
+        private string filePath;
+
+        public PointCRUD(string filePath
+                = "../ElectronicPointControl.Library/Database/employee.txt")
         {
-            throw new System.NotImplementedException();
+            this.filePath = filePath;
+        }
+
+        public void Add(Point point)
+        {
+            if (!File.Exists(filePath))
+            {
+                Stream file = File.Open(filePath, FileMode.Create);
+                file.Close();
+            }
+            using (Stream file = File.Open(filePath, FileMode.Append))
+            {
+                using (StreamWriter writer = new(file))
+                {
+                    writer.WriteLine(point);
+                }
+            }
         }
 
         public Point Get()

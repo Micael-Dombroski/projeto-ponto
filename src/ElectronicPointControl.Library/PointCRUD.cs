@@ -30,9 +30,9 @@ namespace ElectronicPointControl.Library
             }
         }
 
-        public Point Get()
+        public Point FindByID(Guid id)
         {
-            throw new System.NotImplementedException();
+            return null;
         }
 
         public List<Point> GetAll()

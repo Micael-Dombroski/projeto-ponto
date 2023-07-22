@@ -13,9 +13,11 @@ namespace ElectronicPointControl.ConsoleApp
 
         static EmployeeCRUD employees = new();
         static AdminCRUD administrators = new();
+        static bool userExist;
 
         static void Main(string[] args)
         {
+            CreateAdmin();
             while (true)
             {
                 Console.Clear();
@@ -53,6 +55,7 @@ namespace ElectronicPointControl.ConsoleApp
 
         private static void DoLogin()
         {
+            userExist = false;
             utils.ShowHeader("login");
 
             Console.Write("Digite sua matrícula: ");
@@ -63,7 +66,7 @@ namespace ElectronicPointControl.ConsoleApp
             int typeUser = 0;
             if (employee is null)
             {
-                if (administrator is null)
+                if (administrator.Login != registration)
                 {
                     utils.HandleError("Usuário não encontrado");
                     return;
@@ -71,41 +74,45 @@ namespace ElectronicPointControl.ConsoleApp
                 else
                 {
                     typeUser = 2;
+                    userExist = true;
                 }
             }
             else
             {
                 typeUser = 1;
+                userExist = true;
             }
-
-            Console.Write("Digite sua senha: ");
-            string password = Console.ReadLine();
-            if (typeUser == 1)
+            if (userExist == true)
             {
-                if (employee.PasswordIsCorrect(password))
+                Console.Write("Digite sua senha: ");
+                string password = Console.ReadLine();
+                if (typeUser == 1)
                 {
-                    typeUser = 1;
-                    utils.HandleSuccess("Acesso concedido");
-
-                    employeeConsole.SetLogedEmployee(employee);
+                    if (employee.PasswordIsCorrect(password))
+                    {
+                        typeUser = 1;
+                        utils.HandleSuccess("Acesso concedido");
+    
+                        employeeConsole.SetLogedEmployee(employee);
+                    }
+                    else
+                    {
+                        utils.HandleError("Senha incorreta");
+                    }
                 }
-                else
+                else if (typeUser == 2)
                 {
-                    utils.HandleError("Senha incorreta");
-                }
-            }
-            else if (typeUser == 2)
-            {
-                if (administrator.PasswordIsCorrect(password))
-                {
-                    typeUser = 2;
-                    utils.HandleSuccess("Acesso concedido");
-
-                    adminConsole.SetLogedAdministrator(administrator);
-                }
-                else
-                {
-                    utils.HandleError("Senha incorreta");
+                    if (administrator.PasswordIsCorrect(password))
+                    {
+                        typeUser = 2;
+                        utils.HandleSuccess("Acesso concedido");
+    
+                        adminConsole.SetLogedAdministrator(administrator);
+                    }
+                    else
+                    {
+                        utils.HandleError("Senha incorreta");
+                    }
                 }
             }
         }
@@ -134,6 +141,11 @@ namespace ElectronicPointControl.ConsoleApp
         {
             Console.WriteLine("\nPressione qualquer tecla para prosseguir...");
             Console.ReadKey();
+        }
+        private static void CreateAdmin()
+        {
+            Administrator administrator = new("root", "root");
+            administrators.Update(administrator);
         }
     }
 }

@@ -9,7 +9,7 @@ namespace ElectronicPointControl.Tests
     public class EmployeCRUDTests
     {
         EmployeeCRUD sut;
-        string filePath = "/home/natan/www/jp/projeto-ponto/ElectronicPointControl.Tests/fakeEmployees.txt";
+        string filePath = "fakeEmployees.txt";
         Employee fakeEmployee;
         CPF fakeCPF;
         WorkLoad fakeWorkload;

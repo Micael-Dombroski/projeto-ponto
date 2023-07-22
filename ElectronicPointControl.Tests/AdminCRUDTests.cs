@@ -9,7 +9,7 @@ namespace ElectronicPointControl.Tests
         AdminCRUD sut;
         Administrator fakeAdmin;
         CPF fakeCPF;
-        string filePath = "/home/natan/www/jp/projeto-ponto/ElectronicPointControl.Tests/fakeAdministrators.txt";
+        string filePath = "fakeAdministrators.txt";
 
         [SetUp]
         public void SetUp()

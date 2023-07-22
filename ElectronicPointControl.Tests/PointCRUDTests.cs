@@ -7,7 +7,7 @@ namespace ElectronicPointControl.Tests
 {
     public class PointCRUDTests
     {
-        static string filePath = "../../../../ElectronicPointControl.Tests/points.txt";
+        static string filePath = "points.txt";
         static Point point = new Point(employeeRegistration: "1234", startWorkLoad: new System.DateTime())
         {
             StartPause = null,

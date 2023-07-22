@@ -10,15 +10,15 @@ namespace ElectronicPointControl.Library
                 = "../ElectronicPointControl.Library/Database/administrator.txt")
         {
             this.filePath = filePath;
-        }
-
-        public void Add(Administrator administrator)
-        {
             if (!File.Exists(filePath))
             {
                 Stream file = File.Open(filePath, FileMode.Create);
                 file.Close();
             }
+        }
+
+        public void Add(Administrator administrator)
+        {
             using (Stream file = File.Open(filePath, FileMode.Append))
             {
                 using (StreamWriter writer = new(file))
@@ -55,6 +55,12 @@ namespace ElectronicPointControl.Library
             using (Stream file = File.Open(filePath, FileMode.Create))
             {
             }
+        }
+
+        public void Root()
+        {
+            Administrator root = new Administrator("root", "root");
+            Add(root);
         }
     }
 }

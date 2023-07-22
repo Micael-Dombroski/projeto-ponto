@@ -9,7 +9,7 @@ namespace ElectronicPointControl.Library
         private string filePath;
 
         public PointCRUD(string filePath
-                = "../ElectronicPointControl.Library/Database/employee.txt")
+                = "../ElectronicPointControl.Library/Database/pointhistory.txt")
         {
             this.filePath = filePath;
         }

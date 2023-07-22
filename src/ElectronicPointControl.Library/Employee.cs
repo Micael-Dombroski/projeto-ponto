@@ -14,6 +14,7 @@ namespace ElectronicPointControl.Library
         private DateTime hourWhoEndsToday;
 
         private int timesPunchClock = 0;
+        private Guid  PointIDToday;
 
         public Employee(
             CPF cpf,
@@ -34,52 +35,6 @@ namespace ElectronicPointControl.Library
             return Password == password;
         }
 
-        public void PunchClock()
-        {
-            if (timesPunchClock == 2)
-                timesPunchClock = 0;
-
-
-            if (timesPunchClock == 0)
-            {
-                Console.WriteLine($"Horário Mínimo permitido para bater ponto ao entrar: {WorkLoad.StartHour.AddMinutes(-5).ToString("H:mm:ss")}");
-                Console.WriteLine($"Horário Limite permitido para bater ponto ao entrar: {WorkLoad.StartHour.AddMinutes(5).ToString("H:mm:ss")}");
-                if (DateTime.Now >= WorkLoad.StartHour.AddMinutes(-5) && DateTime.Now <= WorkLoad.StartHour.AddMinutes(5))
-                {
-                    hourWhoStartToday = DateTime.Now;
-                    timesPunchClock++;
-                }
-                else
-                {
-                    throw new Exception("Fora do horario");
-                }
-            }
-            else if (timesPunchClock == 1)
-            {
-                Console.WriteLine($"Horário Mínimo permitido para bater ponto ao sair: {WorkLoad.EndHour.AddMinutes(-5).ToString("H:mm:ss")}");
-                Console.WriteLine($"Horário Limite permitido para bater ponto ao sair: {WorkLoad.EndHour.AddMinutes(5).ToString("H:mm:ss")}");
-                if (DateTime.Now >= WorkLoad.EndHour.AddMinutes(-5)
-                    && DateTime.Now <= WorkLoad.EndHour.AddMinutes(5))
-                {
-                    hourWhoEndsToday = DateTime.Now;
-                    timesPunchClock++;
-                }
-                else
-                {
-                    throw new Exception("Fora do horario");
-                }
-                CalcWorkedHours();
-            }
-        }
-
-        public void CalcWorkedHours()
-        {
-            TimeSpan WorkedHours = hourWhoEndsToday.Subtract(hourWhoStartToday);
-            DateTime IgnoreIt = new DateTime(1996, 6, 3, 0, 0, 0);
-            DateTime workedHours = IgnoreIt + WorkedHours;
-            Console.WriteLine($"Hoje seu tempo trabalhado foi: {workedHours.ToString("H:mm:ss")}, parabéns!");
-        }
-
         public override string ToString()
         {
             return $"{CPF};{Name};{Registration};{Password};{WorkLoad.StartHour};{WorkLoad.EndHour}";
@@ -95,5 +50,51 @@ namespace ElectronicPointControl.Library
         {
             return HashCode.Combine(Registration);
         }
+
+        public void TimesPunchClockAddition()
+        {
+            timesPunchClock++;
+        }
+
+        public void TimesPunchClockReset()
+        {
+            timesPunchClock = 0;
+        }
+
+        public int TimesPunchClockGetValue()
+        {
+            return timesPunchClock;
+        }
+
+        public void GetHourWhoStartTodayValue(DateTime datetime)
+        {
+            hourWhoStartToday = datetime;
+        }
+
+        public void GetHourWhoEndsTodayValue(DateTime datetime)
+        {
+            hourWhoEndsToday = datetime;
+        }
+
+        public DateTime SendHourWhoStartTodayValue()
+        {
+            return hourWhoStartToday;
+        }
+
+        public DateTime SendHourWhoEndsTodayValue()
+        {
+            return hourWhoEndsToday;
+        }
+
+        public void GetPointIdToday(Guid ID)
+        {
+            PointIDToday = ID;
+        }
+
+        public Guid SendPointIdToday()
+        {
+            return PointIDToday;
+        }
+    
     }
 }

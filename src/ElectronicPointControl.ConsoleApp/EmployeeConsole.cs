@@ -8,6 +8,7 @@ namespace ElectronicPointControl.ConsoleApp
         private string menuOption;
         private ConsoleUtils utils = new();
         private Employee logedEmployee;
+        private PunchClock punchClock;
 
         public void SetLogedEmployee(Employee employee)
         {
@@ -44,26 +45,29 @@ namespace ElectronicPointControl.ConsoleApp
 
         protected override void HandleMenu()
         {
-            Console.Clear();
             switch (menuOption)
             {
                 case "1":
+                    Console.Clear();
                     utils.ShowHeader("Informações do Funcionário");
                     Console.WriteLine($"CPF: {logedEmployee.CPF}");
                     Console.WriteLine($"Nome: {logedEmployee.Name}");
                     Console.WriteLine($"Usuário: {logedEmployee.Registration}");
                     Console.WriteLine($"Senha: {logedEmployee.Password}");
-                    Console.WriteLine($"Carga Horária: {logedEmployee.WorkLoad.StartHour.ToString("hh:mm:ss")} - {logedEmployee.WorkLoad.EndHour.ToString("hh:mm:ss")}\n");
+                    Console.WriteLine($"Carga Horária: {logedEmployee.WorkLoad.StartHour.ToString("H:mm:ss")} - {logedEmployee.WorkLoad.EndHour.ToString("H:mm:ss")}\n");
                     PressKeyToBackToMenu();
                     break;
                 case "2":
-                    PunchClock();
+                    Console.Clear();
+                    PunchingClock();
                     PressKeyToBackToMenu();
                     break;
                 case "3":
+                    Console.Clear();
                     Console.WriteLine("Voltando...");
                     break;
                 default:
+                    Console.Clear();
                     Console.WriteLine("Opção Inválida");
                     PressKeyToBackToMenu();
                     break;
@@ -71,11 +75,12 @@ namespace ElectronicPointControl.ConsoleApp
 
         }
 
-        public void PunchClock()
+        public void PunchingClock()
         {
             try
             {
-                logedEmployee.PunchClock();
+                punchClock= new(logedEmployee);
+                punchClock.PunchClocked();
                 utils.HandleSuccess($"Ponto Batido com sucesso às {DateTime.Now.ToString("H:mm:ss")}");
             }
             catch (System.Exception e)

@@ -10,6 +10,7 @@ namespace ElectronicPointControl.ConsoleApp
         private Administrator logedAdministrator;
         private ConsoleUtils utils= new();
         private EmployeeCRUD employees = new();
+        private string registration;
 
         public void SetLogedAdministrator(Administrator administrator)
         {
@@ -19,7 +20,7 @@ namespace ElectronicPointControl.ConsoleApp
 
         public void Execute()
         {
-            string optionToBack = "5";
+            string optionToBack = "6";
 
             do
             {
@@ -100,8 +101,9 @@ namespace ElectronicPointControl.ConsoleApp
             Console.WriteLine("[1] Cadastrar");
             Console.WriteLine("[2] Editar");
             Console.WriteLine("[3] Excluir");
-            Console.WriteLine("[4] Exibir todos os Funcionários");
-            Console.WriteLine("[5] Voltar");
+            Console.WriteLine("[4] Exibir as Informações de um Funcionário");
+            Console.WriteLine("[5] Exibir todos os Funcionários");
+            Console.WriteLine("[6] Voltar");
         }
 
         private void ReadMenuOption()
@@ -115,18 +117,43 @@ namespace ElectronicPointControl.ConsoleApp
             switch (menuOption)
             {
                 case "1":
+                    Console.Clear();
                     NewEmployee();
                     PressKeyToBackToMenu();
                     break;
                 case "2":
+                    Console.Clear();
                     EditEmployee();
                     PressKeyToBackToMenu();
                     break;
                 case "3":
+                    Console.Clear();
                     DeleteEmployee();
                     PressKeyToBackToMenu();
                     break;
                 case "4":
+                    Console.Clear();
+                    Console.WriteLine("Informe o Nome de Usuário do Funcionário que deseja ver as informações: ");
+                    ReadRegistration();
+                    if (utils.EmployeeExists(registration))
+                    {
+                        utils.HandleError("Funcionário Não Encontrado");
+                    }
+                    else
+                    {
+                        Employee employee = employees.Get(registration);
+                        Console.Clear();
+                        utils.ShowHeader("Informações do Funcionário");
+                        Console.WriteLine($"CPF: {employee.CPF}");
+                        Console.WriteLine($"Nome: {employee.Name}");
+                        Console.WriteLine($"Usuário: {employee.Registration}");
+                        Console.WriteLine($"Senha: {employee.Password}");
+                        Console.WriteLine($"Carga Horária: {employee.WorkLoad.StartHour.ToString("H:mm:ss")} - {employee.WorkLoad.EndHour.ToString("H:mm:ss")}\n");
+                    }
+                    PressKeyToBackToMenu();
+                    break;
+                case "5":
+                    Console.Clear();
                     Console.WriteLine("Lista de Funcionarios");
                     Console.WriteLine("CPF | Nome | Usuário | Senha | Carga Horária");
                     foreach (var item in employees.GetAll())
@@ -135,10 +162,12 @@ namespace ElectronicPointControl.ConsoleApp
                     }
                     PressKeyToBackToMenu();
                     break;
-                case "5":
+                case "6":
+                    Console.Clear();
                     Console.WriteLine("Voltando...");
                     break;
                 default:
+                    Console.Clear();
                     Console.WriteLine("Opção Inválida");
                     PressKeyToBackToMenu();
                     break;
@@ -154,6 +183,11 @@ namespace ElectronicPointControl.ConsoleApp
         {
             Console.Write("=> ");
             EditAnswer = Console.ReadLine().ToLower();
+        }
+        private void ReadRegistration()
+        {
+            Console.Write("=> ");
+            registration = Console.ReadLine();
         }
     }
 }

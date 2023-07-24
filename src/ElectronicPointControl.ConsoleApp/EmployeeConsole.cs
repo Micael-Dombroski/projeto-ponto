@@ -117,7 +117,23 @@ namespace ElectronicPointControl.ConsoleApp
 
         private void EditPassword()
         {
-            throw new NotImplementedException();
+            utils.ShowHeader("Atualizar senha");
+
+            Console.Write("Digite a nova senha: ");
+            string password = Console.ReadLine();
+
+            Console.Write("Repita a senha: ");
+            string passwordConfirmation = Console.ReadLine();
+
+            if (password != passwordConfirmation)
+            {
+                utils.HandleError("Senha não confere!");
+                return;
+            }
+
+            loggedEmployee.SetPassword(password);
+            crud.Update(loggedEmployee);
+            utils.HandleSuccess("Senha atualizada!");
         }
 
         public void PunchingClock()

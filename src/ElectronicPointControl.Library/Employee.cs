@@ -14,7 +14,7 @@ namespace ElectronicPointControl.Library
         private DateTime hourWhoEndsToday;
 
         private int timesPunchClock = 0;
-        private Guid  PointIDToday;
+        private Guid PointIDToday;
 
         public Employee(
             CPF cpf,
@@ -23,10 +23,10 @@ namespace ElectronicPointControl.Library
             string password,
             WorkLoad workLoad)
         {
-            this.CPF =cpf;
-            this.Name=name;
-            this.Registration=registration;
-            this.Password=password;
+            this.CPF = cpf;
+            this.Name = name;
+            this.Registration = registration;
+            this.Password = password;
             this.WorkLoad = workLoad;
         }
 
@@ -49,6 +49,11 @@ namespace ElectronicPointControl.Library
         public override int GetHashCode()
         {
             return HashCode.Combine(Registration);
+        }
+
+        public void SetPassword(string password)
+        {
+            this.Password = password;
         }
 
         public void TimesPunchClockAddition()
@@ -95,6 +100,6 @@ namespace ElectronicPointControl.Library
         {
             return PointIDToday;
         }
-    
+
     }
 }

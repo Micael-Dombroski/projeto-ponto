@@ -12,36 +12,35 @@ namespace ElectronicPointControl.ConsoleApp
         static ConsoleUtils utils = new();
 
         static EmployeeCRUD employees = new();
-        static AdminCRUD administrators = new();
+        static AdminCRUD administratorCRUD = new();
         static bool userExist;
 
         static void Main(string[] args)
         {
-            CreateAdmin();
+            if (administratorCRUD.Get() is null)
+            {
+                Console.Clear();
+                CreateAdmin();
+                AdminMenu();
+            }
+
             while (true)
             {
                 Console.Clear();
-                utils.ShowHeader("Menu");
+                utils.ShowHeader("Main Menu");
                 ShowMainMenu();
                 ReadMenuOption();
-                HandleMenu();
+                HandleMainMenu();
             }
         }
 
-        static void ShowMainMenu()
-        {
-            Console.WriteLine("[1] Fazer Login");
-            Console.WriteLine("[2] Sobre");
-            Console.WriteLine("[0] Sair");
-        }
-
-        private static void HandleMenu()
+        private static void HandleAdminMenu()
         {
             Console.Clear();
             switch (menuOption)
             {
                 case "1":
-                    DoLogin();
+                    RegisterEmployee();
                     break;
                 case "2":
                     AboutUs();
@@ -50,7 +49,112 @@ namespace ElectronicPointControl.ConsoleApp
                     Exit(); break;
                 default: break;
             }
-            BackToMainMenu();
+            BackToMenu();
+        }
+
+        private static void RegisterEmployee()
+        {
+            try
+            {
+                Console.Write("Digite o nome do número do CPF: ");
+                var cpf = new CPF(Console.ReadLine());
+
+                Console.Write("Digite o nome do funcionário: ");
+                string name = Console.ReadLine();
+
+                Console.Write("Digite a matrícula: ");
+                string registration = Console.ReadLine();
+
+                Console.Write("Digite a senha para acessar o sistema: ");
+                string password = Console.ReadLine();
+
+                Console.Write("Digite a hora de INÍCIO do espediente: ");
+                var hourToStart = Convert.ToDateTime(Console.ReadLine());
+
+                Console.Write("Digite a hora do FIM do espediente: ");
+                var hourToEnd = Convert.ToDateTime(Console.ReadLine());
+
+                WorkLoad workLoad = new(hourToStart, hourToEnd);
+
+                var employee = new Employee(cpf, name, registration, password, workLoad);
+
+                employees.Add(employee);
+            }
+            catch (Exception e)
+            {
+                utils.HandleError(e.Message);
+            }
+        }
+
+        private static void ShowAdminMenu()
+        {
+            Console.WriteLine("[1] Cadastrar funcionário");
+            Console.WriteLine("[2] Sobre");
+            Console.WriteLine("[0] Sair");
+        }
+
+        static void ShowMainMenu()
+        {
+            Console.WriteLine("[1] Fazer login como FUNCIONÁRIO");
+            Console.WriteLine("[2] Fazer login como ADMINISTRADOR");
+            Console.WriteLine("[3] Sobre");
+            Console.WriteLine("[0] Sair");
+        }
+
+        private static void HandleMainMenu()
+        {
+            Console.Clear();
+            switch (menuOption)
+            {
+                case "1":
+                    DoLoginAsEmployee();
+                    break;
+                case "2":
+                    DoLoginAsAdmin();
+                    break;
+                case "3":
+                    AboutUs();
+                    break;
+                case "0":
+                    Exit(); break;
+                default: break;
+            }
+            BackToMenu();
+        }
+
+        private static void DoLoginAsAdmin()
+        {
+            utils.ShowHeader("Login Administrador");
+
+            Console.Write("Login: ");
+            string login = Console.ReadLine();
+
+            Console.Write("Password: ");
+            string password = Console.ReadLine();
+
+            var admin = administratorCRUD.Get();
+
+            if (admin.Login == login && admin.Password == password)
+            {
+                AdminMenu();
+            }
+        }
+
+        private static void AdminMenu()
+        {
+            while (true)
+            {
+                Console.Clear();
+                utils.ShowHeader("Menu do administrator");
+                ShowAdminMenu();
+                ReadMenuOption();
+                HandleAdminMenu();
+            }
+        }
+
+        private static void DoLoginAsEmployee()
+        {
+            throw new NotImplementedException();
         }
 
         private static void DoLogin()
@@ -62,7 +166,7 @@ namespace ElectronicPointControl.ConsoleApp
             string registration = Console.ReadLine();
 
             Employee employee = employees.Get(registration);
-            Administrator administrator = administrators.Get();
+            Administrator administrator = administratorCRUD.Get();
             int typeUser = 0;
             if (employee is null)
             {
@@ -92,7 +196,7 @@ namespace ElectronicPointControl.ConsoleApp
                     {
                         typeUser = 1;
                         utils.HandleSuccess("Acesso concedido");
-    
+
                         employeeConsole.SetLogedEmployee(employee);
                     }
                     else
@@ -106,7 +210,7 @@ namespace ElectronicPointControl.ConsoleApp
                     {
                         typeUser = 2;
                         utils.HandleSuccess("Acesso concedido");
-    
+
                         adminConsole.SetLogedAdministrator(administrator);
                     }
                     else
@@ -137,15 +241,24 @@ namespace ElectronicPointControl.ConsoleApp
             menuOption = Console.ReadLine();
         }
 
-        static void BackToMainMenu()
+        static void BackToMenu()
         {
             Console.WriteLine("\nPressione qualquer tecla para prosseguir...");
             Console.ReadKey();
         }
+
         private static void CreateAdmin()
         {
-            Administrator administrator = new("root", "root");
-            administrators.Update(administrator);
+            utils.ShowHeader("criar Administrador");
+
+            Console.Write("Digite o login de Administrador: ");
+            string login = Console.ReadLine();
+
+            Console.Write("Digite a senha: ");
+            string password = Console.ReadLine();
+
+            var admin = new Administrator(login, password);
+            administratorCRUD.Add(admin);
         }
     }
 }

@@ -54,15 +54,13 @@ namespace ElectronicPointControl.ConsoleApp
 
         public WorkLoad ReadWorkLoad()
         {
-            WorkLoad workLoad = new WorkLoad();
-
             Console.Write("Digite a hora em que se deve bater o ponto para Iniciar a jornada de trabalho: ");
-            workLoad.StartHour = Convert.ToDateTime(Console.ReadLine());
+            var startHour = Convert.ToDateTime(Console.ReadLine());
 
             Console.Write("A hora em que se deve bater o ponto para Encerrar a jornada de trabalho: ");
-            workLoad.EndHour = Convert.ToDateTime(Console.ReadLine());
+            var endHour = Convert.ToDateTime(Console.ReadLine());
 
-            return workLoad;
+            return new WorkLoad(startHour, endHour);
         }
     }
 }

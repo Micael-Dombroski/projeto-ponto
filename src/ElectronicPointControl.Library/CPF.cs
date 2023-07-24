@@ -30,7 +30,7 @@ namespace ElectronicPointControl.Library
         private void LengthIsCorrect()
         {
             if (cpf.Length != cpfLengthWithOnlyNumbers)
-                throw new InvalidCPFException("Número de caracteres é insuficiente.");
+                throw new InvalidCPFException("Número de caracteres do CPF é insuficiente.");
         }
 
         private void AllDigitsAreEqual()

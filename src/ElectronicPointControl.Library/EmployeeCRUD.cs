@@ -49,11 +49,10 @@ namespace ElectronicPointControl.Library
                                 name: props[1],
                                 registration: props[2],
                                 password: props[3],
-                                workLoad: new WorkLoad
-                                {
-                                    StartHour = Convert.ToDateTime(props[4]),
-                                    EndHour = Convert.ToDateTime(props[5])
-                                });
+                                workLoad: new WorkLoad(
+                                    Convert.ToDateTime(props[4]),
+                                    Convert.ToDateTime(props[5])));
+
                         employees.Add(employee);
                         line = reader.ReadLine();
                     }

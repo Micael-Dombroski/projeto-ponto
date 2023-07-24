@@ -3,95 +3,213 @@ using ElectronicPointControl.Library;
 
 namespace ElectronicPointControl.ConsoleApp
 {
-    public class EmployeeConsole: UserConsole
+    public class EmployeeConsole
     {
         private string menuOption;
-        private ConsoleUtils utils = new();
-        private Employee logedEmployee;
+        static EmployeeCRUD crud = new();
+        static Employee loggedEmployee;
         private PunchClock punchClock;
+        static ConsoleUtils utils = new();
 
-        public void SetLogedEmployee(Employee employee)
+        public void RegisterEmployee()
         {
-            logedEmployee = employee;
-            Execute();
+            try
+            {
+                Console.Write("Digite o nome do número do CPF: ");
+                var cpf = new CPF(Console.ReadLine());
+
+                Console.Write("Digite o nome do funcionário: ");
+                string name = Console.ReadLine();
+
+                Console.Write("Digite a matrícula: ");
+                string registration = Console.ReadLine();
+
+                Console.Write("Digite a senha para acessar o sistema: ");
+                string password = Console.ReadLine();
+
+                Console.Write("Digite a hora de INÍCIO do espediente: ");
+                var hourToStart = Convert.ToDateTime(Console.ReadLine());
+
+                Console.Write("Digite a hora do FIM do espediente: ");
+                var hourToEnd = Convert.ToDateTime(Console.ReadLine());
+
+                WorkLoad workLoad = new(hourToStart, hourToEnd);
+
+                var employee = new Employee(cpf, name, registration, password, workLoad);
+
+                crud.Add(employee);
+            }
+            catch (Exception e)
+            {
+                utils.HandleError(e.Message);
+            }
         }
 
-        public void Execute()
+        public void DoLogin()
         {
-            string optionToBack = "3";
+            utils.ShowHeader("login funcionário");
 
-            do
+            Console.Write("Matrícula: ");
+            string registration = Console.ReadLine();
+
+            Console.Write("Senha: ");
+            string password = Console.ReadLine();
+
+            var employee = crud.Get(registration);
+
+            if (employee is null)
+            {
+                utils.HandleError("Funcionário não encontrado!");
+                BackToMenu();
+                return;
+            }
+
+            if (employee.PasswordIsCorrect(password))
+            {
+                loggedEmployee = employee;
+                Console.WriteLine(loggedEmployee.Name);
+                EmployeeMenu();
+            }
+            else
+            {
+                utils.HandleError("Senha incorreta");
+            }
+        }
+
+        public void EmployeeMenu()
+        {
+            while (true)
             {
                 Console.Clear();
-                utils.ShowHeader("Menu Funcionário");
+                utils.ShowHeader("menu do funcionário");
+                Console.WriteLine($"Logado como: {loggedEmployee.Name}");
                 ShowMenu();
                 ReadMenuOption();
-                HandleMenu();
-            } while (menuOption != optionToBack);
+                HandleEmployeeMenu();
+            }
         }
 
         private void ShowMenu()
         {
-            Console.WriteLine("[1] Exibir Informações");
-            Console.WriteLine("[2] Bater Ponto");
-            Console.WriteLine("[3] Voltar");
+            Console.WriteLine("[1] Bater ponto");
+            Console.WriteLine("[2] Redefinir senha");
+            Console.WriteLine("[0] Voltar");
         }
 
-        private void ReadMenuOption()
+        public void HandleEmployeeMenu()
+        {
+            Console.Clear();
+            switch (menuOption)
+            {
+                case "1":
+                    PunchingClock();
+                    break;
+                case "2":
+                    EditPassword();
+                    break;
+                case "0":
+                    BackToMainMenu();
+                    break;
+                default: break;
+            }
+            BackToMenu();
+        }
+
+        private void EditPassword()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void PunchingClock()
+        {
+            // try
+            // {
+            //     punchClock = new(loggedEmployee);
+            //     punchClock.PunchClocked();
+            //     utils.HandleSuccess($"Ponto Batido com sucesso às {DateTime.Now.ToString("H:mm:ss")}");
+            // }
+            // catch (System.Exception e)
+            // {
+            //     utils.HandleError(e.Message);
+            // }
+        }
+
+        private void BackToMainMenu()
+        {
+            Program.MainMenu();
+        }
+
+        void BackToMenu()
+        {
+            Console.WriteLine("\nPressione qualquer tecla para prosseguir...");
+            Console.ReadKey();
+        }
+
+        void ReadMenuOption()
         {
             Console.Write("=> ");
             menuOption = Console.ReadLine();
         }
 
-        protected override void HandleMenu()
-        {
-            switch (menuOption)
-            {
-                case "1":
-                    Console.Clear();
-                    utils.ShowHeader("Informações do Funcionário");
-                    Console.WriteLine($"CPF: {logedEmployee.CPF}");
-                    Console.WriteLine($"Nome: {logedEmployee.Name}");
-                    Console.WriteLine($"Usuário: {logedEmployee.Registration}");
-                    Console.WriteLine($"Senha: {logedEmployee.Password}");
-                    Console.WriteLine($"Carga Horária: {logedEmployee.WorkLoad.StartHour.ToString("H:mm:ss")} - {logedEmployee.WorkLoad.EndHour.ToString("H:mm:ss")}\n");
-                    PressKeyToBackToMenu();
-                    break;
-                case "2":
-                    Console.Clear();
-                    PunchingClock();
-                    PressKeyToBackToMenu();
-                    break;
-                case "3":
-                    Console.Clear();
-                    Console.WriteLine("Voltando...");
-                    break;
-                default:
-                    Console.Clear();
-                    Console.WriteLine("Opção Inválida");
-                    PressKeyToBackToMenu();
-                    break;
-            }
 
-        }
+        // public void SetLogedEmployee(Employee employee)
+        // {
+        //     logedEmployee = employee;
+        //     Execute();
+        // }
 
-        public void PunchingClock()
-        {
-            try
-            {
-                punchClock= new(logedEmployee);
-                punchClock.PunchClocked();
-                utils.HandleSuccess($"Ponto Batido com sucesso às {DateTime.Now.ToString("H:mm:ss")}");
-            }
-            catch (System.Exception e)
-            {
-                utils.HandleError(e.Message);
-            }
-        }
-        private void PressKeyToBackToMenu()
-        {
-            Console.WriteLine("\nPressione qualquer tecla para voltar ao Menu");
-            Console.ReadLine();
-        }
+        // public void Execute()
+        // {
+        //     string optionToBack = "3";
+
+        //     do
+        //     {
+        //         Console.Clear();
+        //         utils.ShowHeader("Menu Funcionário");
+        //         ShowMenu();
+        //         ReadMenuOption();
+        //         HandleMenu();
+        //     } while (menuOption != optionToBack);
+        // }
+
+
+        // private void ReadMenuOption()
+        // {
+        //     Console.Write("=> ");
+        //     menuOption = Console.ReadLine();
+        // }
+
+        // private void HandleMenu()
+        // {
+        //     switch (menuOption)
+        //     {
+        //         case "1":
+        //             Console.Clear();
+        //             utils.ShowHeader("Informações do Funcionário");
+        //             Console.WriteLine($"CPF: {logedEmployee.CPF}");
+        //             Console.WriteLine($"Nome: {logedEmployee.Name}");
+        //             Console.WriteLine($"Usuário: {logedEmployee.Registration}");
+        //             Console.WriteLine($"Senha: {logedEmployee.Password}");
+        //             Console.WriteLine($"Carga Horária: {logedEmployee.WorkLoad.StartHour.ToString("H:mm:ss")} - {logedEmployee.WorkLoad.EndHour.ToString("H:mm:ss")}\n");
+        //             PressKeyToBackToMenu();
+        //             break;
+        //         case "2":
+        //             Console.Clear();
+        //             PunchingClock();
+        //             PressKeyToBackToMenu();
+        //             break;
+        //         case "3":
+        //             Console.Clear();
+        //             Console.WriteLine("Voltando...");
+        //             break;
+        //         default:
+        //             Console.Clear();
+        //             Console.WriteLine("Opção Inválida");
+        //             PressKeyToBackToMenu();
+        //             break;
+        //     }
+
+        // }
+
     }
 }

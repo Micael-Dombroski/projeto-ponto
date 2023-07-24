@@ -11,9 +11,7 @@ namespace ElectronicPointControl.ConsoleApp
 
         static ConsoleUtils utils = new();
 
-        static EmployeeCRUD employees = new();
         static AdminCRUD administratorCRUD = new();
-        static bool userExist;
 
         static void Main(string[] args)
         {
@@ -24,14 +22,7 @@ namespace ElectronicPointControl.ConsoleApp
                 AdminMenu();
             }
 
-            while (true)
-            {
-                Console.Clear();
-                utils.ShowHeader("Main Menu");
-                ShowMainMenu();
-                ReadMenuOption();
-                HandleMainMenu();
-            }
+            MainMenu();
         }
 
         private static void HandleAdminMenu()
@@ -40,7 +31,7 @@ namespace ElectronicPointControl.ConsoleApp
             switch (menuOption)
             {
                 case "1":
-                    RegisterEmployee();
+                    employeeConsole.RegisterEmployee();
                     break;
                 case "2":
                     AboutUs();
@@ -52,39 +43,6 @@ namespace ElectronicPointControl.ConsoleApp
             BackToMenu();
         }
 
-        private static void RegisterEmployee()
-        {
-            try
-            {
-                Console.Write("Digite o nome do número do CPF: ");
-                var cpf = new CPF(Console.ReadLine());
-
-                Console.Write("Digite o nome do funcionário: ");
-                string name = Console.ReadLine();
-
-                Console.Write("Digite a matrícula: ");
-                string registration = Console.ReadLine();
-
-                Console.Write("Digite a senha para acessar o sistema: ");
-                string password = Console.ReadLine();
-
-                Console.Write("Digite a hora de INÍCIO do espediente: ");
-                var hourToStart = Convert.ToDateTime(Console.ReadLine());
-
-                Console.Write("Digite a hora do FIM do espediente: ");
-                var hourToEnd = Convert.ToDateTime(Console.ReadLine());
-
-                WorkLoad workLoad = new(hourToStart, hourToEnd);
-
-                var employee = new Employee(cpf, name, registration, password, workLoad);
-
-                employees.Add(employee);
-            }
-            catch (Exception e)
-            {
-                utils.HandleError(e.Message);
-            }
-        }
 
         private static void ShowAdminMenu()
         {
@@ -107,7 +65,7 @@ namespace ElectronicPointControl.ConsoleApp
             switch (menuOption)
             {
                 case "1":
-                    DoLoginAsEmployee();
+                    employeeConsole.DoLogin();
                     break;
                 case "2":
                     DoLoginAsAdmin();
@@ -152,72 +110,22 @@ namespace ElectronicPointControl.ConsoleApp
             }
         }
 
-        private static void DoLoginAsEmployee()
+
+        private static void BackToMainMenu()
         {
-            throw new NotImplementedException();
+            BackToMenu();
+            MainMenu();
         }
 
-        private static void DoLogin()
+        public static void MainMenu()
         {
-            userExist = false;
-            utils.ShowHeader("login");
-
-            Console.Write("Digite sua matrícula: ");
-            string registration = Console.ReadLine();
-
-            Employee employee = employees.Get(registration);
-            Administrator administrator = administratorCRUD.Get();
-            int typeUser = 0;
-            if (employee is null)
+            while (true)
             {
-                if (administrator.Login != registration)
-                {
-                    utils.HandleError("Usuário não encontrado");
-                    return;
-                }
-                else
-                {
-                    typeUser = 2;
-                    userExist = true;
-                }
-            }
-            else
-            {
-                typeUser = 1;
-                userExist = true;
-            }
-            if (userExist == true)
-            {
-                Console.Write("Digite sua senha: ");
-                string password = Console.ReadLine();
-                if (typeUser == 1)
-                {
-                    if (employee.PasswordIsCorrect(password))
-                    {
-                        typeUser = 1;
-                        utils.HandleSuccess("Acesso concedido");
-
-                        employeeConsole.SetLogedEmployee(employee);
-                    }
-                    else
-                    {
-                        utils.HandleError("Senha incorreta");
-                    }
-                }
-                else if (typeUser == 2)
-                {
-                    if (administrator.PasswordIsCorrect(password))
-                    {
-                        typeUser = 2;
-                        utils.HandleSuccess("Acesso concedido");
-
-                        adminConsole.SetLogedAdministrator(administrator);
-                    }
-                    else
-                    {
-                        utils.HandleError("Senha incorreta");
-                    }
-                }
+                Console.Clear();
+                utils.ShowHeader("Main Menu");
+                ShowMainMenu();
+                ReadMenuOption();
+                HandleMainMenu();
             }
         }
 

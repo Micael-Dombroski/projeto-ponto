@@ -24,10 +24,6 @@ namespace ElectronicPointControl.ConsoleApp
             Console.ResetColor();
         }
 
-        public bool EmployeeExists(string registration) => employees.Get(registration) is not null;
-
-        public bool AdministratorExists(string registration) => adminstrators.Get() is not null;
-
         public string ReadRegistration()
         {
             Console.Write("Digite a matrícula: ");

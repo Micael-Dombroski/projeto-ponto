@@ -1,54 +1,21 @@
 ﻿using System;
-using ElectronicPointControl.Library;
 
 namespace ElectronicPointControl.ConsoleApp
 {
     class Program
     {
         static string menuOption;
-        static EmployeeConsole employeeConsole = new();
-        static AdminConsole adminConsole = new();
-
         static ConsoleUtils utils = new();
-
-        static AdminCRUD administratorCRUD = new();
+        static AdminConsole adminConsole = new();
+        static EmployeeConsole employeeConsole = new();
 
         static void Main(string[] args)
         {
-            if (administratorCRUD.Get() is null)
+            if (adminConsole.AdminExists())
             {
-                Console.Clear();
-                CreateAdmin();
-                AdminMenu();
+                adminConsole.CreateAdmin();
             }
-
             MainMenu();
-        }
-
-        private static void HandleAdminMenu()
-        {
-            Console.Clear();
-            switch (menuOption)
-            {
-                case "1":
-                    employeeConsole.RegisterEmployee();
-                    break;
-                case "2":
-                    AboutUs();
-                    break;
-                case "0":
-                    Exit(); break;
-                default: break;
-            }
-            BackToMenu();
-        }
-
-
-        private static void ShowAdminMenu()
-        {
-            Console.WriteLine("[1] Cadastrar funcionário");
-            Console.WriteLine("[2] Sobre");
-            Console.WriteLine("[0] Sair");
         }
 
         static void ShowMainMenu()
@@ -65,10 +32,10 @@ namespace ElectronicPointControl.ConsoleApp
             switch (menuOption)
             {
                 case "1":
-                    employeeConsole.DoLogin();
+                    employeeConsole.Login();
                     break;
                 case "2":
-                    DoLoginAsAdmin();
+                    adminConsole.Login();
                     break;
                 case "3":
                     AboutUs();
@@ -78,43 +45,6 @@ namespace ElectronicPointControl.ConsoleApp
                 default: break;
             }
             BackToMenu();
-        }
-
-        private static void DoLoginAsAdmin()
-        {
-            utils.ShowHeader("Login Administrador");
-
-            Console.Write("Login: ");
-            string login = Console.ReadLine();
-
-            Console.Write("Password: ");
-            string password = Console.ReadLine();
-
-            var admin = administratorCRUD.Get();
-
-            if (admin.Login == login && admin.Password == password)
-            {
-                AdminMenu();
-            }
-        }
-
-        private static void AdminMenu()
-        {
-            while (true)
-            {
-                Console.Clear();
-                utils.ShowHeader("Menu do administrator");
-                ShowAdminMenu();
-                ReadMenuOption();
-                HandleAdminMenu();
-            }
-        }
-
-
-        private static void BackToMainMenu()
-        {
-            BackToMenu();
-            MainMenu();
         }
 
         public static void MainMenu()
@@ -153,20 +83,6 @@ namespace ElectronicPointControl.ConsoleApp
         {
             Console.WriteLine("\nPressione qualquer tecla para prosseguir...");
             Console.ReadKey();
-        }
-
-        private static void CreateAdmin()
-        {
-            utils.ShowHeader("criar Administrador");
-
-            Console.Write("Digite o login de Administrador: ");
-            string login = Console.ReadLine();
-
-            Console.Write("Digite a senha: ");
-            string password = Console.ReadLine();
-
-            var admin = new Administrator(login, password);
-            administratorCRUD.Add(admin);
         }
     }
 }

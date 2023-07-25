@@ -18,11 +18,7 @@ namespace ElectronicPointControl.Tests
         public void SetUp()
         {
             fakeCPF = new CPF("111.444.777-35");
-            fakeWorkload = new WorkLoad
-            {
-                StartHour = new DateTime(),
-                EndHour = new DateTime()
-            };
+            fakeWorkload = new WorkLoad(new DateTime(), new DateTime());
             fakeEmployee = new Employee(
                 workLoad: fakeWorkload,
                 cpf: fakeCPF,
@@ -54,11 +50,7 @@ namespace ElectronicPointControl.Tests
                         employeeProps[1],
                         employeeProps[2],
                         employeeProps[3],
-                        new WorkLoad()
-                        {
-                            StartHour = Convert.ToDateTime(employeeProps[4]),
-                            EndHour = Convert.ToDateTime(employeeProps[5])
-                        });
+                        new WorkLoad(Convert.ToDateTime(employeeProps[4]), Convert.ToDateTime(employeeProps[5])));
                     employees.Add(employee);
                 }
             }

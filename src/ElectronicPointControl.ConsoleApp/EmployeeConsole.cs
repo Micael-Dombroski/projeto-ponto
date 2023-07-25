@@ -5,47 +5,13 @@ namespace ElectronicPointControl.ConsoleApp
 {
     public class EmployeeConsole
     {
-        private string menuOption;
-        static EmployeeCRUD crud = new();
-        static Employee loggedEmployee;
-        private PunchClock punchClock;
-        static ConsoleUtils utils = new();
+        string menuOption;
+        PunchClock punchClock;
+        Employee loggedEmployee;
+        EmployeeCRUD crud = new();
+        ConsoleUtils utils = new();
 
-        public void RegisterEmployee()
-        {
-            try
-            {
-                Console.Write("Digite o nome do número do CPF: ");
-                var cpf = new CPF(Console.ReadLine());
-
-                Console.Write("Digite o nome do funcionário: ");
-                string name = Console.ReadLine();
-
-                Console.Write("Digite a matrícula: ");
-                string registration = Console.ReadLine();
-
-                Console.Write("Digite a senha para acessar o sistema: ");
-                string password = Console.ReadLine();
-
-                Console.Write("Digite a hora de INÍCIO do espediente: ");
-                var hourToStart = Convert.ToDateTime(Console.ReadLine());
-
-                Console.Write("Digite a hora do FIM do espediente: ");
-                var hourToEnd = Convert.ToDateTime(Console.ReadLine());
-
-                WorkLoad workLoad = new(hourToStart, hourToEnd);
-
-                var employee = new Employee(cpf, name, registration, password, workLoad);
-
-                crud.Add(employee);
-            }
-            catch (Exception e)
-            {
-                utils.HandleError(e.Message);
-            }
-        }
-
-        public void DoLogin()
+        public void Login()
         {
             utils.ShowHeader("login funcionário");
 
@@ -68,7 +34,7 @@ namespace ElectronicPointControl.ConsoleApp
             {
                 loggedEmployee = employee;
                 Console.WriteLine(loggedEmployee.Name);
-                EmployeeMenu();
+                Menu();
             }
             else
             {
@@ -76,27 +42,29 @@ namespace ElectronicPointControl.ConsoleApp
             }
         }
 
-        public void EmployeeMenu()
+        public void Menu()
         {
             while (true)
             {
                 Console.Clear();
                 utils.ShowHeader("menu do funcionário");
-                Console.WriteLine($"Logado como: {loggedEmployee.Name}");
                 ShowMenu();
                 ReadMenuOption();
-                HandleEmployeeMenu();
+                HandleMenu();
             }
         }
 
         private void ShowMenu()
         {
+            Console.WriteLine(
+                $"Logado como: {loggedEmployee.Name}"
+            );
             Console.WriteLine("[1] Bater ponto");
             Console.WriteLine("[2] Redefinir senha");
             Console.WriteLine("[0] Voltar");
         }
 
-        public void HandleEmployeeMenu()
+        public void HandleMenu()
         {
             Console.Clear();
             switch (menuOption)

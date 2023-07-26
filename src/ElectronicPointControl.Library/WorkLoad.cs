@@ -19,12 +19,37 @@ namespace ElectronicPointControl.Library
 
         public string StartToString()
         {
-            return StartTime.ToString("H:MM");
+            return StartTime.ToString("H:mm:ss");
         }
 
         public string EndToString()
         {
-            return FinishTime.ToString("H:MM");
+            return FinishTime.ToString("H:mm:ss");
+        }
+
+        public string SPauseToString()
+        {
+            if (StartPause is null)
+            {
+                return "Não Informado";
+            }
+            else
+            {
+                DateTime SPause = Convert.ToDateTime(StartPause);
+                return SPause.ToString("H:mm:ss");
+            }
+        }
+        public string FPauseToString()
+        {
+            if (FinishPause is null)
+            {
+                return "Não Informado";
+            }
+            else
+            {
+                DateTime FPause = Convert.ToDateTime(FinishPause);
+                return FPause.ToString("H:mm:ss");
+            }
         }
 
         public override string ToString()

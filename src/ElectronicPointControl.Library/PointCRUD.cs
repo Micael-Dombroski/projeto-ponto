@@ -69,7 +69,7 @@ namespace ElectronicPointControl.Library
             Add(point);
         }
 
-        private void Delete(Guid id)
+        public void Delete(Guid id)
         {
             var points = GetAll();
             points.Remove(FindByID(id));

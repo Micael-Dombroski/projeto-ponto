@@ -52,11 +52,25 @@ namespace ElectronicPointControl.ConsoleApp
         {
             Console.Write("Digite a hora em que se deve bater o ponto para Iniciar a jornada de trabalho: ");
             var startHour = Convert.ToDateTime(Console.ReadLine());
-
-            Console.Write("A hora em que se deve bater o ponto para Encerrar a jornada de trabalho: ");
-            var endHour = Convert.ToDateTime(Console.ReadLine());
-
-            return new WorkLoad(startHour, endHour);
+            string answer;
+            Console.WriteLine("Deseja informar o horário de Pausa? S/N");
+            answer = Console.ReadLine();
+            if (answer.ToLower() == "s")
+            {
+                Console.Write("Digite a hora em que se deve bater o ponto para Iniciar a Pausa: ");
+                var starPause = Convert.ToDateTime(Console.ReadLine());
+                Console.Write("Digite a hora em que se deve bater o ponto para Finalizar a Pause: ");
+                var finishPause = Convert.ToDateTime(Console.ReadLine());
+                Console.Write("A hora em que se deve bater o ponto para Encerrar a jornada de trabalho: ");
+                var endHour = Convert.ToDateTime(Console.ReadLine());
+                return new WorkLoad(startHour,endHour, starPause, finishPause);
+            }
+            else
+            {
+                Console.Write("A hora em que se deve bater o ponto para Encerrar a jornada de trabalho: ");
+                var endHour = Convert.ToDateTime(Console.ReadLine());
+                return new WorkLoad(startHour, endHour, null, null);
+            }
         }
     }
 }

@@ -111,13 +111,7 @@ namespace ElectronicPointControl.ConsoleApp
                 Console.Write("Digite a senha para acessar o sistema: ");
                 string password = Console.ReadLine();
 
-                Console.Write("Digite a hora de INÍCIO do espediente: ");
-                var hourToStart = Convert.ToDateTime(Console.ReadLine());
-
-                Console.Write("Digite a hora do FIM do espediente: ");
-                var hourToEnd = Convert.ToDateTime(Console.ReadLine());
-
-                WorkLoad workLoad = new(hourToStart, hourToEnd);
+                WorkLoad workLoad= utils.ReadWorkLoad();
 
                 var employee = new Employee(cpf, name, registration, password, workLoad);
 
@@ -146,9 +140,16 @@ namespace ElectronicPointControl.ConsoleApp
 
             Console.WriteLine("Carga horária atual:");
             Console.WriteLine($"Horário de ENTRADA: {employee.WorkLoad.StartToString()}");
-            Console.WriteLine($"Horário de INÍCIO da PAUSE: {employee.WorkLoad.StartPause}");
-            Console.WriteLine($"Horário de TÉRMINO da PAUSE: {employee.WorkLoad.FinishPause}");
+            Console.WriteLine($"Horário de INÍCIO da PAUSE: {employee.WorkLoad.SPauseToString()}");
+            Console.WriteLine($"Horário de Término da PAUSE: {employee.WorkLoad.FPauseToString()}");
             Console.WriteLine($"Horário de SAÍDA: {employee.WorkLoad.EndToString()}");
+
+            Console.WriteLine("\nTem certeza que deseja editar a carga horária desse funcionário? S/N");
+            if (Console.ReadLine().ToLower() == "s")
+            {
+                employee.WorkLoad = utils.ReadWorkLoad();
+                employeeCRUD.Update(employee);
+            }
         }
 
         void BackToMenu()

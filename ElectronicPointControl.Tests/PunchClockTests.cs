@@ -17,7 +17,7 @@ namespace ElectronicPointControl.Tests
         public void SetUp()
         {
             fakeCPF = new CPF("123.456.789-09");
-            fakeWorkload = new WorkLoad(DateTime.Now, DateTime.Now);
+            fakeWorkload = new WorkLoad(DateTime.Now.AddMinutes(-4), DateTime.Now.AddMinutes(4));
             fakeEmployee = new Employee(
                 workLoad: fakeWorkload,
                 cpf: fakeCPF,
@@ -58,6 +58,8 @@ namespace ElectronicPointControl.Tests
         {
             fakeEmployee.TimesPunchClockReset();
             fakePunchClock.PunchClocked();
+            fakePunchClock.PunchClocked();
+            fakePunchClock.PunchClocked();
             var EndHour = fakeEmployee.WorkLoad.FinishTime;
             EndHour.AddMinutes(15);
             fakePunchClock.PunchClocked();
@@ -69,6 +71,8 @@ namespace ElectronicPointControl.Tests
         public void TestPuchClockingIsInLimitTimeForEndHour()
         {
             fakeEmployee.TimesPunchClockReset();
+            fakePunchClock.PunchClocked();
+            fakePunchClock.PunchClocked();
             fakePunchClock.PunchClocked();
             var EndHour = fakeEmployee.WorkLoad.FinishTime;
             fakePunchClock.PunchClocked();

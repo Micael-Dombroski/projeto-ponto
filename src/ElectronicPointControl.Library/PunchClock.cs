@@ -32,46 +32,84 @@ namespace ElectronicPointControl.Library
                 }
                 else
                 {
-                    throw new Exception("Fora do horario de começo");
+                    throw new Exception("Fora do horário de começo");
                 }
             }
             else if (Employee.TimesPunchClockGetValue() == 1)
             {
                 if (DateTime.Now > Employee.WorkLoad.StartTime && DateTime.Now < Employee.WorkLoad.FinishTime)
                 {
-                    TimeWhenPunchClockWasHit = DateTime.Now;
-                    Point point = Points.FindByID(Employee.SendPointIdToday());
-                    point.StartPause = TimeWhenPunchClockWasHit;
-                    Employee.TimesPunchClockAddition();
-                    Points.Update(point);
+                    if (Employee.WorkLoad.StartPause is null)
+                    {
+                        TimeWhenPunchClockWasHit = DateTime.Now;
+                        Point point = Points.FindByID(Employee.SendPointIdToday());
+                        point.StartPause = TimeWhenPunchClockWasHit;
+                        Employee.TimesPunchClockAddition();
+                        Points.Update(point);
+                    }
+                    else
+                    {
+                        var StartPause = Convert.ToDateTime(Employee.WorkLoad.StartPause);
+                        if (DateTime.Now >= StartPause.AddMinutes(-5) && DateTime.Now <= StartPause.AddMinutes(5))
+                        {
+                            TimeWhenPunchClockWasHit = DateTime.Now;
+                            Point point = Points.FindByID(Employee.SendPointIdToday());
+                            point.StartPause = TimeWhenPunchClockWasHit;
+                            Employee.TimesPunchClockAddition();
+                            Points.Update(point);
+                        }
+                        else
+                        {
+                            throw new Exception("Fora do horário de começo de pausa");
+                        }
+                    } 
                 }
                 else
                 {
-                    throw new Exception("Fora do horario de começo de pausa");
+                    throw new Exception("Fora do horário de começo de pausa");
                 }
             }
             else if (Employee.TimesPunchClockGetValue() == 2)
             {
                 if (DateTime.Now > Employee.WorkLoad.StartTime && DateTime.Now < Employee.WorkLoad.FinishTime)
                 {
-                    TimeWhenPunchClockWasHit = DateTime.Now;
-                    Point point = Points.FindByID(Employee.SendPointIdToday());
-                    point.FinishPause = TimeWhenPunchClockWasHit;
-                    DateTime startPause = Convert.ToDateTime(point.StartPause);
-                    DateTime finishPause = Convert.ToDateTime(point.FinishPause);
-                    if (startPause.AddMinutes(70) >= finishPause)
+                    if (Employee.WorkLoad.FinishPause is null)
                     {
-                        Employee.TimesPunchClockAddition();
-                    Points.Update(point);
+                        TimeWhenPunchClockWasHit = DateTime.Now;
+                        Point point = Points.FindByID(Employee.SendPointIdToday());
+                        point.FinishPause = TimeWhenPunchClockWasHit;
+                        DateTime startPause = Convert.ToDateTime(point.StartPause);
+                        DateTime finishPause = Convert.ToDateTime(point.FinishPause);
+                        if (startPause.AddMinutes(70) >= finishPause)
+                        {
+                            Employee.TimesPunchClockAddition();
+                        Points.Update(point);
+                        }
+                        else
+                        {
+                            throw new Exception("Fora do horário de fim de pausa");
+                        }
                     }
                     else
                     {
-                        throw new Exception("Fora do horario de fim de pausa");
+                        var FinishPause = Convert.ToDateTime(Employee.WorkLoad.FinishPause);
+                        if (DateTime.Now >= FinishPause.AddMinutes(-5) && DateTime.Now <= FinishPause.AddMinutes(5))
+                        {
+                            TimeWhenPunchClockWasHit = DateTime.Now;
+                            Point point = Points.FindByID(Employee.SendPointIdToday());
+                            point.FinishPause = TimeWhenPunchClockWasHit;
+                            Employee.TimesPunchClockAddition();
+                        }
+                        else
+                        {
+                            throw new Exception("Fora do horário de fim de pausa");
+                        }
                     }
+                        
                 }
                 else
                 {
-                    throw new Exception("Fora do horario de fim de pausa");
+                    throw new Exception("Fora do horário de fim de pausa");
                 }
             }
             else if (Employee.TimesPunchClockGetValue() == 3)
@@ -90,7 +128,7 @@ namespace ElectronicPointControl.Library
                 }
                 else
                 {
-                    throw new Exception("Fora do horario de saída");
+                    throw new Exception("Fora do horário de saída");
                 }
                 CalcWorkedHours();
             }

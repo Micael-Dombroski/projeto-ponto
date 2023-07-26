@@ -5,189 +5,168 @@ namespace ElectronicPointControl.ConsoleApp
 {
     public class AdminConsole
     {
-        // private string menuOption;
-        // private string EditAnswer;
-        // private Administrator logedAdministrator;
-        // private ConsoleUtils utils= new();
-        // private EmployeeCRUD employees = new();
-        // private string registration;
+        string menuOption;
+        AdminCRUD crud = new();
+        ConsoleUtils utils = new();
+        Administrator loggedAdmin;
+        EmployeeCRUD employeeCRUD = new();
 
-        // public void SetLogedAdministrator(Administrator administrator)
-        // {
-        //     logedAdministrator = administrator;
-        //     Execute();
-        // }
+        public void CreateAdmin()
+        {
+            Console.Clear();
+            Create();
+            Menu();
+        }
 
-        // public void Execute()
-        // {
-        //     string optionToBack = "6";
+        void Create()
+        {
+            utils.ShowHeader("criar Administrador");
 
-        //     do
-        //     {
-        //         Console.Clear();
-        //         utils.ShowHeader("Menu Administrador");
-        //         ShowMenu();
-        //         ReadMenuOption();
-        //         HandleMenu();
-        //     } while (menuOption != optionToBack);
-        // }
+            Console.Write("Digite o login de Administrador: ");
+            string login = Console.ReadLine();
 
-        // public void NewEmployee()
-        // {
-        //     utils.ShowHeader("Novo Funcionário");
-        //     string registration = utils.ReadRegistration();
-        //     if (utils.EmployeeExists(registration))
-        //         utils.HandleError("Funcionário já cadastrado");
-        //     CPF cpf = utils.ReadCPF();
-        //     string name = utils.ReadName();
-        //     string password = utils.ReadPassword();
-        //     WorkLoad workLoad = utils.ReadWorkLoad();
-        //     Employee employee = new Employee(cpf, name, password: password, registration: registration, workLoad: workLoad);
-        //     employees = new EmployeeCRUD();
-        //     employees.Add(employee);
+            Console.Write("Digite a senha: ");
+            string password = Console.ReadLine();
 
-        //     utils.HandleSuccess("Funcionário criado com sucesso");
-        // }
-        // public void DeleteEmployee()
-        // {
-        //     utils.ShowHeader("Deletar Funcionário");
-        //     string registration = utils.ReadRegistration();
-        //     if (utils.EmployeeExists(registration))
-        //     {
-        //         employees.Delete(registration);
-        //         utils.HandleSuccess("Funcionário deletado com sucesso");
-        //     }
-        //     else
-        //         utils.HandleError("Funcionário não encontrado");
-        // }
+            var admin = new Administrator(login, password);
+            crud.Add(admin);
+        }
 
-        // public void EditEmployee()
-        // {
-        //     string registration = utils.ReadRegistration();
-        //     if (utils.EmployeeExists(registration))
-        //     {
-        //         Employee editEmployee = employees.Get(registration);
-        //         string name = editEmployee.Name;
-        //         string  password = editEmployee.Password;
-        //         WorkLoad workload = editEmployee.WorkLoad;
-        //         Console.WriteLine("Deseja Editar o Nome do Funcionário? S/N");
-        //         ReadEditeAnswer();
-        //         if (EditAnswer == "s")
-        //         {
-        //             name = utils.ReadName();
-        //         }
-        //         Console.WriteLine("Deseja Editar a Senha do Funcionário? S/N");
-        //         ReadEditeAnswer();
-        //         if (EditAnswer == "s")
-        //         {
-        //             password = utils.ReadPassword();
-        //         }
-        //         Console.WriteLine("Deseja Editar a Carga Horária do Funcionário? S/N");
-        //         ReadEditeAnswer();
-        //         if (EditAnswer == "s")
-        //         {
-        //             workload = utils.ReadWorkLoad();
-        //         }
-        //         Employee editedEmployee = new Employee(editEmployee.CPF, name, editEmployee.Registration, password, workload);
-        //         employees.Update(editedEmployee);
-        //         utils.HandleSuccess("Funcionário Editado com Sucesso");
-        //     }
-        //     else
-        //         utils.HandleError("Funcionário Não Encontrado");
-        // }
+        public void Login()
+        {
+            utils.ShowHeader("Login Administrador");
 
-        // private void ShowMenu()
-        // {
-        //     Console.WriteLine("[1] Cadastrar");
-        //     Console.WriteLine("[2] Editar");
-        //     Console.WriteLine("[3] Excluir");
-        //     Console.WriteLine("[4] Exibir as Informações de um Funcionário");
-        //     Console.WriteLine("[5] Exibir todos os Funcionários");
-        //     Console.WriteLine("[6] Voltar");
-        // }
+            Console.Write("Login: ");
+            string login = Console.ReadLine();
 
-        // private void ReadMenuOption()
-        // {
-        //     Console.Write("=> ");
-        //     menuOption = Console.ReadLine();
-        // }
+            Console.Write("Password: ");
+            string password = Console.ReadLine();
 
-        // private void HandleMenu()
-        // {
-        //     switch (menuOption)
-        //     {
-        //         case "1":
-        //             Console.Clear();
-        //             NewEmployee();
-        //             PressKeyToBackToMenu();
-        //             break;
-        //         case "2":
-        //             Console.Clear();
-        //             EditEmployee();
-        //             PressKeyToBackToMenu();
-        //             break;
-        //         case "3":
-        //             Console.Clear();
-        //             DeleteEmployee();
-        //             PressKeyToBackToMenu();
-        //             break;
-        //         case "4":
-        //             Console.Clear();
-        //             Console.WriteLine("Informe o Nome de Usuário do Funcionário que deseja ver as informações: ");
-        //             ReadRegistration();
-        //             if (utils.EmployeeExists(registration))
-        //             {
-        //                 utils.HandleError("Funcionário Não Encontrado");
-        //             }
-        //             else
-        //             {
-        //                 Employee employee = employees.Get(registration);
-        //                 Console.Clear();
-        //                 utils.ShowHeader("Informações do Funcionário");
-        //                 Console.WriteLine($"CPF: {employee.CPF}");
-        //                 Console.WriteLine($"Nome: {employee.Name}");
-        //                 Console.WriteLine($"Usuário: {employee.Registration}");
-        //                 Console.WriteLine($"Senha: {employee.Password}");
-        //                 Console.WriteLine($"Carga Horária: {employee.WorkLoad.StartHour.ToString("H:mm:ss")} - {employee.WorkLoad.EndHour.ToString("H:mm:ss")}\n");
-        //             }
-        //             PressKeyToBackToMenu();
-        //             break;
-        //         case "5":
-        //             Console.Clear();
-        //             Console.WriteLine("Lista de Funcionarios");
-        //             Console.WriteLine("CPF | Nome | Usuário | Senha | Carga Horária");
-        //             foreach (var item in employees.GetAll())
-        //             {
-        //                 Console.WriteLine($"{item.CPF} | {item.Name} | {item.Registration} | {item.Password} | {item.WorkLoad.StartHour.ToString("H:mm:ss")} - {item.WorkLoad.EndHour.ToString("H:mm:ss")}");
-        //             }
-        //             PressKeyToBackToMenu();
-        //             break;
-        //         case "6":
-        //             Console.Clear();
-        //             Console.WriteLine("Voltando...");
-        //             break;
-        //         default:
-        //             Console.Clear();
-        //             Console.WriteLine("Opção Inválida");
-        //             PressKeyToBackToMenu();
-        //             break;
-        //     }
-        // }
-        // private void PressKeyToBackToMenu()
-        // {
-        //     Console.WriteLine("\nPressione qualquer tecla para voltar ao Menu");
-        //     Console.ReadLine();
-        // }
+            var admin = crud.Get();
 
-        // private void ReadEditeAnswer()
-        // {
-        //     Console.Write("=> ");
-        //     EditAnswer = Console.ReadLine().ToLower();
-        // }
-        // private void ReadRegistration()
-        // {
-        //     Console.Write("=> ");
-        //     registration = Console.ReadLine();
-        // }
+            if (admin.Login == login && admin.Password == password)
+            {
+                Menu();
+            }
+        }
+
+        void Menu()
+        {
+            while (true)
+            {
+                Console.Clear();
+                utils.ShowHeader("Menu do administrator");
+                ShowMenu();
+                ReadMenuOption();
+                HandleMenu();
+            }
+        }
+
+        void ShowMenu()
+        {
+
+            Console.WriteLine("[1] Cadastrar funcionário");
+            Console.WriteLine("[2] Editar carga horária de funcionário");
+            Console.WriteLine("[0] Voltar");
+        }
+
+        void ReadMenuOption()
+        {
+            Console.Write("=> ");
+            menuOption = Console.ReadLine();
+        }
+
+        void HandleMenu()
+        {
+            Console.Clear();
+            switch (menuOption)
+            {
+                case "1":
+                    RegisterEmployee();
+                    break;
+                case "2":
+                    EditEmployeeWorkLoad();
+                    break;
+                case "0":
+                    BackToMainMenu();
+                    break;
+                default: break;
+            }
+            BackToMenu();
+        }
+
+        void RegisterEmployee()
+        {
+            try
+            {
+                Console.Write("Digite o nome do número do CPF: ");
+                var cpf = new CPF(Console.ReadLine());
+
+                Console.Write("Digite o nome do funcionário: ");
+                string name = Console.ReadLine();
+
+                Console.Write("Digite a matrícula: ");
+                string registration = Console.ReadLine();
+
+                Console.Write("Digite a senha para acessar o sistema: ");
+                string password = Console.ReadLine();
+
+                Console.Write("Digite a hora de INÍCIO do espediente: ");
+                var hourToStart = Convert.ToDateTime(Console.ReadLine());
+
+                Console.Write("Digite a hora do FIM do espediente: ");
+                var hourToEnd = Convert.ToDateTime(Console.ReadLine());
+
+                WorkLoad workLoad = new(hourToStart, hourToEnd);
+
+                var employee = new Employee(cpf, name, registration, password, workLoad);
+
+                employeeCRUD.Add(employee);
+            }
+            catch (Exception e)
+            {
+                utils.HandleError(e.Message);
+            }
+        }
+
+        void EditEmployeeWorkLoad()
+        {
+            utils.ShowHeader("Editar carga horária");
+
+            Console.Write("Matrícula do funcionário: ");
+            string registration = Console.ReadLine();
+
+            var employee = employeeCRUD.Get(registration);
+
+            if (employee is null)
+            {
+                utils.HandleError("Funcionário não encontrado");
+                return;
+            }
+
+            Console.WriteLine("Carga horária atual:");
+            Console.WriteLine($"Horário de ENTRADA: {employee.WorkLoad.StartToString()}");
+            Console.WriteLine($"Horário de INÍCIO da PAUSE: {employee.WorkLoad.StartPause}");
+            Console.WriteLine($"Horário de TÉRMINO da PAUSE: {employee.WorkLoad.FinishPause}");
+            Console.WriteLine($"Horário de SAÍDA: {employee.WorkLoad.EndToString()}");
+        }
+
+        void BackToMenu()
+        {
+            Console.WriteLine(
+                "\nPressione qualquer tecla para prosseguir..."
+            );
+            Console.ReadKey();
+        }
+
+        void BackToMainMenu()
+        {
+            Program.MainMenu();
+        }
+
+        public bool AdminExists()
+        {
+            return crud.Get() is null;
+        }
     }
 }

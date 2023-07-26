@@ -1,7 +1,6 @@
 using NUnit.Framework;
 using ElectronicPointControl.Library;
 using System;
-using System.Collections.Generic;
 using System.IO;
 
 namespace ElectronicPointControl.Tests
@@ -18,11 +17,7 @@ namespace ElectronicPointControl.Tests
         public void SetUp()
         {
             fakeCPF = new CPF("123.456.789-09");
-            fakeWorkload = new WorkLoad
-            {
-                StartHour = DateTime.Now,
-                EndHour = DateTime.Now
-            };
+            fakeWorkload = new WorkLoad(DateTime.Now, DateTime.Now);
             fakeEmployee = new Employee(
                 workLoad: fakeWorkload,
                 cpf: fakeCPF,
@@ -42,7 +37,7 @@ namespace ElectronicPointControl.Tests
         [Test]
         public void TestPuchClockingIsOutOfLimitTimeForStartHour()
         {
-            var StartHour = fakeEmployee.WorkLoad.StartHour;
+            var StartHour = fakeEmployee.WorkLoad.StartTime;
             StartHour = StartHour.AddMinutes(-20);
             fakePunchClock.PunchClocked();
             var TimeNow = fakePunchClock.TimeWhenPunchClockWasHit;
@@ -52,18 +47,18 @@ namespace ElectronicPointControl.Tests
         [Test]
         public void TestPuchClockingIsInLimitTimeForStartHour()
         {
-            var StartHour = fakeEmployee.WorkLoad.StartHour;
+            var StartHour = fakeEmployee.WorkLoad.StartTime;
             fakePunchClock.PunchClocked();
             var TimeNow = fakePunchClock.TimeWhenPunchClockWasHit;
             Assert.IsTrue(StartHour.AddMinutes(5) > TimeNow && StartHour.AddMinutes(-5) < TimeNow);
         }
 
-                [Test]
+        [Test]
         public void TestPuchClockingIsOutOfLimitTimeForEndHour()
         {
             fakeEmployee.TimesPunchClockReset();
             fakePunchClock.PunchClocked();
-            var EndHour = fakeEmployee.WorkLoad.EndHour;
+            var EndHour = fakeEmployee.WorkLoad.FinishTime;
             EndHour.AddMinutes(15);
             fakePunchClock.PunchClocked();
             var TimeNow = fakePunchClock.TimeWhenPunchClockWasHit;
@@ -75,7 +70,7 @@ namespace ElectronicPointControl.Tests
         {
             fakeEmployee.TimesPunchClockReset();
             fakePunchClock.PunchClocked();
-            var EndHour = fakeEmployee.WorkLoad.EndHour;
+            var EndHour = fakeEmployee.WorkLoad.FinishTime;
             fakePunchClock.PunchClocked();
             var TimeNow = fakePunchClock.TimeWhenPunchClockWasHit;
             Assert.IsTrue(EndHour.AddMinutes(5) > TimeNow && EndHour.AddMinutes(-5) < TimeNow);

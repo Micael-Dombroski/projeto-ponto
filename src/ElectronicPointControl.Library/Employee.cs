@@ -34,7 +34,7 @@ namespace ElectronicPointControl.Library
 
         public override string ToString()
         {
-            return $"{CPF};{Name};{Registration};{Password};{WorkLoad.StartHour};{WorkLoad.EndHour}";
+            return $"{CPF};{Name};{Registration};{Password};{WorkLoad.ToString()}";
         }
 
         public override bool Equals(object obj)

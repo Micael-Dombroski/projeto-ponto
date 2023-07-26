@@ -41,7 +41,7 @@ namespace ElectronicPointControl.ConsoleApp
 
             Console.Write("Password: ");
             string password = Console.ReadLine();
-
+            
             var admin = crud.Get();
 
             if (admin.Login == login && admin.Password == password)
@@ -67,6 +67,7 @@ namespace ElectronicPointControl.ConsoleApp
 
             Console.WriteLine("[1] Cadastrar funcionário");
             Console.WriteLine("[2] Editar carga horária de funcionário");
+            Console.WriteLine("[3] Deletar funcionário");
             Console.WriteLine("[0] Voltar");
         }
 
@@ -86,6 +87,9 @@ namespace ElectronicPointControl.ConsoleApp
                     break;
                 case "2":
                     EditEmployeeWorkLoad();
+                    break;
+                case "3":
+                    DeleteEmployee();
                     break;
                 case "0":
                     BackToMainMenu();
@@ -149,6 +153,23 @@ namespace ElectronicPointControl.ConsoleApp
             {
                 employee.WorkLoad = utils.ReadWorkLoad();
                 employeeCRUD.Update(employee);
+            }
+        }
+
+        void DeleteEmployee()
+        {
+            utils.ShowHeader("Excluir funcionário");
+
+            Console.Write("Matrícula do funcionário: ");
+            string registration = Console.ReadLine();
+            if (employeeCRUD.Get(registration) is null)
+            {
+                utils.HandleError("Funcionário não encontrado");
+            }
+            else
+            {
+                employeeCRUD.Delete(registration);
+                utils.HandleSuccess("Funcionário excluído com sucesso!");
             }
         }
 

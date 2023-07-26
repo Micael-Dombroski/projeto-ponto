@@ -18,7 +18,6 @@ namespace ElectronicPointControl.ConsoleApp
             MainMenu();
         }
 
-<<<<<<< HEAD
         private static void HandleAdminMenu()
         {
             Console.Clear();
@@ -46,9 +45,6 @@ namespace ElectronicPointControl.ConsoleApp
             Console.WriteLine("[2] Sobre");
             Console.WriteLine("[0] Sair");
         }
-
-=======
->>>>>>> f0ecbb1421c769146ffc08693bec548225c526c9
         static void ShowMainMenu()
         {
             Console.WriteLine("[1] Fazer login como FUNCIONÁRIO");

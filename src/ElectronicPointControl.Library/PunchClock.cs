@@ -4,69 +4,111 @@ namespace ElectronicPointControl.Library
 {
     public class PunchClock
     {
+        public Employee Employee;
         public DateTime TimeWhenPunchClockWasHit;
-        private IPointRepository PointCRUD;
-
-        public PunchClock(PointCRUD crud)
+        public Point Point;
+        public PointCRUD Points= new();
+        public PunchClock(Employee employee)
         {
-            this.PointCRUD = crud;
+            this.Employee = employee;
         }
-
-        public void PunchClocked(Employee employee)
+        public void PunchClocked()
         {
-            if (employee.TimesPunchClockGetValue() == 2)
-                employee.TimesPunchClockReset();
+            if (Employee.TimesPunchClockGetValue() == 4)
+                Employee.TimesPunchClockReset();
 
 
-            if (employee.TimesPunchClockGetValue() == 0)
+            if (Employee.TimesPunchClockGetValue() == 0)
             {
-                Console.WriteLine($"Horário Mínimo permitido para bater ponto ao entrar: {employee.WorkLoad.StartTime.AddMinutes(-5).ToString("H:mm:ss")}");
-                Console.WriteLine($"Horário Limite permitido para bater ponto ao entrar: {employee.WorkLoad.StartTime.AddMinutes(5).ToString("H:mm:ss")}");
-
-                Point point;
-                if (
-                        DateTime.Now >= employee.WorkLoad.StartTime.AddMinutes(-5) &&
-                        DateTime.Now <= employee.WorkLoad.StartTime.AddMinutes(5)
-                    )
+                Console.WriteLine($"Horário Mínimo permitido para bater ponto ao entrar: {Employee.WorkLoad.StartTime.AddMinutes(-5).ToString("H:mm:ss")}");
+                Console.WriteLine($"Horário Limite permitido para bater ponto ao entrar: {Employee.WorkLoad.StartTime.AddMinutes(5).ToString("H:mm:ss")}");
+                if (DateTime.Now >= Employee.WorkLoad.StartTime.AddMinutes(-5) && DateTime.Now <= Employee.WorkLoad.StartTime.AddMinutes(5))
                 {
                     TimeWhenPunchClockWasHit = DateTime.Now;
-                    employee.GetHourWhoStartTodayValue(TimeWhenPunchClockWasHit);
-                    employee.TimesPunchClockAddition();
-                    point = new Point(employee.Registration, TimeWhenPunchClockWasHit);
-                    employee.GetPointIdToday(point.ID);
-                    PointCRUD.Add(point);
+                    Employee.TimesPunchClockAddition();
+                    Point = new Point(Employee.Registration, TimeWhenPunchClockWasHit);
+                    Employee.GetPointIdToday(Point.ID);
+                    Points.Add(Point);
                 }
                 else
                 {
-                    throw new Exception("Fora do horario");
+                    throw new Exception("Fora do horario de começo");
                 }
             }
-            else if (employee.TimesPunchClockGetValue() == 1)
+            else if (Employee.TimesPunchClockGetValue() == 1)
             {
-                Console.WriteLine($"Horário Mínimo permitido para bater ponto ao sair: {employee.WorkLoad.FinishTime.AddMinutes(-5).ToString("H:mm:ss")}");
-                Console.WriteLine($"Horário Limite permitido para bater ponto ao sair: {employee.WorkLoad.FinishTime.AddMinutes(5).ToString("H:mm:ss")}");
-                if (DateTime.Now >= employee.WorkLoad.FinishTime.AddMinutes(-5)
-                    && DateTime.Now <= employee.WorkLoad.FinishTime.AddMinutes(5))
+                if (DateTime.Now > Employee.WorkLoad.StartTime && DateTime.Now < Employee.WorkLoad.FinishTime)
                 {
                     TimeWhenPunchClockWasHit = DateTime.Now;
-                    employee.GetHourWhoEndsTodayValue(TimeWhenPunchClockWasHit);
-                    employee.TimesPunchClockAddition();
-                    PointCRUD.FindByID(employee.SendPointIdToday());
+                    Point point = Points.FindByID(Employee.SendPointIdToday());
+                    point.StartPause = TimeWhenPunchClockWasHit;
+                    Employee.TimesPunchClockAddition();
+                    Points.Update(point);
                 }
                 else
                 {
-                    throw new Exception("Fora do horario");
+                    throw new Exception("Fora do horario de começo de pausa");
                 }
-                CalcWorkedHours(employee);
+            }
+            else if (Employee.TimesPunchClockGetValue() == 2)
+            {
+                if (DateTime.Now > Employee.WorkLoad.StartTime && DateTime.Now < Employee.WorkLoad.FinishTime)
+                {
+                    TimeWhenPunchClockWasHit = DateTime.Now;
+                    Point point = Points.FindByID(Employee.SendPointIdToday());
+                    point.FinishPause = TimeWhenPunchClockWasHit;
+                    DateTime startPause = Convert.ToDateTime(point.StartPause);
+                    DateTime finishPause = Convert.ToDateTime(point.FinishPause);
+                    if (startPause.AddMinutes(70) >= finishPause)
+                    {
+                        Employee.TimesPunchClockAddition();
+                    Points.Update(point);
+                    }
+                    else
+                    {
+                        throw new Exception("Fora do horario de fim de pausa");
+                    }
+                }
+                else
+                {
+                    throw new Exception("Fora do horario de fim de pausa");
+                }
+            }
+            else if (Employee.TimesPunchClockGetValue() == 3)
+            {
+                Console.WriteLine($"Horário Mínimo permitido para bater ponto ao sair: {Employee.WorkLoad.FinishTime.AddMinutes(-5).ToString("H:mm:ss")}");
+                Console.WriteLine($"Horário Limite permitido para bater ponto ao sair: {Employee.WorkLoad.FinishTime.AddMinutes(5).ToString("H:mm:ss")}");
+                if (DateTime.Now >= Employee.WorkLoad.FinishTime.AddMinutes(-5)
+                    && DateTime.Now <= Employee.WorkLoad.FinishTime.AddMinutes(5))
+                {
+                    TimeWhenPunchClockWasHit = DateTime.Now;
+                    Employee.TimesPunchClockAddition();
+                    Point point = Points.FindByID(Employee.SendPointIdToday());
+                    point.FinishWorkLoad = TimeWhenPunchClockWasHit;
+                    Employee.TimesPunchClockAddition();
+                    Points.Update(point);
+                }
+                else
+                {
+                    throw new Exception("Fora do horario de saída");
+                }
+                CalcWorkedHours();
             }
         }
 
-        private void CalcWorkedHours(Employee employee)
+        private void CalcWorkedHours()
         {
-            TimeSpan calcWorkedHours = employee.SendHourWhoEndsTodayValue().Subtract(employee.SendHourWhoStartTodayValue());
-            DateTime convertCalcWorkedHoursToDateTime = new DateTime(1996, 6, 3, 0, 0, 0);
-            DateTime workedHours = convertCalcWorkedHoursToDateTime + calcWorkedHours;
-            Console.WriteLine($"Hoje seu tempo trabalhado foi: {workedHours.ToString("H:mm:ss")}, parabéns!");
+            Point point = Points.FindByID(Employee.SendPointIdToday());
+            DateTime startPause = Convert.ToDateTime(point.StartPause);
+            DateTime finishPause = Convert.ToDateTime(point.FinishPause);
+            DateTime finishWorkLoad = Convert.ToDateTime(point.FinishWorkLoad);
+            TimeSpan calcWorkedHoursPrePause = startPause.Subtract(point.StartWorkLoad);
+            DateTime convertCalcWorkedHoursPrePauseToDateTime = new DateTime(1996, 6, 3, 0, 0, 0);
+            DateTime workedHoursPrePause = convertCalcWorkedHoursPrePauseToDateTime + calcWorkedHoursPrePause;
+            TimeSpan calcWorkedHourPosPause = finishWorkLoad.Subtract(finishPause);
+            DateTime convertCalcWorkedHoursPosPauseToDateTime = new DateTime(1996, 6, 3, 0, 0, 0);
+            DateTime TodayWorkedHours = workedHoursPrePause + calcWorkedHourPosPause;
+            Console.WriteLine($"Hoje seu tempo trabalhado foi: {TodayWorkedHours.ToString("H:mm:ss")}, parabéns!");
         }
     }
 }

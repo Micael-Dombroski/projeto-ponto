@@ -11,6 +11,40 @@ namespace ElectronicPointControl.ConsoleApp
         EmployeeCRUD crud = new();
         ConsoleUtils utils = new();
 
+        public void RegisterEmployee()
+        {
+            try
+            {
+                Console.Write("Digite o nome do número do CPF: ");
+                var cpf = new CPF(Console.ReadLine());
+
+                Console.Write("Digite o nome do funcionário: ");
+                string name = Console.ReadLine();
+
+                Console.Write("Digite a matrícula: ");
+                string registration = Console.ReadLine();
+
+                Console.Write("Digite a senha para acessar o sistema: ");
+                string password = Console.ReadLine();
+
+                Console.Write("Digite a hora de INÍCIO do espediente: ");
+                var hourToStart = Convert.ToDateTime(Console.ReadLine());
+
+                Console.Write("Digite a hora do FIM do espediente: ");
+                var hourToEnd = Convert.ToDateTime(Console.ReadLine());
+
+                WorkLoad workLoad = new(hourToStart, hourToEnd);
+
+                var employee = new Employee(cpf, name, registration, password, workLoad);
+
+                crud.Add(employee);
+            }
+            catch (Exception e)
+            {
+                utils.HandleError(e.Message);
+            }
+        }
+
         public void Login()
         {
             utils.ShowHeader("login funcionário");

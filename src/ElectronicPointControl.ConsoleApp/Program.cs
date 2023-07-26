@@ -38,7 +38,9 @@ namespace ElectronicPointControl.ConsoleApp
                     break;
                 case "0":
                     Exit(); break;
-                default: break;
+                default:
+                    utils.HandleError("Opção inválida"); 
+                    break;
             }
             BackToMenu();
         }
@@ -75,7 +77,9 @@ namespace ElectronicPointControl.ConsoleApp
                     break;
                 case "0":
                     Exit(); break;
-                default: break;
+                default:
+                    utils.HandleError("Opção inválida"); 
+                    break;
             }
             BackToMenu();
         }

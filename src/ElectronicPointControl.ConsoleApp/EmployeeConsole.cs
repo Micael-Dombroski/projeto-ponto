@@ -60,7 +60,6 @@ namespace ElectronicPointControl.ConsoleApp
             if (employee is null)
             {
                 utils.HandleError("Funcionário não encontrado!");
-                BackToMenu();
                 return;
             }
 
@@ -110,7 +109,9 @@ namespace ElectronicPointControl.ConsoleApp
                 case "0":
                     BackToMainMenu();
                     break;
-                default: break;
+                default: 
+                    utils.HandleError("Opção inválida");
+                    break;
             }
             BackToMenu();
         }
@@ -138,16 +139,17 @@ namespace ElectronicPointControl.ConsoleApp
 
         public void PunchingClock()
         {
-            // try
-            // {
-            //     punchClock = new(loggedEmployee);
-            //     punchClock.PunchClocked();
-            //     utils.HandleSuccess($"Ponto Batido com sucesso às {DateTime.Now.ToString("H:mm:ss")}");
-            // }
-            // catch (System.Exception e)
-            // {
-            //     utils.HandleError(e.Message);
-            // }
+            try
+            {
+                 punchClock = new(loggedEmployee);
+                 punchClock.PunchClocked();
+                 utils.HandleSuccess($"\nPonto Batido com sucesso às {DateTime.Now.ToString("H:mm:ss")}");
+            }
+            catch (System.Exception e)
+            {
+                Console.WriteLine("");
+                utils.HandleError(e.Message);
+            }
         }
 
         private void BackToMainMenu()
@@ -167,65 +169,6 @@ namespace ElectronicPointControl.ConsoleApp
             menuOption = Console.ReadLine();
         }
 
-
-        // public void SetLogedEmployee(Employee employee)
-        // {
-        //     logedEmployee = employee;
-        //     Execute();
-        // }
-
-        // public void Execute()
-        // {
-        //     string optionToBack = "3";
-
-        //     do
-        //     {
-        //         Console.Clear();
-        //         utils.ShowHeader("Menu Funcionário");
-        //         ShowMenu();
-        //         ReadMenuOption();
-        //         HandleMenu();
-        //     } while (menuOption != optionToBack);
-        // }
-
-
-        // private void ReadMenuOption()
-        // {
-        //     Console.Write("=> ");
-        //     menuOption = Console.ReadLine();
-        // }
-
-        // private void HandleMenu()
-        // {
-        //     switch (menuOption)
-        //     {
-        //         case "1":
-        //             Console.Clear();
-        //             utils.ShowHeader("Informações do Funcionário");
-        //             Console.WriteLine($"CPF: {logedEmployee.CPF}");
-        //             Console.WriteLine($"Nome: {logedEmployee.Name}");
-        //             Console.WriteLine($"Usuário: {logedEmployee.Registration}");
-        //             Console.WriteLine($"Senha: {logedEmployee.Password}");
-        //             Console.WriteLine($"Carga Horária: {logedEmployee.WorkLoad.StartHour.ToString("H:mm:ss")} - {logedEmployee.WorkLoad.EndHour.ToString("H:mm:ss")}\n");
-        //             PressKeyToBackToMenu();
-        //             break;
-        //         case "2":
-        //             Console.Clear();
-        //             PunchingClock();
-        //             PressKeyToBackToMenu();
-        //             break;
-        //         case "3":
-        //             Console.Clear();
-        //             Console.WriteLine("Voltando...");
-        //             break;
-        //         default:
-        //             Console.Clear();
-        //             Console.WriteLine("Opção Inválida");
-        //             PressKeyToBackToMenu();
-        //             break;
-        //     }
-
-        // }
 
     }
 }

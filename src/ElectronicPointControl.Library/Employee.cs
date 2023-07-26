@@ -10,9 +10,6 @@ namespace ElectronicPointControl.Library
         public string Password { get; protected set; }
         public WorkLoad WorkLoad;
 
-        private DateTime hourWhoStartToday;
-        private DateTime hourWhoEndsToday;
-
         private int timesPunchClock = 0;
         private Guid PointIDToday;
 
@@ -69,26 +66,6 @@ namespace ElectronicPointControl.Library
         public int TimesPunchClockGetValue()
         {
             return timesPunchClock;
-        }
-
-        public void GetHourWhoStartTodayValue(DateTime datetime)
-        {
-            hourWhoStartToday = datetime;
-        }
-
-        public void GetHourWhoEndsTodayValue(DateTime datetime)
-        {
-            hourWhoEndsToday = datetime;
-        }
-
-        public DateTime SendHourWhoStartTodayValue()
-        {
-            return hourWhoStartToday;
-        }
-
-        public DateTime SendHourWhoEndsTodayValue()
-        {
-            return hourWhoEndsToday;
         }
 
         public void GetPointIdToday(Guid ID)

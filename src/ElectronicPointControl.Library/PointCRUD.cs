@@ -62,5 +62,28 @@ namespace ElectronicPointControl.Library
             }
             return points;
         }
+
+        public void Update(Point point)
+        {
+            Delete(point.ID);
+            Add(point);
+        }
+
+        private void Delete(Guid id)
+        {
+            var points = GetAll();
+            points.Remove(FindByID(id));
+            using (Stream file = File.Open(filePath, FileMode.Create))
+            {
+                using (StreamWriter writer = new(file))
+                {
+                    foreach (var point in points)
+                    {
+                        writer.WriteLine(point);
+                    }
+                }
+            }
+
+        }
     }
 }

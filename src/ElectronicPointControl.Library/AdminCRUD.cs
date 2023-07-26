@@ -56,11 +56,5 @@ namespace ElectronicPointControl.Library
             {
             }
         }
-
-        public void Root()
-        {
-            Administrator root = new Administrator("root", "root");
-            Add(root);
-        }
     }
 }

@@ -14,7 +14,7 @@ namespace ElectronicPointControl.Library
         }
         public void PunchClocked()
         {
-            if (Employee.TimesPunchClockGetValue() == 2)
+            if (Employee.TimesPunchClockGetValue() == 4)
                 Employee.TimesPunchClockReset();
 
 
@@ -25,7 +25,6 @@ namespace ElectronicPointControl.Library
                 if (DateTime.Now >= Employee.WorkLoad.StartHour.AddMinutes(-5) && DateTime.Now <= Employee.WorkLoad.StartHour.AddMinutes(5))
                 {
                     TimeWhenPunchClockWasHit = DateTime.Now;
-                    Employee.GetHourWhoStartTodayValue(TimeWhenPunchClockWasHit);
                     Employee.TimesPunchClockAddition();
                     Point = new Point(Employee.Registration, TimeWhenPunchClockWasHit);
                     Employee.GetPointIdToday(Point.ID);
@@ -33,10 +32,40 @@ namespace ElectronicPointControl.Library
                 }
                 else
                 {
-                    throw new Exception("Fora do horario");
+                    throw new Exception("Fora do horario de começo");
                 }
             }
             else if (Employee.TimesPunchClockGetValue() == 1)
+            {
+                if (DateTime.Now > Employee.WorkLoad.StartHour && DateTime.Now < Employee.WorkLoad.EndHour)
+                {
+                    TimeWhenPunchClockWasHit = DateTime.Now;
+                    Point point = Points.FindByID(Employee.SendPointIdToday());
+                    point.StartPause = TimeWhenPunchClockWasHit;
+                    Employee.TimesPunchClockAddition();
+                    Points.Update(point);
+                }
+                else
+                {
+                    throw new Exception("Fora do horario de começo de pausa");
+                }
+            }
+            else if (Employee.TimesPunchClockGetValue() == 2)
+            {
+                if (DateTime.Now > Employee.WorkLoad.StartHour && DateTime.Now < Employee.WorkLoad.EndHour)
+                {
+                    TimeWhenPunchClockWasHit = DateTime.Now;
+                    Point point = Points.FindByID(Employee.SendPointIdToday());
+                    point.FinishPause = TimeWhenPunchClockWasHit;
+                    Employee.TimesPunchClockAddition();
+                    Points.Update(point);
+                }
+                else
+                {
+                    throw new Exception("Fora do horario de fim de pausa");
+                }
+            }
+            else if (Employee.TimesPunchClockGetValue() == 3)
             {
                 Console.WriteLine($"Horário Mínimo permitido para bater ponto ao sair: {Employee.WorkLoad.EndHour.AddMinutes(-5).ToString("H:mm:ss")}");
                 Console.WriteLine($"Horário Limite permitido para bater ponto ao sair: {Employee.WorkLoad.EndHour.AddMinutes(5).ToString("H:mm:ss")}");
@@ -44,13 +73,15 @@ namespace ElectronicPointControl.Library
                     && DateTime.Now <= Employee.WorkLoad.EndHour.AddMinutes(5))
                 {
                     TimeWhenPunchClockWasHit = DateTime.Now;
-                    Employee.GetHourWhoEndsTodayValue(TimeWhenPunchClockWasHit);
                     Employee.TimesPunchClockAddition();
-                    Points.FindByID(Employee.SendPointIdToday());
+                    Point point = Points.FindByID(Employee.SendPointIdToday());
+                    point.FinishWorkLoad = TimeWhenPunchClockWasHit;
+                    Employee.TimesPunchClockAddition();
+                    Points.Update(point);
                 }
                 else
                 {
-                    throw new Exception("Fora do horario");
+                    throw new Exception("Fora do horario de saída");
                 }
                 CalcWorkedHours();
             }
@@ -58,10 +89,17 @@ namespace ElectronicPointControl.Library
 
         private void CalcWorkedHours()
         {
-            TimeSpan calcWorkedHours = Employee.SendHourWhoEndsTodayValue().Subtract(Employee.SendHourWhoStartTodayValue());
-            DateTime convertCalcWorkedHoursToDateTime = new DateTime(1996, 6, 3, 0, 0, 0);
-            DateTime workedHours = convertCalcWorkedHoursToDateTime + calcWorkedHours;
-            Console.WriteLine($"Hoje seu tempo trabalhado foi: {workedHours.ToString("H:mm:ss")}, parabéns!");
+            Point point = Points.FindByID(Employee.SendPointIdToday());
+            DateTime startPause = Convert.ToDateTime(point.StartPause);
+            DateTime finishPause = Convert.ToDateTime(point.FinishPause);
+            DateTime finishWorkLoad = Convert.ToDateTime(point.FinishWorkLoad);
+            TimeSpan calcWorkedHoursPrePause = startPause.Subtract(point.StartWorkLoad);
+            DateTime convertCalcWorkedHoursPrePauseToDateTime = new DateTime(1996, 6, 3, 0, 0, 0);
+            DateTime workedHoursPrePause = convertCalcWorkedHoursPrePauseToDateTime + calcWorkedHoursPrePause;
+            TimeSpan calcWorkedHourPosPause = finishWorkLoad.Subtract(finishPause);
+            DateTime convertCalcWorkedHoursPosPauseToDateTime = new DateTime(1996, 6, 3, 0, 0, 0);
+            DateTime TodayWorkedHours = workedHoursPrePause + calcWorkedHourPosPause;
+            Console.WriteLine($"Hoje seu tempo trabalhado foi: {TodayWorkedHours.ToString("H:mm:ss")}, parabéns!");
         }
     }
 }
